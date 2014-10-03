@@ -1,26 +1,19 @@
-angular.module('starter.services', [])
+angular.module('dream.services', [])
 
 /**
  * A simple example service that returns some data.
  */
-.factory('Friends', function() {
-  // Might use a resource here that returns a JSON array
+.factory('MenuService', function() {
 
-  // Some fake testing data
-  var friends = [
-    { id: 0, name: 'Scruff McGruff' },
-    { id: 1, name: 'G.I. Joe' },
-    { id: 2, name: 'Miss Frizzle' },
-    { id: 3, name: 'Ash Ketchum' }
+  var menuItems = [
+      { text: 'Dream feed', iconClass: 'icon ion-cloud', link: 'feed'},
+      { text: 'Record', iconClass: 'icon ion-edit', link: 'record'},
+      { text: 'Settings', iconClass: 'icon ion-gear-a', link: 'settings'}
   ];
 
   return {
     all: function() {
-      return friends;
-    },
-    get: function(friendId) {
-      // Simple index lookup
-      return friends[friendId];
+      return menuItems;
     }
   }
 });
