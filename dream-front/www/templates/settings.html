@@ -1,8 +1,41 @@
 <ion-view title="navTitle" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
-      hide-back-button="true">
+hide-back-button="true">
 
-    <ion-content has-header="true" padding="true">
-        <h2>3 {{navTitle}}</h2>
-    </ion-content>
+<ion-content has-header="true" padding="true">
+  <h2>{{navTitle}}</h2>
+
+  <!-- list of options -->
+  <ul>
+    <li class="item item-toggle" style="border-style:none;">
+      Mature content
+      <label class="toggle toggle-positive">
+        <input checked="" type="checkbox">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+    </li>
+
+    <li class="item item-toggle" style="border-style:none;">
+      Auto sharing
+      <label class="toggle toggle-positive">
+        <input checked="" type="checkbox">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+    </li>
+  </ul>
+
+  <div class="item item-input-inset" style="border-style:none;">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="tags to ban">
+    </label>
+    <button class="button button-small">
+      Add
+    </button>
+  </div>
+
+</ion-content>
 
 </ion-view>

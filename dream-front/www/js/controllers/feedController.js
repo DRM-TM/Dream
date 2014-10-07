@@ -1,6 +1,6 @@
 //Controller handling API call and result display
 angular.module('dream.controllers').controller('FeedController', function ($scope) {
-  $scope.navTitle = "Page One Title";
+  $scope.navTitle = "Feed";
 
   $scope.leftButtons = [{
     type: 'button-icon icon ion-navicon',
