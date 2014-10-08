@@ -1,6 +1,6 @@
 //Controller handling API call and result display
 angular.module('dream.controllers').controller('FeedController', function ($scope, FeedService) {
-  $scope.navTitle = "Dream feed"
+  $scope.navTitle = "Dream feed";
   $scope.list = FeedService.all()
 
 
