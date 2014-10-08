@@ -1,5 +1,5 @@
-angular.module('dream.controllers').controller('RecordController', function ($scope) {
-  $scope.navTitle = "Page Two Title";
+ctrl.controller('RecordController', function ($scope) {
+  $scope.navTitle = "Record";
 
   $scope.leftButtons = [{
     type: 'button-icon icon ion-navicon',

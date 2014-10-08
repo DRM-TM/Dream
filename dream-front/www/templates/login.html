@@ -3,17 +3,21 @@ hide-back-button="true">
 
 <ion-content has-header="true" padding="true">
   <div class="list">
-    <label class="item item-input">
-      <input type="text" placeholder="First Name">
-    </label>
-    <label class="item item-input">
-      <input type="text" placeholder="Last Name">
-    </label>
-    <label class="item item-input">
-      <textarea placeholder="Comments"></textarea>
-    </label>
-  </div>
 
+    <form name="loginForm">
+
+      <label class="item item-input">
+        <input ng-model="user.email" type="text" placeholder="Email">
+      </label>
+      <label class="item item-input">
+        <input ng-model="user.password" type="password" placeholder="Password">
+      </label>
+    </div>
+    <button type="submit" ng-click="login(user)" class="button button-block button-positive">Submit</button>
+    <pre>form = {{user |json}}</pre>
+    Log with root root<br/><br/>
+    {{ log }}
+  </form>
 </ion-content>
 
 </ion-view>
