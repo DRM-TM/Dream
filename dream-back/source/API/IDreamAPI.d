@@ -23,7 +23,7 @@ interface   IDreamAPI
      */
 
     // GET /api/user
-    User*  getUser();
+    User[]  getUser();
 
     // GET /api/user/:uid
     @path("user/:uid")

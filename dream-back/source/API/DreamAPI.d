@@ -45,9 +45,26 @@ class DreamAPI : IDreamAPI
      */
 
     // GET /user
-    User*  getUser() {
-        auto c = Command(_dbCon, "select * from user");
-        return (null);
+    User[]  getUser() {
+        ResultSet       result;
+        Command         c;
+        DBValue[string] aa;
+
+        c = Command(_dbCon, "select * from user");
+        writeln("[QUERY] Query raw: ", c.sql);
+        try result = c.execSQLResult();
+        catch (Exception e) {
+            writefln("Exception caught in getDream: %s", e.toString());
+        }
+        if (result.empty())
+            return (null);
+        writeln("Results: ", result.length());
+        Dream[]   users = new Dream[to!uint(result.length())];
+        for (auto i = 0 ; !result.empty() ; ++i) {
+            users[i] = new Dream(result.asAA());
+            result.popFront();
+        }
+        return (users);
     }
 
     // GET /user/:uid
