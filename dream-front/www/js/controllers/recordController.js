@@ -1,4 +1,4 @@
-angular.module('dream.controllers').controller('RecordController', function ($scope) {
+ctrl.controller('RecordController', function ($scope) {
   $scope.navTitle = "Record";
 
   $scope.leftButtons = [{

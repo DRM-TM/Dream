@@ -1,5 +1,5 @@
 //Controller handling user connection
-angular.module('dream.controllers').controller('LoginController', function ($scope, $location) {
+ctrl.controller('LoginController', function ($scope, $location) {
   $scope.navTitle = "Login";
 
   $scope.login = function(user) {

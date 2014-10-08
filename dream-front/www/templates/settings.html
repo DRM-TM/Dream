@@ -2,8 +2,41 @@
 hide-back-button="true">
 
 <ion-content has-header="true" padding="true">
-  <h2>{{navTitle}}</h2>
+  <h2>Your profile</h2>
+  <ul>
+    <li class="item item-toggle" style="border-style:none;">
+      Auto sharing
+      <label class="toggle toggle-positive">
+        <input checked="" type="checkbox">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+    </li>
 
+    <li class="item item-toggle" style="border-style:none;">
+      Private
+      <label class="toggle toggle-positive">
+        <input checked="" type="checkbox">
+        <div class="track">
+          <div class="handle"></div>
+        </div>
+      </label>
+    </li>
+
+    <li>
+      <button ng-click="showEditPopup()" class="button button-assertive">
+        button-assertive
+      </button>
+      <a class="item item-icon-right" style="border-style:none;">
+        {{edit_user_infos}}
+        <i class="icon ion-person" style="margin-right:15px"></i>
+      </a>
+    </li>
+
+
+  </ul>
+  <h2>{{feed_options}}</h2>
   <!-- list of options -->
   <ul>
     <li class="item item-toggle" style="border-style:none;">
@@ -16,23 +49,14 @@ hide-back-button="true">
       </label>
     </li>
 
-    <li class="item item-toggle" style="border-style:none;">
-      Auto sharing
-      <label class="toggle toggle-positive">
-        <input checked="" type="checkbox">
-        <div class="track">
-          <div class="handle"></div>
-        </div>
-      </label>
-    </li>
   </ul>
 
   <div class="item item-input-inset" style="border-style:none;">
     <label class="item-input-wrapper">
-      <input type="text" placeholder="tags to ban">
+      <input ng-model="tags" type="text" placeholder="tags to ban (separedt by a comma)">
     </label>
-    <button class="button button-small">
-      Add
+    <button ng-click="addTags(tags)" class="button button-small">
+      add
     </button>
   </div>
 
