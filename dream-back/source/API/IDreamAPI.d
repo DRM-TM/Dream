@@ -30,7 +30,7 @@ interface   IDreamAPI
     User    getUser(uint _uid);
 
     // POST /api/user
-    void    postUser(string email, string password);
+    void    postUser(string _email, string _password);
 
     // DELETE /api/user/:uid
     @path("user/:uid")
@@ -47,9 +47,9 @@ interface   IDreamAPI
     @path("dream/:uid")
     Dream   getDream(uint _uid);
 
-    // GET /api/dream/category/:category_id
-    @path("dream/category/:category_id")
-    Dream[]  getDream(string categoryzz);
+    // GET /api/dream/incategory/:category_id
+    @path("dream/incategory/:uid")
+    Dream[]  getDreamIncategory(uint _uid);
 
     // POST /api/dream
     void    postDream();

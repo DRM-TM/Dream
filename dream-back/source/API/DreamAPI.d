@@ -58,7 +58,6 @@ class DreamAPI : IDreamAPI
         }
         if (result.empty())
             return (null);
-        writeln("Results: ", result.length());
         User[]   users = new User[to!uint(result.length())];
         for (auto i = 0 ; !result.empty() ; ++i) {
             users[i] = new User(result.asAA());
@@ -99,9 +98,26 @@ class DreamAPI : IDreamAPI
      * Dream resource
      */
 
-    // GET /api/dream/category/:category_id
-    Dream[]  getDream(string category_id) {
-        return (null);
+    // GET /api/dream/incategory/:uid
+    Dream[]  getDreamIncategory(uint _uid) {
+        ResultSet result;
+        Command         c;
+        DBValue[string] aa;
+
+        c = Command(_dbCon, "select * from dream where category_id=" ~ to!string(_uid));
+        writeln("[QUERY] Query raw: ", c.sql);
+        try result = c.execSQLResult();
+        catch (Exception e) {
+            writefln("Exception caught in getDream(category_id): %s", e.toString());
+        }
+        if (result.empty())
+            return (null);
+        Dream[]   dreams = new Dream[to!uint(result.length())];
+        for (auto i = 0 ; !result.empty() ; ++i) {
+            dreams[i] = new Dream(result.asAA());
+            result.popFront();
+        }
+        return (dreams);
     }
 
     // GET /dream
@@ -118,7 +134,6 @@ class DreamAPI : IDreamAPI
         }
         if (result.empty())
             return (null);
-        writeln("Results: ", result.length());
         Dream[]   dreams = new Dream[to!uint(result.length())];
         for (auto i = 0 ; !result.empty() ; ++i) {
             dreams[i] = new Dream(result.asAA());
