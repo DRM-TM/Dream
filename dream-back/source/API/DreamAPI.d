@@ -59,9 +59,9 @@ class DreamAPI : IDreamAPI
         if (result.empty())
             return (null);
         writeln("Results: ", result.length());
-        Dream[]   users = new Dream[to!uint(result.length())];
+        User[]   users = new User[to!uint(result.length())];
         for (auto i = 0 ; !result.empty() ; ++i) {
-            users[i] = new Dream(result.asAA());
+            users[i] = new User(result.asAA());
             result.popFront();
         }
         return (users);
@@ -85,10 +85,6 @@ class DreamAPI : IDreamAPI
         return (new User(aa));
     }
 
-    // GET /api/dream/:category
-    Dream*  getDream(string category) {
-        return (null);
-    }
 
     // POST /user
     void    postUser(string email, string password) {
@@ -102,6 +98,11 @@ class DreamAPI : IDreamAPI
     /**
      * Dream resource
      */
+
+    // GET /api/dream/category/:category_id
+    Dream[]  getDream(string category_id) {
+        return (null);
+    }
 
     // GET /dream
     Dream[] getDream() {
@@ -126,13 +127,16 @@ class DreamAPI : IDreamAPI
         return (dreams);
     }
 
-    // GET /dream/:id
+    // GET /api/dream/:uid
     Dream   getDream(uint _uid) {
         ResultSequence  result;
         Command         c;
         DBValue[string] aa;
 
-        c = Command(_dbCon, "select * from dream where id=" ~ to!string(_uid));
+        try c = Command(_dbCon, "select * from dream where id=" ~ to!string(_uid));
+        catch (Exception e) {
+            writefln("Exception caught in getDream(id): %s", e.toString());
+        }
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLSequence();
         catch (Exception e) {

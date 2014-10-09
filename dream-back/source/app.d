@@ -13,7 +13,7 @@ shared static	this()
 {
 	setLogLevel(LogLevel.debug_);
 	runTask({
-		string		connStr = "host=localhost;port=3306;user=ganich;pwd=00df337a0c;db=dream";
+		string		connStr = "host=roemer.im;port=3306;user=dream;pwd=vizzerdrix;db=dream";
 		auto		router = new URLRouter;
 		auto		settings = new HTTPServerSettings;
 

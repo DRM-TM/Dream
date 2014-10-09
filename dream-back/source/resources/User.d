@@ -12,7 +12,7 @@ class User
     string  birthdate;
 
     this() {
-
+        id = "-1";
     }
 
     this(string _email, string _password) {

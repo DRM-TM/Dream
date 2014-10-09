@@ -47,9 +47,9 @@ interface   IDreamAPI
     @path("dream/:uid")
     Dream   getDream(uint _uid);
 
-    // GET /api/dream/:category
-    @path("dream/:category")
-    Dream*  getDream(string category);
+    // GET /api/dream/category/:category_id
+    @path("dream/category/:category_id")
+    Dream[]  getDream(string categoryzz);
 
     // POST /api/dream
     void    postDream();
