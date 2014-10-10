@@ -23,6 +23,7 @@ shared static	this()
 			writeln("Failed: ", e.toString());
 		}
 		settings.port = 15030;
+		settings.bindAddresses = ["::1", "127.0.0.1"];
 		/*settings.sslContext = createSSLContext(SSLContextKind.server, SSLVersion.any);
 		try {
 			settings.sslContext.usePrivateKeyFile("SSL\\host.key");
