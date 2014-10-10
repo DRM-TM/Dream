@@ -10,7 +10,7 @@ hide-back-button="true">
       </a>
       <li>
         <li class="item item-toggle">
-          Auto sharing {{autoSharing}}
+          Auto sharing
           <label class="toggle toggle-positive">
             <input ng-change="test('autoSharing')" ng-model="autoSharing" checked="" type="checkbox">
             <div class="track">
@@ -20,7 +20,7 @@ hide-back-button="true">
         </li>
 
         <li class="item item-toggle">
-          Private {{private}}
+          Private
           <label class="toggle toggle-positive">
             <input ng-change="test('private')" ng-model="private" checked="" type="checkbox">
             <div class="track">
@@ -37,7 +37,7 @@ hide-back-button="true">
       <!-- list of options -->
       <ul>
         <li class="item item-toggle" style="border-style:none;">
-          Mature content {{mature}}
+          Mature content
           <label class="toggle toggle-positive">
             <input ng-change="test('mature')" ng-model="mature" checked="" type="checkbox">
             <div class="track">
@@ -49,13 +49,17 @@ hide-back-button="true">
 
       <div class="item item-input-inset" style="border-style:none;">
         <label class="item-input-wrapper">
-          <input type="text" placeholder="tags to ban (separedt by a comma)">
+          <input ng-model="tags" type="text" placeholder="tags to ban (separedt by a comma)">
         </label>
         <button ng-click="addTags(tags)" class="button button-small">
           add
         </button>
       </div>
 
+      <!--debug purpose only-->
+      <center><button ng-click="clearLocalStorage()" class="button button-assertive">
+        CLEAR LOCAL STORAGE
+      </button></center>
     </ion-content>
 
   </ion-view>

@@ -1,4 +1,4 @@
-ctrl.controller('SettingsController', function ($scope, $ionicPopup, StorageService) {
+ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, StorageService) {
   $scope.navTitle = "Settings"
 
   $scope.edit_user_infos = "Edit your informations"
@@ -15,10 +15,10 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, StorageServ
     } else {
       StorageService.set(toChange, "true")
     }
-    console.log("autoSharing :" + StorageService.get("autoSharing"))
-    console.log("private :" +StorageService.get("private"))
-    console.log("mature :" +StorageService.get("mature"))
-    console.log("------------------------")
+    // console.log("autoSharing :" + StorageService.get("autoSharing"))
+    // console.log("private :" +StorageService.get("private"))
+    // console.log("mature :" +StorageService.get("mature"))
+    // console.log("------------------------")
   }
 
   //store banned tags in local storage as bannedTags
@@ -26,6 +26,26 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, StorageServ
     var bannedTags = tags.replace(/\s/g, "").split(',')
     StorageService.set('bannedTags', JSON.stringify(bannedTags))
     StorageService.dump('bannedTags')
+  }
+
+  $scope.clearLocalStorage = function() {
+    StorageService.clean()
+    console.log("local storage cleared by user")
+    $scope.data = {}
+    $scope.errorMessage = ""
+
+    var myPopup = $ionicPopup.show({
+      title:"Local storage clear",
+      scope: $scope,
+
+    });
+    myPopup.then(function(res) {
+      myPopup.close()
+      console.log('Profile settings saved', res);
+    });
+    $timeout(function() {
+     myPopup.close();
+  }, 1000);
   }
 
   //popup function for email and password modification
@@ -63,6 +83,7 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, StorageServ
       console.log('Profile settings saved', res);
     });
   };
+
 
   $scope.leftButtons = [{
     type: 'button-icon icon ion-navicon',

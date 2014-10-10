@@ -57,6 +57,9 @@ angular.module('dream.services', [])
     },
     getObject: function(key) {
       return JSON.parse($window.localStorage[key] || '{}');
+    },
+    clean: function() {
+      $window.localStorage.clear()
     }
   }
 }]);
