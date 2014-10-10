@@ -95,6 +95,21 @@ class DreamAPI : IDreamAPI
 
     // DELETE /user
     void    deleteUser(uint id) {
+        ResultSequence  result;
+        Command         c;
+
+        try c = Command(_dbCon,
+                        "DELETE FROM user
+                        WHERE
+                        id=" ~ to!string(id));
+        catch (Exception e) {
+            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
+        }
+        writeln("[QUERY] Query raw: ", c.sql);
+        try result = c.execSQLSequence();
+        catch (Exception e) {
+            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
+        }
     }
 
     /**
@@ -167,7 +182,6 @@ class DreamAPI : IDreamAPI
     }
 
     // POST /dream
-    // INSERT INTO dream (user_id, category_id, content, date) VALUES(uid, category_id, content, CURRENT_TIMESTAMP);
     void                postDream(uint uid, uint category_id, string content) {
         ResultSequence  result;
         Command         c;
@@ -188,5 +202,20 @@ class DreamAPI : IDreamAPI
 
     // DELETE /dream
     void    deleteDream(uint uid) {
+        ResultSequence  result;
+        Command         c;
+
+        try c = Command(_dbCon,
+                        "DELETE FROM dream
+                        WHERE
+                        id=" ~ to!string(id));
+        catch (Exception e) {
+            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
+        }
+        writeln("[QUERY] Query raw: ", c.sql);
+        try result = c.execSQLSequence();
+        catch (Exception e) {
+            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
+        }
     }
 }
