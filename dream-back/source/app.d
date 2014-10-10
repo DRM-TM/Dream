@@ -23,14 +23,15 @@ shared static	this()
 			writeln("Failed: ", e.toString());
 		}
 		settings.port = 15030;
-		settings.sslContext = createSSLContext(SSLContextKind.server, SSLVersion.any);
+		/*settings.sslContext = createSSLContext(SSLContextKind.server, SSLVersion.any);
 		try {
 			settings.sslContext.usePrivateKeyFile("SSL\\host.key");
 			settings.sslContext.useCertificateChainFile(`SSL\host.cert`);
 			settings.sslContext.peerValidationMode = SSLPeerValidationMode.none;
+			writeln(to!string(settings.sslContext.peerValidationMode));
 		} catch (Exception e) {
 			writeln("Failed to load SSL stuff: ", e.toString());
-		}
+		}*/
 		listenHTTP(settings, router);
 	});
 }
