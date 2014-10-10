@@ -1,10 +1,15 @@
-<ion-view title="navTitle" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
+<ion-view title="{{navTitle}}" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
 hide-back-button="true">
 
-<ion-content has-header="true" padding="true">
+<ion-content has-header="true">
   <h2>Your profile</h2>
-  <ul>
-    <li class="item item-toggle" style="border-style:none;">
+<ul>
+<li class="item">
+      <a  ng-click="showEditPopup()">
+        Edit your login informations
+      </a>
+<li>
+    <li class="item item-toggle">
       Auto sharing
       <label class="toggle toggle-positive">
         <input checked="" type="checkbox">
@@ -14,7 +19,7 @@ hide-back-button="true">
       </label>
     </li>
 
-    <li class="item item-toggle" style="border-style:none;">
+    <li class="item item-toggle">
       Private
       <label class="toggle toggle-positive">
         <input checked="" type="checkbox">
@@ -23,19 +28,11 @@ hide-back-button="true">
         </div>
       </label>
     </li>
-
-    <li>
-      <button ng-click="showEditPopup()" class="button button-assertive">
-        button-assertive
-      </button>
-      <a class="item item-icon-right" style="border-style:none;">
-        {{edit_user_infos}}
-        <i class="icon ion-person" style="margin-right:15px"></i>
-      </a>
+    <li class="item" >
+      Your dreams
+      <span class="badge badge-positive">0</span>
     </li>
-
-
-  </ul>
+</ul>
   <h2>{{feed_options}}</h2>
   <!-- list of options -->
   <ul>
