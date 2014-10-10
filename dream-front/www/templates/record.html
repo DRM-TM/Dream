@@ -1,8 +1,10 @@
-<ion-view title="navTitle" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
-      hide-back-button="true">
+<ion-view title="{{navTitle}}" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
+hide-back-button="true">
 
-    <ion-content has-header="true" padding="true">
-        <h2>{{navTitle}}</h2>
-    </ion-content>
+<ion-content has-header="true" padding="true">
+  <a ng-click="showPopup('templates/popups/textDream.html', 'Just write it', 'You probably forgot something')"  class="button button-icon icon ion-compose"></a>
+
+  <a ng-click="showPopup('templates/popups/microDream.html', 'Loud and clear !', '')"  class="button button-icon icon ion-ios7-mic"></a>
+</ion-content>
 
 </ion-view>
