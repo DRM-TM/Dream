@@ -1,14 +1,14 @@
 angular.module('dream.services', [])
 
-/**
- * A simple example service that returns some data.
- */
+/*
+** menu content
+*/
 .factory('MenuService', function() {
 
   var menuItems = [
-      { text: 'Dream feed', iconClass: 'icon ion-cloud', link: 'feed'},
-      { text: 'Record', iconClass: 'icon ion-edit', link: 'record'},
-      { text: 'Settings', iconClass: 'icon ion-gear-a', link: 'settings'}
+  { text: 'Dream feed', iconClass: 'icon ion-cloud', link: 'feed'},
+  { text: 'Record', iconClass: 'icon ion-edit', link: 'record'},
+  { text: 'Settings', iconClass: 'icon ion-gear-a', link: 'settings'}
   ];
 
   return {
@@ -17,6 +17,10 @@ angular.module('dream.services', [])
     }
   }
 })
+
+/*
+** mock datas for the feed
+*/
 
 .factory('FeedService', function() {
   var dreamItems = [
@@ -31,4 +35,28 @@ angular.module('dream.services', [])
       return dreamItems
     }
   }
-});
+})
+
+/*
+** simpler local storage access
+*/
+
+.factory('StorageService', ['$window', function($window) {
+  return {
+    dump : function(key){
+      console.log($window.localStorage[key])
+    },
+    set: function(key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function(key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    setObject: function(key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function(key) {
+      return JSON.parse($window.localStorage[key] || '{}');
+    }
+  }
+}]);

@@ -26,9 +26,14 @@ function($stateProvider, $urlRouterProvider) {
     url: '/settings',
     controller: 'SettingsController',
     templateUrl: 'templates/settings.html'
+  })
+  .state('intro', {
+    url: '/',
+    controller: 'IntroController',
+    templateUrl: 'templates/intro.html'
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/');
 }
 ]);

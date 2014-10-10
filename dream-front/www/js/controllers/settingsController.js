@@ -1,25 +1,24 @@
-ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout) {
+ctrl.controller('SettingsController', function ($scope, $ionicPopup, StorageService) {
   $scope.navTitle = "Settings"
 
   $scope.edit_user_infos = "Edit your informations"
   $scope.feed_options = "Feed"
 
-  //function used to add banned tags
+  //store banned tags in local storage as bannedTags
   $scope.addTags = function(tags) {
-    console.log("debug tags")
-    console.log(tags.split(","))
-    console.log("-----end------")
+    var bannedTags = tags.replace(/\s/g, "").split(',')
+    StorageService.set('bannedTags', JSON.stringify(bannedTags))
+    StorageService.dump('bannedTags')
   }
 
-  //function used to show the popup for email/passwd change
+  //popup function for email and password modification
   $scope.showEditPopup = function() {
     $scope.data = {}
+    $scope.errorMessage = ""
 
-    // An elaborate, custom popup
     var myPopup = $ionicPopup.show({
-      template: '<input type="password" ng-model="data.wifi">',
-      title: 'Enter Wi-Fi Password',
-      subTitle: 'Please use normal things',
+      templateUrl: 'templates/popups/editUserInfos.html',
+      title: 'Change your email or password',
       scope: $scope,
       buttons: [
       { text: 'Cancel' },
@@ -27,22 +26,25 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout) {
         text: '<b>Save</b>',
         type: 'button-positive',
         onTap: function(e) {
-          if (!$scope.data.wifi) {
-            //don't allow the user to close unless he enters wifi password
+          if (!$scope.data.email && !$scope.data.password) {
+            $scope.errorMessage = "Nothing to update"
+            e.preventDefault();
+          }
+          if ($scope.data.password != $scope.data.passwordVerif){
+            $scope.errorMessage = "Passwords not matching"
             e.preventDefault();
           } else {
-            return $scope.data.wifi;
+            //process datas
+            return $scope.data;
           }
         }
       },
       ]
     });
     myPopup.then(function(res) {
-      console.log('Tapped!', res);
+      myPopup.close()
+      console.log('Profile settings saved', res);
     });
-    $timeout(function() {
-      myPopup.close(); //close the popup after 3 seconds for some reason
-    }, 3000);
   };
 
   $scope.leftButtons = [{
