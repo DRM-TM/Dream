@@ -116,8 +116,8 @@ class DreamAPI : IDreamAPI
      * Dream resource
      */
 
-    // GET /api/dream/incategory/:uid
-    Dream[]  getDreamIncategory(uint _uid) {
+    // GET /api/dream/incategory/:cat_id
+    Dream[]  getDreamIncategory(uint _cat_id) {
         ResultSet       result;
         Command         c;
         DBValue[string] aa;
