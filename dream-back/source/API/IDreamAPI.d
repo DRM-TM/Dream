@@ -9,16 +9,6 @@ import      User;
 interface   IDreamAPI
 {
     /**
-     * Bullshit stuff for debug purpose ONLY
-     */
-
-    // GET /api/bullshit_users
-    User*   getBullshitUsers();
-
-    // GET /api/bullshit_dreams
-    Dream*  getBullshitDreams();
-
-    /**
      * User resource
      */
 
@@ -30,11 +20,10 @@ interface   IDreamAPI
     User    getUser(uint _uid);
 
     // POST /api/user
-    void    postUser(string _email, string _password);
+    void    postUser(string email, string password, string token, string birthdate);
 
-    // DELETE /api/user/:uid
-    @path("user/:uid")
-    User    deleteUser(uint _uid);
+    // DELETE /api/user
+    void    deleteUser(uint uid);
 
     /**
      * Dream resource
@@ -52,9 +41,8 @@ interface   IDreamAPI
     Dream[]  getDreamIncategory(uint _uid);
 
     // POST /api/dream
-    void    postDream();
+    void    postDream(uint uid, uint category_id, string content);
 
-    // DELETE /api/dream/:uid
-    @path("dream/:uid")
-    Dream    deleteDream(uint _uid);
+    // DELETE /api/dream
+    void    deleteDream(uint uid);
 }

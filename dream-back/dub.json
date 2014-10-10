@@ -1,6 +1,6 @@
 {
     "name": "DreamWebService",
-    "description": "Webservice for Dream mobile app",
+    "description": "Webservice for Dream app",
     "copyright": "Copyright © 2014, Ganitzsh",
     "authors": ["Ganitzsh"],
     "dependencies": {

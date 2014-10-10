@@ -20,24 +20,13 @@ class DreamAPI : IDreamAPI
     {
         _connStr = connStr;
         _dbCon = new Connection(_connStr);
-        scope(exit) _dbCon.close();
+        scope(failure) _dbCon.close();
         writefln("You have connected to server version %s", _dbCon.serverVersion);
         writefln("With currents stats : %s", _dbCon.serverStats());
         try _dbCon.selectDB("dream");
         catch (Exception e) {
             writefln("Exception caught: %s", e.toString());
         }
-    }
-
-    /**
-     * Bullshit stuff for debug purpose ONLY
-     */
-    User*    getBullshitUsers() {
-        return (null);
-    }
-
-    Dream*   getBullshitDreams() {
-        return (null);
     }
 
     /**
@@ -86,12 +75,26 @@ class DreamAPI : IDreamAPI
 
 
     // POST /user
-    void    postUser(string email, string password) {
+    void    postUser(string email, string password, string token, string birthdate) {
+        ResultSequence  result;
+        Command         c;
+
+        try c = Command(_dbCon,
+                        "INSERT INTO user (email, password, inscription_date, last_connection, user_token, birthdate)
+                        VALUES
+                        (" ~ email ~ ", " ~ password ~ ", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, " ~ token ~ ", " ~ birthdate ~ ")");
+        catch (Exception e) {
+            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
+        }
+        writeln("[QUERY] Query raw: ", c.sql);
+        try result = c.execSQLSequence();
+        catch (Exception e) {
+            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
+        }
     }
 
-    // DELETE /user/:id
-    User    deleteUser(uint id) {
-        return (null);
+    // DELETE /user
+    void    deleteUser(uint id) {
     }
 
     /**
@@ -100,7 +103,7 @@ class DreamAPI : IDreamAPI
 
     // GET /api/dream/incategory/:uid
     Dream[]  getDreamIncategory(uint _uid) {
-        ResultSet result;
+        ResultSet       result;
         Command         c;
         DBValue[string] aa;
 
@@ -108,7 +111,7 @@ class DreamAPI : IDreamAPI
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLResult();
         catch (Exception e) {
-            writefln("Exception caught in getDream(category_id): %s", e.toString());
+            writefln("Exception caught in getDreamIncategory(uid): %s", e.toString());
         }
         if (result.empty())
             return (null);
@@ -164,11 +167,26 @@ class DreamAPI : IDreamAPI
     }
 
     // POST /dream
-    void    postDream() {
+    // INSERT INTO dream (user_id, category_id, content, date) VALUES(uid, category_id, content, CURRENT_TIMESTAMP);
+    void                postDream(uint uid, uint category_id, string content) {
+        ResultSequence  result;
+        Command         c;
+
+        try c = Command(_dbCon,
+                        "INSERT INTO dream (user_id, category_id, content, date)
+                        VALUES
+                        (" ~ to!string(uid) ~ ", " ~ to!string(category_id) ~ ", \"" ~ to!string(content) ~ "\", CURRENT_TIMESTAMP)");
+        catch (Exception e) {
+            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
+        }
+        writeln("[QUERY] Query raw: ", c.sql);
+        try result = c.execSQLSequence();
+        catch (Exception e) {
+            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
+        }
     }
 
-    // DELETE /dream/:id
-    Dream    deleteDream(uint id) {
-        return (null);
+    // DELETE /dream
+    void    deleteDream(uint uid) {
     }
 }
