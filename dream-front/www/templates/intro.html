@@ -1,0 +1,60 @@
+<style>
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  padding-top: 50px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+.scroll{
+  height:100%;
+}
+</style>
+
+<ion-modal-view  left-buttons="leftButtons" right-buttons="rightButtons">
+
+  <ion-content>
+
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+
+      <ion-slide>
+        <h1>Thank you for choosing Dream !!!</h1>
+        <div id="logo">
+          <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+        </div>
+        <br/><p>
+          We've worked super hard to make you happy.
+        </p>
+      </ion-slide>
+      <ion-slide>
+        <h1>How to</h1>
+
+        <div id="list">
+          <h5>Just three steps:</h5>
+          <ol>
+            <li>Record</li>
+            <li>Share</li>
+            <li>Learn</li>
+          </ol>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <h3>Ready to go ?</h3>
+        <button ng-click="startApp()" class="button button-positive">
+          <i class="icon ion-mail"></i> Click here
+        </button>
+        <h3>And if you have any questions</h3>
+        <button class="button button-positive">
+          <i class="icon ion-mail"></i> Contact us
+        </button>
+      </ion-slide>
+    </ion-slide-box>
+
+  </ion-content>
+
+</ion-modal-view >
