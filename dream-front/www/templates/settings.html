@@ -3,60 +3,59 @@ hide-back-button="true">
 
 <ion-content has-header="true">
   <h2>Your profile</h2>
-<ul>
-<li class="item">
+  <ul>
+    <li class="item">
       <a  ng-click="showEditPopup()">
         Edit your login informations
       </a>
-<li>
-    <li class="item item-toggle">
-      Auto sharing
-      <label class="toggle toggle-positive">
-        <input checked="" type="checkbox">
-        <div class="track">
-          <div class="handle"></div>
-        </div>
-      </label>
-    </li>
+      <li>
+        <li class="item item-toggle">
+          Auto sharing {{autoSharing}}
+          <label class="toggle toggle-positive">
+            <input ng-change="test('autoSharing')" ng-model="autoSharing" checked="" type="checkbox">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
 
-    <li class="item item-toggle">
-      Private
-      <label class="toggle toggle-positive">
-        <input checked="" type="checkbox">
-        <div class="track">
-          <div class="handle"></div>
-        </div>
-      </label>
-    </li>
-    <li class="item" >
-      Your dreams
-      <span class="badge badge-positive">0</span>
-    </li>
-</ul>
-  <h2>{{feed_options}}</h2>
-  <!-- list of options -->
-  <ul>
-    <li class="item item-toggle" style="border-style:none;">
-      Mature content
-      <label class="toggle toggle-positive">
-        <input checked="" type="checkbox">
-        <div class="track">
-          <div class="handle"></div>
-        </div>
-      </label>
-    </li>
+        <li class="item item-toggle">
+          Private {{private}}
+          <label class="toggle toggle-positive">
+            <input ng-change="test('private')" ng-model="private" checked="" type="checkbox">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+        <li class="item" >
+          Your dreams
+          <span class="badge badge-positive">0</span>
+        </li>
+      </ul>
+      <h2>{{feed_options}}</h2>
+      <!-- list of options -->
+      <ul>
+        <li class="item item-toggle" style="border-style:none;">
+          Mature content {{mature}}
+          <label class="toggle toggle-positive">
+            <input ng-change="test('mature')" ng-model="mature" checked="" type="checkbox">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+      </ul>
 
-  </ul>
+      <div class="item item-input-inset" style="border-style:none;">
+        <label class="item-input-wrapper">
+          <input type="text" placeholder="tags to ban (separedt by a comma)">
+        </label>
+        <button ng-click="addTags(tags)" class="button button-small">
+          add
+        </button>
+      </div>
 
-  <div class="item item-input-inset" style="border-style:none;">
-    <label class="item-input-wrapper">
-      <input ng-model="tags" type="text" placeholder="tags to ban (separedt by a comma)">
-    </label>
-    <button ng-click="addTags(tags)" class="button button-small">
-      add
-    </button>
-  </div>
+    </ion-content>
 
-</ion-content>
-
-</ion-view>
+  </ion-view>

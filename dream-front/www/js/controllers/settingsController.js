@@ -4,6 +4,23 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, StorageServ
   $scope.edit_user_infos = "Edit your informations"
   $scope.feed_options = "Feed"
 
+  StorageService.set("autoSharing", "false")
+  StorageService.set("private", "false")
+  StorageService.set("mature", "false")
+
+  //store checkboxes changes in local storage
+  $scope.test = function(toChange) {
+    if (StorageService.get(toChange) == "true") {
+      StorageService.set(toChange, "false")
+    } else {
+      StorageService.set(toChange, "true")
+    }
+    console.log("autoSharing :" + StorageService.get("autoSharing"))
+    console.log("private :" +StorageService.get("private"))
+    console.log("mature :" +StorageService.get("mature"))
+    console.log("------------------------")
+  }
+
   //store banned tags in local storage as bannedTags
   $scope.addTags = function(tags) {
     var bannedTags = tags.replace(/\s/g, "").split(',')
