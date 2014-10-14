@@ -1,11 +1,5 @@
 var dream = angular.module('dream', ['ionic', 'dream.controllers', 'dream.services'])
 
-.run(function(HardwareBackButtonManager)
-{
-  //disable hardware back button
-  HardwareBackButtonManager.disable();
-})
-
 .config(['$stateProvider', '$urlRouterProvider',
 function($stateProvider, $urlRouterProvider) {
   $stateProvider

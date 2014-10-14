@@ -1,7 +1,9 @@
 //Controller handling user connection
-ctrl.controller('LoginController', function ($scope, $location) {
+ctrl.controller('LoginController', function ($scope, $location, HardwareBackButtonManager) {
   $scope.navTitle = "Login";
-  
+
+//disable hardware back button
+HardwareBackButtonManager.disable();
   //get credentials fro mthe login page and try to authentificate the user with the database infos
   $scope.login = function(user) {
     if (user.email == "root" && user.password == "root") {

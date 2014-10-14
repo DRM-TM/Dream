@@ -1,4 +1,4 @@
-ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, StorageService) {
+ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, StorageService, HardwareBackButtonManager) {
   $scope.navTitle = "Settings"
 
   $scope.edit_user_infos = "Edit your informations"
@@ -7,6 +7,9 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, S
   StorageService.set("autoSharing", "false")
   StorageService.set("private", "false")
   StorageService.set("mature", "false")
+
+  //re-enable hardware back button
+  HardwareBackButtonManager.enable();
 
   //store checkboxes changes in local storage
   $scope.test = function(toChange) {
