@@ -221,10 +221,47 @@ class DreamAPI : IDreamAPI
      */
 
      // GET /api/comment
-     Comment[]  getComment() { return (null); }
+     Comment[]  getComment() {
+         ResultSet          result;
+         Command            c;
+         DBValue[string]    aa;
+
+         c = Command(_dbCon, "select * from comment");
+         writeln("[QUERY] Query raw: ", c.sql);
+         try result = c.execSQLResult();
+         catch (Exception e) {
+             writefln("Exception caught in getDream: %s", e.toString());
+         }
+         if (result.empty())
+             return (null);
+         Comment[]   comments = new Comment[to!uint(result.length())];
+         for (auto i = 0 ; !result.empty() ; ++i) {
+             comments[i] = new Comment(result.asAA());
+             result.popFront();
+         }
+         return (comments);
+     }
 
      // GET /api/comment/:uid
-     Comment    getComment(uint _uid) { return (new Comment()); }
+     Comment    getComment(uint _uid) {
+         ResultSequence  result;
+         Command         c;
+         DBValue[string] aa;
+
+         try c = Command(_dbCon, "select * from comment where id=" ~ to!string(_uid));
+         catch (Exception e) {
+             writefln("Exception caught in getComment(id): %s", e.toString());
+         }
+         writeln("[QUERY] Query raw: ", c.sql);
+         try result = c.execSQLSequence();
+         catch (Exception e) {
+             writefln("Exception caught in getComment(id): %s", e.toString());
+         }
+         if (result.empty())
+             return (new Comment());
+         aa = result.asAA();
+         return (new Comment(aa));
+     }
 
      // GET /api/comment/bydreamid/:dream_id
      Comment[]  getCommentByDreamId(uint _dream_id) { return (null); }
@@ -233,7 +270,23 @@ class DreamAPI : IDreamAPI
      Comment[]  getCommentByUserId(uint _uid) { return (null); }
 
      // DELETE /api/comment
-     void   deleteComment(uint uid) { }
+     void   deleteComment(uint uid) {
+         ResultSequence  result;
+         Command         c;
+
+         try c = Command(_dbCon,
+                         "DELETE FROM comment
+                         WHERE
+                         id=" ~ to!string(uid));
+         catch (Exception e) {
+             writefln("Exception caught in void    deleteComment(uint id): %s", e.toString());
+         }
+         writeln("[QUERY] Query raw: ", c.sql);
+         try result = c.execSQLSequence();
+         catch (Exception e) {
+             writefln("Exception caught in void    deleteComment(uint id): %s", e.toString());
+         }
+     }
 
      // POST /api/comment
      void   postComment(uint uid, uint dream_id, string content) { }
@@ -243,19 +296,116 @@ class DreamAPI : IDreamAPI
       */
 
       // GET /api/hashtag
-      Hashtag[]  getHashtag() { return (null); }
+      Hashtag[]  getHashtag() {
+          ResultSet          result;
+          Command            c;
+          DBValue[string]    aa;
+
+          c = Command(_dbCon, "select * from comment");
+          writeln("[QUERY] Query raw: ", c.sql);
+          try result = c.execSQLResult();
+          catch (Exception e) {
+              writefln("Exception caught in getDream: %s", e.toString());
+          }
+          if (result.empty())
+              return (null);
+          Hashtag[]   hashtags = new Hashtag[to!uint(result.length())];
+          for (auto i = 0 ; !result.empty() ; ++i) {
+              hashtags[i] = new Hashtag(result.asAA());
+              result.popFront();
+          }
+          return (hashtags);
+      }
 
       // GET /api/hashtag/:uid
-      Hashtag    getHashtag(uint _uid) { return (new Hashtag()); }
+      Hashtag    getHashtag(uint _uid) {
+          ResultSequence    result;
+          Command           c;
+          DBValue[string]   aa;
+
+          try c = Command(_dbCon, "select * from comment where id=" ~ to!string(_uid));
+          catch (Exception e) {
+              writefln("Exception caught in getHashtag(id): %s", e.toString());
+          }
+          writeln("[QUERY] Query raw: ", c.sql);
+          try result = c.execSQLSequence();
+          catch (Exception e) {
+              writefln("Exception caught in getHashtag(id): %s", e.toString());
+          }
+          if (result.empty())
+              return (new Hashtag());
+          aa = result.asAA();
+          return (new Hashtag(aa));
+      }
 
       // GET /api/hashtag/bydreamid/:dream_id
-      Hashtag[]  getHashtagByDreamId(uint _dream_id) { return (null); }
+      Hashtag[]  getHashtagByDreamId(uint _dream_id) {
+          ResultSet         result;
+          Command           c;
+          DBValue[string]   aa;
+
+          try c = Command(_dbCon, "SELECT * FROM hashtag WHERE dream_id=" ~ to!string(_dream_id));
+          catch (Exception e) {
+              writefln("Exception caught in getHashtagByDreamId(_dream_id): %s", e.toString());
+          }
+          writeln("[QUERY] Query raw: ", c.sql);
+          try result = c.execSQLResult();
+          catch (Exception e) {
+              writefln("Exception caught in getHashtagByDreamId(_dream_id): %s", e.toString());
+          }
+          if (result.empty())
+              return (null);
+          Hashtag[]   hashtags = new Hashtag[to!uint(result.length())];
+          for (auto i = 0 ; !result.empty() ; ++i) {
+              hashtags[i] = new Hashtag(result.asAA());
+              result.popFront();
+          }
+          return (hashtags);
+      }
 
      // GET /api/hashtag/byuserid/:uid
-      Hashtag[]  getHashtagByUserId(uint _uid) { return (null); }
+      Hashtag[]  getHashtagByUserId(uint _uid) {
+          ResultSet         result;
+          Command           c;
+          DBValue[string]   aa;
+
+          try c = Command(_dbCon, "SELECT * FROM hashtag WHERE user_id=" ~ to!string(_uid));
+          catch (Exception e) {
+              writefln("Exception caught in getHashtagByDreamId(user_id): %s", e.toString());
+          }
+          writeln("[QUERY] Query raw: ", c.sql);
+          try result = c.execSQLResult();
+          catch (Exception e) {
+              writefln("Exception caught in getHashtagByDreamId(user_id): %s", e.toString());
+          }
+          if (result.empty())
+              return (null);
+          Hashtag[]   hashtags = new Hashtag[to!uint(result.length())];
+          for (auto i = 0 ; !result.empty() ; ++i) {
+              hashtags[i] = new Hashtag(result.asAA());
+              result.popFront();
+          }
+          return (hashtags);
+      }
 
       // DELETE /api/hashtag
-      void   deleteHashtag(uint uid) { }
+      void   deleteHashtag(uint uid) {
+          ResultSequence  result;
+          Command         c;
+
+          try c = Command(_dbCon,
+                          "DELETE FROM hashtag
+                          WHERE
+                          id=" ~ to!string(uid));
+          catch (Exception e) {
+              writefln("Exception caught in void    deleteHashtag(uint id): %s", e.toString());
+          }
+          writeln("[QUERY] Query raw: ", c.sql);
+          try result = c.execSQLSequence();
+          catch (Exception e) {
+              writefln("Exception caught in void    deleteHashtag(uint id): %s", e.toString());
+          }
+      }
 
       // POST /api/hashtag
       void   postHashtag(uint uid, uint dream_id, string content) { }
