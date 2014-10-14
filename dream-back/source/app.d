@@ -18,6 +18,7 @@ shared static	this()
 		auto		router = new URLRouter;
 		auto		settings = new HTTPServerSettings;
 
+		router.any("*", &setAccessControlOrigin);
 		try registerRestInterface(router, new DreamAPI(connStr));
 		catch(Exception e) {
 			writeln("Failed: ", e.toString());
