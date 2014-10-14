@@ -14,7 +14,7 @@ API routes
 Request over HTTP only
 
 
-Host: http://mimiks.net:15030
+Host: http://0.0.0.0:15030
 
 Root path: /api
 
