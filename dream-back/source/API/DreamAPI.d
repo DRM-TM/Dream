@@ -301,7 +301,7 @@ class DreamAPI : IDreamAPI
           Command            c;
           DBValue[string]    aa;
 
-          c = Command(_dbCon, "select * from comment");
+          c = Command(_dbCon, "select * from hashtag");
           writeln("[QUERY] Query raw: ", c.sql);
           try result = c.execSQLResult();
           catch (Exception e) {
@@ -323,7 +323,7 @@ class DreamAPI : IDreamAPI
           Command           c;
           DBValue[string]   aa;
 
-          try c = Command(_dbCon, "select * from comment where id=" ~ to!string(_uid));
+          try c = Command(_dbCon, "select * from hashtag where id=" ~ to!string(_uid));
           catch (Exception e) {
               writefln("Exception caught in getHashtag(id): %s", e.toString());
           }
