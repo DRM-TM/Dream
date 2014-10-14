@@ -1,7 +1,9 @@
 var dream = angular.module('dream', ['ionic', 'dream.controllers', 'dream.services'])
 
-.config(function ($compileProvider) {
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+.run(function(HardwareBackButtonManager)
+{
+  //disable hardware back button
+  HardwareBackButtonManager.disable();
 })
 
 .config(['$stateProvider', '$urlRouterProvider',

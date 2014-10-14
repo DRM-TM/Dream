@@ -7,7 +7,6 @@ angular.module('dream.services', [])
 
   var menuItems = [
   { text: 'Dream feed', iconClass: 'icon ion-cloud', link: 'feed'},
-  { text: 'Record', iconClass: 'icon ion-edit', link: 'record'},
   { text: 'Settings', iconClass: 'icon ion-gear-a', link: 'settings'}
   ];
 
@@ -36,6 +35,29 @@ angular.module('dream.services', [])
     }
   }
 })
+
+/*
+** Back button manager
+*/
+.service( 'HardwareBackButtonManager', function($ionicPlatform){
+  this.deregister = undefined;
+
+  this.disable = function(){
+    this.deregister = $ionicPlatform.registerBackButtonAction(function(e){
+      e.preventDefault();
+      return false;
+    }, 101);
+  }
+
+  this.enable = function(){
+    if( this.deregister !== undefined ){
+      this.deregister();
+      this.deregister = undefined;
+    }
+  }
+  return this;
+})
+
 
 /*
 ** simpler local storage access
