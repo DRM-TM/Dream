@@ -10,6 +10,11 @@ import	std.stdio;
 import	IDreamAPI;
 import	DreamAPI;
 
+void	setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
+{
+	res.headers["Access-Control-Allow-Origin"] = "*";
+}
+
 shared static	this()
 {
 	setLogLevel(LogLevel.debug_);
