@@ -15,33 +15,26 @@
   height:100%;
 }
 </style>
-
-<ion-modal-view  left-buttons="leftButtons" right-buttons="rightButtons">
-
+<ion-modal-view left-buttons="leftButtons" right-buttons="rightButtons">
   <ion-content>
-
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
-
       <ion-slide>
         <h1>Thank you for choosing Dream !!!</h1>
         <div id="logo">
-          <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+          <img src="https://m1.behance.net/rendition/modules/71359113/disp/f04e2b04f4a4aeb892271b046f55034e.png">
         </div>
         <br/><p>
           We've worked super hard to make you happy.
         </p>
       </ion-slide>
-      <ion-slide>
-        <h1>How to</h1>
-
-        <div id="list">
-          <h5>Just three steps:</h5>
-          <ol>
-            <li>Record</li>
-            <li>Share</li>
-            <li>Learn</li>
-          </ol>
-        </div>
+      <ion-slide style="margin-top:-50px">
+        <img style="width:100%;" src="../../img/intro/how_to_record.png">
+      </ion-slide>
+      <ion-slide style="margin-top:-50px">
+        <img style="width:100%;" src="../../img/intro/how_to_menu.png">
+      </ion-slide>
+      <ion-slide style="margin-top:-50px">
+        <img style="width:100%;" src="../../img/intro/how_to_search.png">
       </ion-slide>
       <ion-slide>
         <h3>Ready to go ?</h3>
@@ -54,7 +47,5 @@
         </button>
       </ion-slide>
     </ion-slide-box>
-
   </ion-content>
-
 </ion-modal-view >
