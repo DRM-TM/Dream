@@ -8,9 +8,6 @@ import  vibe.d;
 
 import  IDreamAPI;
 
-import  Dream;
-import  User;
-
 class DreamAPI : IDreamAPI
 {
     private string      _connStr;
@@ -122,7 +119,7 @@ class DreamAPI : IDreamAPI
         Command         c;
         DBValue[string] aa;
 
-        c = Command(_dbCon, "select * from dream where category_id=" ~ to!string(_uid));
+        c = Command(_dbCon, "select * from dream where category_id=" ~ to!string(_cat_id));
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLResult();
         catch (Exception e) {
@@ -208,7 +205,7 @@ class DreamAPI : IDreamAPI
         try c = Command(_dbCon,
                         "DELETE FROM dream
                         WHERE
-                        id=" ~ to!string(id));
+                        id=" ~ to!string(uid));
         catch (Exception e) {
             writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
         }
@@ -218,4 +215,48 @@ class DreamAPI : IDreamAPI
             writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
         }
     }
+
+    /**
+     * Comment resource
+     */
+
+     // GET /api/comment
+     Comment[]  getComment() { return (null); }
+
+     // GET /api/comment/:uid
+     Comment    getComment(uint _uid) { return (new Comment()); }
+
+     // GET /api/comment/bydreamid/:dream_id
+     Comment[]  getCommentByDreamId(uint _dream_id) { return (null); }
+
+    // GET /api/comment/byuserid/:uid
+     Comment[]  getCommentByUserId(uint _uid) { return (null); }
+
+     // DELETE /api/comment
+     void   deleteComment(uint uid) { }
+
+     // POST /api/comment
+     void   postComment(uint uid, uint dream_id, string content) { }
+
+     /**
+      * Hashtag resource
+      */
+
+      // GET /api/hashtag
+      Hashtag[]  getHashtag() { return (null); }
+
+      // GET /api/hashtag/:uid
+      Hashtag    getHashtag(uint _uid) { return (new Hashtag()); }
+
+      // GET /api/hashtag/bydreamid/:dream_id
+      Hashtag[]  getHashtagByDreamId(uint _dream_id) { return (null); }
+
+     // GET /api/hashtag/byuserid/:uid
+      Hashtag[]  getHashtagByUserId(uint _uid) { return (null); }
+
+      // DELETE /api/hashtag
+      void   deleteHashtag(uint uid) { }
+
+      // POST /api/hashtag
+      void   postHashtag(uint uid, uint dream_id, string content) { }
 }

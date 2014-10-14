@@ -4,6 +4,8 @@ import      vibe.web.common;
 
 import      Dream;
 import      User;
+import      Comment;
+import      Hashtag;
 
 @rootPath("api")
 interface   IDreamAPI
@@ -45,4 +47,52 @@ interface   IDreamAPI
 
     // DELETE /api/dream
     void    deleteDream(uint uid);
+
+    /*
+     * Comment resource
+     */
+
+     // GET /api/comment
+     Comment[]  getComment();
+
+     // GET /api/comment/:uid
+     Comment    getComment(uint _uid);
+
+     // GET /api/comment/bydreamid/:dream_id
+     @path("comment/bydreamid/:dream_id")
+     Comment[]  getCommentByDreamId(uint _dream_id);
+
+    // GET /api/comment/byuserid/:uid
+    @path("comment/byuserid/:uid")
+     Comment[]  getCommentByUserId(uint _uid);
+
+     // DELETE /api/comment
+     void   deleteComment(uint uid);
+
+     // POST /api/comment
+     void   postComment(uint uid, uint dream_id, string content);
+
+     /*
+      * Hashtag resource
+      */
+
+      // GET /api/hashtag
+      Hashtag[]  getHashtag();
+
+      // GET /api/hashtag/:uid
+      Hashtag    getHashtag(uint _uid);
+
+      // GET /api/hashtag/bydreamid/:dream_id
+      @path("hashtag/bydreamid/:dream_id")
+      Hashtag[]  getHashtagByDreamId(uint _dream_id);
+
+     // GET /api/hashtag/byuserid/:uid
+     @path("hashtag/byuserid/:uid")
+      Hashtag[]  getHashtagByUserId(uint _uid);
+
+      // DELETE /api/hashtag
+      void   deleteHashtag(uint uid);
+
+      // POST /api/hashtag
+      void   postHashtag(uint uid, uint hashtag_id, string content);
 }
