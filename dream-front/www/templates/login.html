@@ -1,23 +1,45 @@
+<style>
+.loginButton {
+  width:100%;
+  margin-bottom:5px;
+}
+
+.loginInput {
+  margin-bottom:5px;
+}
+
+#grad {
+background-color:#6c9ecc;
+}
+</style>
+
 <ion-modal-view title="{{navTitle}}" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
 hide-back-button="true">
 
 
-<ion-content has-header="true" >
+<ion-content has-header="true" id="grad">
   <div class="list">
-    <center><h1 style="padding-top:35px;">Welcome</h1></center>
-    <form name="loginForm" style="padding-top:30px">
-      <label class="item item-input">
-        <input ng-model="user.email" type="text" placeholder="Email">
+    <center><img style="margin-top:45px;max-width:45%;" src="../img/logo_with_text.png"></img></center>
+    <center><form name="loginForm" style="padding-top:30px;width:80%">
+      <label class="loginInput item item-input">
+        <i style="font-size: 20px;margin-top: 2px;margin-left: -2px;" class="icon ion-ios7-email-outline placeholder-icon"></i>
+        <input ng-model="user.email" type="text" placeholder="&nbsp;Email">
       </label>
-      <label class="item item-input">
-        <input ng-model="user.password" type="password" placeholder="Password">
+      <label class="loginInput item item-input">
+        <i class="icon ion-locked placeholder-icon"></i>
+        <input ng-model="user.password" type="password" placeholder="&nbsp;Password">
       </label>
-    </div>
-    <center><button style="width:50%" type="submit" ng-click="login(user)" class="button button-block button-positive">Connect</button></center
-      <pre>form = {{user |json}}</pre>
-      Log with root root<br/><br/>
-      {{ log }}
+
+      <button type="submit" ng-click="login(user)" class="loginButton button button-dark">Connect</button>
+      <button style="background-color:#3B5998" type="submit" class="loginButton button button-positive">Login with <b>Facebook</b></button></center>
+      <center><button class="button button-clear button-stable">
+        Password ?
+      </button>
+      <button class="button button-clear button-dark">
+        Create an account
+      </button></center>
     </form>
-  </ion-content>
+  </div>
+</ion-content>
 
 </ion-modal-view>

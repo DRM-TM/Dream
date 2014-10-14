@@ -1,7 +1,7 @@
 //Controller handling user connection
 ctrl.controller('LoginController', function ($scope, $location) {
   $scope.navTitle = "Login";
-
+  
   //get credentials fro mthe login page and try to authentificate the user with the database infos
   $scope.login = function(user) {
     if (user.email == "root" && user.password == "root") {

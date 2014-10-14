@@ -39,10 +39,13 @@
   <div ng-controller="MenuController">
     <ion-side-menus>
       <!-- Center content -->
-      <ion-pane ion-side-menu-content drag-content="false">
+      <ion-pane ion-side-menu-content>
         <ion-nav-bar class="bar-positive" align-title="center">
           <ion-nav-buttons side="left">
             <button menu-toggle="left" class="button button-icon icon ion-navicon-round"></button>
+          </ion-nav-buttons>
+          <ion-nav-buttons side="right" ng-controller="RecordController">
+            <button ng-click="showPopup('templates/popups/microDream.html', 'Share it', 'Nothing to share')" class="button button-icon icon ion-ios7-mic"></button>
           </ion-nav-buttons>
         </ion-nav-back-button>
       </ion-nav-bar>
