@@ -12,8 +12,12 @@ API routes
 --------------
 
 Request over HTTP only
-Host: mimiks.net
-Root path: http://mimiks.net/api
+
+
+Host: http://mimiks.net:15030
+
+Root path: /api
+
 Returned data's format: JSON
 
 ***User resource***
