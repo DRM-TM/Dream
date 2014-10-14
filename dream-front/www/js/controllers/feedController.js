@@ -1,10 +1,18 @@
+var dreams = []
 //Controller handling API call and result display
-angular.module('dream.controllers').controller('FeedController', function ($scope, $ionicViewService, FeedService, HardwareBackButtonManager) {
-  $scope.navTitle = "Dream feed";
+angular.module('dream.controllers').controller('FeedController', function ($scope, $ionicViewService, $http, FeedService, HardwareBackButtonManager) {
+  $scope.navTitle = "Dream feed"
   $scope.list = FeedService.all()
 
   //re-enable hardware back button
-  HardwareBackButtonManager.enable();
+  HardwareBackButtonManager.enable()
+
+  $http.get('http://mimiks.net:15030/api/dream').
+  success(function(data, status, headers, config) {
+    $scope.list = data
+  }).error(function(data, status, headers, config) {
+    $log.log("Error querying dreams for dream feed")
+  });
 
   //reset nav history to prevent back button error
   $ionicViewService.clearHistory()
@@ -15,6 +23,5 @@ angular.module('dream.controllers').controller('FeedController', function ($scop
       $scope.sideMenuController.toggleLeft();
     }
   }];
-
   $scope.rightButtons = [];
 })
