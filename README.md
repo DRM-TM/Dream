@@ -3,9 +3,9 @@ Dream.
 
 Dream. is a dream sharing mobile application.
 
-The front end is written using Ionic http://ionicframework.com/
+The front end is developed with Ionic http://ionicframework.com/
 
-The back end is developed in D
+The back end is written in D
 
 Installation
 --------------
