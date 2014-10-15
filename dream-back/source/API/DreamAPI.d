@@ -20,7 +20,7 @@ class DreamAPI : IDreamAPI
         scope(failure) _dbCon.close();
         writefln("You have connected to server version %s", _dbCon.serverVersion);
         writefln("With currents stats : %s", _dbCon.serverStats());
-        try _dbCon.selectDB("dream");
+        try _dbCon.SELECTDB("dream");
         catch (Exception e) {
             writefln("Exception caught: %s", e.toString());
         }
@@ -36,7 +36,7 @@ class DreamAPI : IDreamAPI
         Command         c;
         DBValue[string] aa;
 
-        c = Command(_dbCon, "select * from user");
+        c = Command(_dbCon, "SELECT * FROM user");
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLResult();
         catch (Exception e) {
@@ -58,7 +58,7 @@ class DreamAPI : IDreamAPI
         Command         c;
         DBValue[string] aa;
 
-        c = Command(_dbCon, "select * from user where id=" ~ to!string(_uid));
+        c = Command(_dbCon, "SELECT * FROM user WHERE id=" ~ to!string(_uid));
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLSequence();
         catch (Exception e) {
@@ -133,7 +133,7 @@ class DreamAPI : IDreamAPI
         Command         c;
         DBValue[string] aa;
 
-        c = Command(_dbCon, "select * from dream where category_id=" ~ to!string(_cat_id));
+        c = Command(_dbCon, "SELECT * FROM dream WHERE category_id=" ~ to!string(_cat_id));
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLResult();
         catch (Exception e) {
@@ -155,7 +155,7 @@ class DreamAPI : IDreamAPI
         Command         c;
         DBValue[string] aa;
 
-        c = Command(_dbCon, "select * from dream");
+        c = Command(_dbCon, "SELECT * FROM dream");
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLResult();
         catch (Exception e) {
@@ -177,7 +177,7 @@ class DreamAPI : IDreamAPI
         Command         c;
         DBValue[string] aa;
 
-        try c = Command(_dbCon, "select * from dream where id=" ~ to!string(_uid));
+        try c = Command(_dbCon, "SELECT * FROM dream WHERE id=" ~ to!string(_uid));
         catch (Exception e) {
             writefln("Exception caught in getDream(id): %s", e.toString());
         }
@@ -240,7 +240,7 @@ class DreamAPI : IDreamAPI
          Command            c;
          DBValue[string]    aa;
 
-         c = Command(_dbCon, "select * from comment");
+         c = Command(_dbCon, "SELECT * FROM comment");
          writeln("[QUERY] Query raw: ", c.sql);
          try result = c.execSQLResult();
          catch (Exception e) {
@@ -262,7 +262,7 @@ class DreamAPI : IDreamAPI
          Command         c;
          DBValue[string] aa;
 
-         try c = Command(_dbCon, "select * from comment where id=" ~ to!string(_uid));
+         try c = Command(_dbCon, "SELECT * FROM comment WHERE id=" ~ to!string(_uid));
          catch (Exception e) {
              writefln("Exception caught in getComment(id): %s", e.toString());
          }
@@ -337,7 +337,7 @@ class DreamAPI : IDreamAPI
           Command            c;
           DBValue[string]    aa;
 
-          c = Command(_dbCon, "select * from hashtag");
+          c = Command(_dbCon, "SELECT * FROM hashtag");
           writeln("[QUERY] Query raw: ", c.sql);
           try result = c.execSQLResult();
           catch (Exception e) {
@@ -359,7 +359,7 @@ class DreamAPI : IDreamAPI
           Command           c;
           DBValue[string]   aa;
 
-          try c = Command(_dbCon, "select * from hashtag where id=" ~ to!string(_uid));
+          try c = Command(_dbCon, "SELECT * FROM hashtag WHERE id=" ~ to!string(_uid));
           catch (Exception e) {
               writefln("Exception caught in getHashtag(id): %s", e.toString());
           }
