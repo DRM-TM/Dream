@@ -1,9 +1,14 @@
 
-ctrl.controller('IntroController', function($scope, $location, $ionicSlideBoxDelegate, StorageService) {
+ctrl.controller('IntroController', function($scope, $location, $ionicSlideBoxDelegate, $ionicSideMenuDelegate, StorageService) {
 
+  //remove menu drag to open
+  $ionicSideMenuDelegate.canDragContent(false)
 
   //debug purpose only, clear the storage to get the intro everytime
   //window.localStorage.clear()
+  $scope.goToApp = "Skip"
+
+  $scope.previousSlide = "Previous"
 
   /*
   **if user already saw the intro, skip it

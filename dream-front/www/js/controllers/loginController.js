@@ -1,9 +1,11 @@
 //Controller handling user connection
-ctrl.controller('LoginController', function ($scope, $location, HardwareBackButtonManager) {
+ctrl.controller('LoginController', function ($scope, $location, $ionicSideMenuDelegate, HardwareBackButtonManager) {
   $scope.navTitle = "Login";
 
-//disable hardware back button
-HardwareBackButtonManager.disable();
+  //remove menu drag to open
+  $ionicSideMenuDelegate.canDragContent(false)
+  //disable hardware back button
+  HardwareBackButtonManager.disable();
   //get credentials fro mthe login page and try to authentificate the user with the database infos
   $scope.login = function(user) {
     if (user.email == "root" && user.password == "root") {

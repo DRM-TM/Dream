@@ -7,7 +7,8 @@ angular.module('dream.services', [])
 
   var menuItems = [
   { text: 'Dream feed', iconClass: 'icon ion-cloud', link: 'feed'},
-  { text: 'Settings', iconClass: 'icon ion-ios7-gear', link: 'settings'}
+  { text: 'Settings', iconClass: 'icon ion-ios7-gear', link: 'settings'},
+  { text: 'About', iconClass: 'icon ion-information-circled', link: 'about'}
   ];
 
   return {

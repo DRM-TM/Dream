@@ -1,6 +1,6 @@
 var dreams = []
 //Controller handling API call and result display
-angular.module('dream.controllers').controller('FeedController', function ($scope, $ionicViewService, $http, FeedService, HardwareBackButtonManager) {
+angular.module('dream.controllers').controller('FeedController', function ($scope, $ionicViewService, $http, $log, FeedService, HardwareBackButtonManager) {
   $scope.navTitle = "Dream feed"
   $scope.list = FeedService.all()
 
