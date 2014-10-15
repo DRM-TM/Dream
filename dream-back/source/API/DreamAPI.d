@@ -113,6 +113,20 @@ class DreamAPI : IDreamAPI
      * Dream resource
      */
 
+    Fdream  solveDream(Dream base) {
+        Fdream      ret = new Fdream();
+        Dream       content = base;
+        User        user = getUser(to!uint(base.user_id));
+        Comment[]   comments = getCommentByDreamId(to!uint(base.id));
+        Hashtag[]   hashtags = getHashtagByDreamId(to!uint(base.id));
+
+        ret.content = content;
+        ret.user = user;
+        ret.comments = comments;
+        ret.hashtags = hashtags;
+        return (ret);
+    }
+
     // GET /api/dream/incategory/:cat_id
     Dream[]  getDreamIncategory(uint _cat_id) {
         ResultSet       result;
@@ -136,7 +150,7 @@ class DreamAPI : IDreamAPI
     }
 
     // GET /dream
-    Dream[] getDream() {
+    Fdream[] getDream() {
         ResultSet result;
         Command         c;
         DBValue[string] aa;
@@ -149,9 +163,9 @@ class DreamAPI : IDreamAPI
         }
         if (result.empty())
             return (null);
-        Dream[]   dreams = new Dream[to!uint(result.length())];
+        Fdream[]   dreams = new Fdream[to!uint(result.length())];
         for (auto i = 0 ; !result.empty() ; ++i) {
-            dreams[i] = new Dream(result.asAA());
+            dreams[i] = solveDream(new Dream(result.asAA()));
             result.popFront();
         }
         return (dreams);
@@ -264,7 +278,29 @@ class DreamAPI : IDreamAPI
      }
 
      // GET /api/comment/bydreamid/:dream_id
-     Comment[]  getCommentByDreamId(uint _dream_id) { return (null); }
+     Comment[]  getCommentByDreamId(uint _dream_id) {
+         ResultSet         result;
+         Command           c;
+         DBValue[string]   aa;
+
+         try c = Command(_dbCon, "SELECT * FROM comment WHERE dream_id=" ~ to!string(_dream_id));
+         catch (Exception e) {
+             writefln("Exception caught in getCommentByDreamId(_dream_id): %s", e.toString());
+         }
+         writeln("[QUERY] Query raw: ", c.sql);
+         try result = c.execSQLResult();
+         catch (Exception e) {
+             writefln("Exception caught in getCommentByDreamId(_dream_id): %s", e.toString());
+         }
+         if (result.empty())
+             return (null);
+         Comment[]   comments = new Comment[to!uint(result.length())];
+         for (auto i = 0 ; !result.empty() ; ++i) {
+             comments[i] = new Comment(result.asAA());
+             result.popFront();
+         }
+         return (comments);
+     }
 
     // GET /api/comment/byuserid/:uid
      Comment[]  getCommentByUserId(uint _uid) { return (null); }

@@ -6,6 +6,7 @@ import      Dream;
 import      User;
 import      Comment;
 import      Hashtag;
+import      Fdream;
 
 @rootPath("api")
 interface   IDreamAPI
@@ -32,7 +33,7 @@ interface   IDreamAPI
      */
 
     // GET /api/dream
-    Dream[] getDream();
+    Fdream[]    getDream();
 
     // GET /api/dream/:uid
     @path("dream/:uid")
