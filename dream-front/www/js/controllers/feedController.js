@@ -10,6 +10,7 @@ angular.module('dream.controllers').controller('FeedController', function ($scop
   $http.get('http://mimiks.net:15030/api/dream').
   success(function(data, status, headers, config) {
     $scope.list = data
+    $log.log(data)
   }).error(function(data, status, headers, config) {
     $log.log("Error querying dreams for dream feed")
   });
