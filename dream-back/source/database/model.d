@@ -6,33 +6,52 @@ import  vibe.web.common;
 import  vibe.d;
 
 import  std.stdio;
-import  std.conv;
+import  std.conv : to;
 import  std.string;
-import  std.container;
+import  std.variant;
+/*import  std.container;*/
+import  std.regex : match;
 
-class Model(T, U)
-{
+
+class Model(T, U) {
     private {
         string          _modelName;
         string          _primaryKey;
+        string          _attributes;
+
+        bool            _autoInc = true;
+
         Connection      _dbCon;
         /*SList!string    _foreignKey;*/
     }
 
-    this(Connection con) {
+    this(Connection con, string primKey = "id") {
         auto	tmp =  to!string(typeid(T)).split(".");
 
         _modelName = tmp[tmp.length - 1];
         _primaryKey = "id";
         _dbCon = con;
+        generateAttributes();
     }
 
-    this(Connection con, string primKey) {
-        auto	tmp =  to!string(typeid(T)).split(".");
+    void    generateAttributes() {
+        auto    members = [ __traits(allMembers, T) ];
+        bool    i = false;
 
-        _modelName = tmp[tmp.length - 1];
-        _primaryKey = primKey;
-        _dbCon = con;
+        _attributes = "(";
+        foreach (string attr ; members) {
+            if (attr.startsWith("m_")) {
+                auto ret = match(attr, r"^m_([A-Za-z_]+)");
+                if (ret.captures[1] != _primaryKey && _autoInc) {
+                    if (i)
+                        _attributes ~= ",";
+                    _attributes ~=  ret.captures[1];
+                    i = true;
+                }
+            }
+        }
+        _attributes ~= ")";
+        writeln("Attributes generated: ", _attributes);
     }
 
     @property ref   string  primaryKey() {
@@ -106,6 +125,23 @@ class Model(T, U)
             result.popFront();
         }
         return (arr);
+    }
+
+    bool   add(T toAdd) {
+        string          query;
+        ResultSequence  result;
+        Command         c;
+
+        query = "INSERT INTO " ~ _modelName.toLower() ~ " "~ _attributes ~ " VALUES " ~ toAdd.asValues;
+        try c = Command(_dbCon, query);
+        catch (Exception e) {
+            writeln("Exception caught: ", e.toString());
+        }
+        writeln("[QUERY] Query raw: ", c.sql);
+        try result = c.execSQLSequence();
+        catch (Exception e) {
+        }
+        return (true);
     }
     /*void    addFKey(string keyName) {
         if (_foreignKey.empty()) {

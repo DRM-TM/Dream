@@ -54,33 +54,26 @@ class DreamAPI : IDreamAPI
 
 
     // POST /user
-    void    postUser(string email, string password, string token, string birthdate) {
-        ResultSequence  result;
-        Command         c;
+    bool    postUser(string email, string password, string token, string birthdate, string username) {
+        User toAdd = new User();
 
-        try c = Command(_dbCon,
-                        "INSERT INTO user (email, password, inscription_date, last_connection, user_token, birthdate)
-                        VALUES
-                        (" ~ email ~ ", " ~ password ~ ", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, " ~ token ~ ", " ~ birthdate ~ ")");
-        catch (Exception e) {
-            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
-        }
-        writeln("[QUERY] Query raw: ", c.sql);
-        try result = c.execSQLSequence();
-        catch (Exception e) {
-            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
-        }
+        toAdd.m_email = email;
+        toAdd.m_password = password;
+        toAdd.m_user_token = token;
+        toAdd.m_birthdate = birthdate;
+        toAdd.m_username = username;
+        return (_userRes.add(toAdd));
     }
 
-    // DELETE /user
-    void    deleteUser(uint id) {
+    // DELETE /user/:uid
+    void    deleteUser(uint _uid) {
         ResultSequence  result;
         Command         c;
 
         try c = Command(_dbCon,
                         "DELETE FROM user
                         WHERE
-                        id=" ~ to!string(id));
+                        id=" ~ to!string(_uid));
         catch (Exception e) {
             writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
         }
@@ -98,9 +91,9 @@ class DreamAPI : IDreamAPI
     Fdream  solveDream(Dream base) {
         Fdream      ret = new Fdream();
         Dream       content = base;
-        User        user = getUser(to!uint(base.user_id));
-        Comment[]   comments = getCommentByDreamId(to!uint(base.id));
-        Hashtag[]   hashtags = getHashtagByDreamId(to!uint(base.id));
+        User        user = getUser(to!uint(base.m_user_id));
+        Comment[]   comments = getCommentByDreamId(to!uint(base.m_id));
+        Hashtag[]   hashtags = getHashtagByDreamId(to!uint(base.m_id));
 
         ret.content = content;
         ret.user = user;
@@ -142,22 +135,13 @@ class DreamAPI : IDreamAPI
     }
 
     // POST /dream
-    void                postDream(uint uid, uint category_id, string content) {
-        ResultSequence  result;
-        Command         c;
+    bool                postDream(uint uid, uint category_id, string content) {
+        Dream   toAdd = new Dream();
 
-        try c = Command(_dbCon,
-                        "INSERT INTO dream (user_id, category_id, content, date)
-                        VALUES
-                        (" ~ to!string(uid) ~ ", " ~ to!string(category_id) ~ ", \"" ~ to!string(content) ~ "\", CURRENT_TIMESTAMP)");
-        catch (Exception e) {
-            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
-        }
-        writeln("[QUERY] Query raw: ", c.sql);
-        try result = c.execSQLSequence();
-        catch (Exception e) {
-            writefln("Exception caught in postDream(uint uid, uint category_id, string content): %s", e.toString());
-        }
+        toAdd.m_user_id = to!string(uid);
+        toAdd.m_category_id = to!string(category_id);
+        toAdd.m_content = content;
+        return (_dreamRes.add(toAdd));
     }
 
     // DELETE /dream
@@ -223,7 +207,14 @@ class DreamAPI : IDreamAPI
      }
 
      // POST /api/comment
-     void   postComment(uint uid, uint dream_id, string content) { }
+     bool   postComment(uint uid, uint dream_id, string content) {
+         Comment   toAdd = new Comment();
+
+         toAdd.m_user_id = to!string(uid);
+         toAdd.m_dream_id = to!string(dream_id);
+         toAdd.m_content = content;
+         return (_commentRes.add(toAdd));
+     }
 
      /**
       * Hashtag resource
@@ -269,7 +260,12 @@ class DreamAPI : IDreamAPI
       }
 
       // POST /api/hashtag
-      void   postHashtag(uint uid, uint dream_id, string content) {
+      bool   postHashtag(uint uid, uint dream_id, string content) {
+          Hashtag   toAdd = new Hashtag();
 
+          toAdd.m_user_id = to!string(uid);
+          toAdd.m_dream_id = to!string(dream_id);
+          toAdd.m_content = content;
+          return (_hashtagRes.add(toAdd));
       }
 }

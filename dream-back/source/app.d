@@ -19,7 +19,7 @@ void	setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 
 shared static	this()
 {
-	setLogLevel(LogLevel.debug_);
+	/*setLogLevel(LogLevel.debug_);*/
 	runTask({
 		string		connStr = "host=roemer.im;port=3306;user=dream;pwd=vizzerdrix;db=dream";
 		auto		router = new URLRouter;
