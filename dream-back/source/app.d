@@ -10,6 +10,8 @@ import	std.stdio;
 import	IDreamAPI;
 import	DreamAPI;
 
+import 	database.model;
+
 void	setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 {
 	res.headers["Access-Control-Allow-Origin"] = "*";
@@ -29,8 +31,8 @@ shared static	this()
 			writeln("Failed: ", e.toString());
 		}
 		settings.port = 15030;
-		/*settings.sslContext = createSSLContext(SSLContextKind.server, SSLVersion.any);
-		try {
+		/*settings.sslContext = createSSLContext(SSLContextKind.server, SSLVersion.any);*/
+		/*try {
 			settings.sslContext.usePrivateKeyFile(`SSL\host.key`);
 			settings.sslContext.useCertificateChainFile(`SSL\host.crt`);
 			settings.sslContext.peerValidationMode = SSLPeerValidationMode.none;
@@ -40,4 +42,5 @@ shared static	this()
 		}*/
 		listenHTTP(settings, router);
 	});
+
 }

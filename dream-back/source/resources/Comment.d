@@ -27,4 +27,5 @@ class Comment
         dream_id = to!string(aa["dream_id"].value);
         user_id = to!string(aa["user_id"].value);
     }
+
 }
