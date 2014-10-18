@@ -66,22 +66,8 @@ class DreamAPI : IDreamAPI
     }
 
     // DELETE /user/:uid
-    void    deleteUser(uint _uid) {
-        ResultSequence  result;
-        Command         c;
-
-        try c = Command(_dbCon,
-                        "DELETE FROM user
-                        WHERE
-                        id=" ~ to!string(_uid));
-        catch (Exception e) {
-            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
-        }
-        writeln("[QUERY] Query raw: ", c.sql);
-        try result = c.execSQLSequence();
-        catch (Exception e) {
-            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
-        }
+    bool    deleteUser(uint _uid) {
+        return (_userRes.del(_uid));
     }
 
     /**
@@ -109,22 +95,11 @@ class DreamAPI : IDreamAPI
 
     // GET /dream
     Fdream[] getDream() {
-        ResultSet result;
-        Command         c;
-        DBValue[string] aa;
+        Dream[]     result = _dreamRes.all();
+        Fdream[]    dreams = new Fdream[to!uint(result.length)];
 
-        c = Command(_dbCon, "SELECT * FROM dream");
-        writeln("[QUERY] Query raw: ", c.sql);
-        try result = c.execSQLResult();
-        catch (Exception e) {
-            writefln("Exception caught in getDream: %s", e.toString());
-        }
-        if (result.empty())
-            return (null);
-        Fdream[]   dreams = new Fdream[to!uint(result.length())];
-        for (auto i = 0 ; !result.empty() ; ++i) {
-            dreams[i] = solveDream(new Dream(result.asAA()));
-            result.popFront();
+        for (auto i = 0 ; i < result.length ; ++i) {
+            dreams[i] = solveDream(result[i]);
         }
         return (dreams);
     }
@@ -145,22 +120,8 @@ class DreamAPI : IDreamAPI
     }
 
     // DELETE /dream
-    void    deleteDream(uint uid) {
-        ResultSequence  result;
-        Command         c;
-
-        try c = Command(_dbCon,
-                        "DELETE FROM dream
-                        WHERE
-                        id=" ~ to!string(uid));
-        catch (Exception e) {
-            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
-        }
-        writeln("[QUERY] Query raw: ", c.sql);
-        try result = c.execSQLSequence();
-        catch (Exception e) {
-            writefln("Exception caught in void    deleteUser(uint id): %s", e.toString());
-        }
+    bool    deleteDream(uint _uid) {
+        return (_dreamRes.del(_uid));
     }
 
     /**
@@ -188,22 +149,8 @@ class DreamAPI : IDreamAPI
      }
 
      // DELETE /api/comment
-     void   deleteComment(uint uid) {
-         ResultSequence  result;
-         Command         c;
-
-         try c = Command(_dbCon,
-                         "DELETE FROM comment
-                         WHERE
-                         id=" ~ to!string(uid));
-         catch (Exception e) {
-             writefln("Exception caught in void    deleteComment(uint id): %s", e.toString());
-         }
-         writeln("[QUERY] Query raw: ", c.sql);
-         try result = c.execSQLSequence();
-         catch (Exception e) {
-             writefln("Exception caught in void    deleteComment(uint id): %s", e.toString());
-         }
+     bool   deleteComment(uint _uid) {
+         return (_commentRes.del(_uid));
      }
 
      // POST /api/comment
@@ -241,22 +188,8 @@ class DreamAPI : IDreamAPI
       }
 
       // DELETE /api/hashtag
-      void   deleteHashtag(uint uid) {
-          ResultSequence  result;
-          Command         c;
-
-          try c = Command(_dbCon,
-                          "DELETE FROM hashtag
-                          WHERE
-                          id=" ~ to!string(uid));
-          catch (Exception e) {
-              writefln("Exception caught in void    deleteHashtag(uint id): %s", e.toString());
-          }
-          writeln("[QUERY] Query raw: ", c.sql);
-          try result = c.execSQLSequence();
-          catch (Exception e) {
-              writefln("Exception caught in void    deleteHashtag(uint id): %s", e.toString());
-          }
+      bool   deleteHashtag(uint _uid) {
+          return (_hashtagRes.del(_uid));
       }
 
       // POST /api/hashtag

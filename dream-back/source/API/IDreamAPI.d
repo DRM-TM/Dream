@@ -27,7 +27,7 @@ interface   IDreamAPI
 
     // DELETE /api/user
     @path("user/:uid")
-    void    deleteUser(uint _uid);
+    bool    deleteUser(uint _uid);
 
     /**
      * Dream resource
@@ -48,7 +48,8 @@ interface   IDreamAPI
     bool    postDream(uint uid, uint category_id, string content);
 
     // DELETE /api/dream
-    void    deleteDream(uint uid);
+    @path("dream/:uid")
+    bool    deleteDream(uint _uid);
 
     /*
      * Comment resource
@@ -69,7 +70,8 @@ interface   IDreamAPI
      Comment[]  getCommentByUserId(uint _uid);
 
      // DELETE /api/comment
-     void   deleteComment(uint uid);
+     @path("comment/:uid")
+     bool   deleteComment(uint _uid);
 
      // POST /api/comment
      bool   postComment(uint uid, uint dream_id, string content);
@@ -93,7 +95,8 @@ interface   IDreamAPI
       Hashtag[]  getHashtagByUserId(uint _uid);
 
       // DELETE /api/hashtag
-      void   deleteHashtag(uint uid);
+      @path("hashtag/:uid")
+      bool   deleteHashtag(uint _uid);
 
       // POST /api/hashtag
       bool   postHashtag(uint uid, uint hashtag_id, string content);

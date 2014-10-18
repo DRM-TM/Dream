@@ -140,14 +140,26 @@ class Model(T, U) {
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLSequence();
         catch (Exception e) {
+            return (false);
         }
         return (true);
     }
-    /*void    addFKey(string keyName) {
-        if (_foreignKey.empty()) {
-            _foreignKey = makeList(keyName);
-        } else {
-            _foreignKey.insertBack(keyName);
+
+    bool    del(U val) {
+        string          query;
+        ResultSequence  result;
+        Command         c;
+
+        query = "DELETE FROM " ~
+                _modelName.toLower() ~
+                " WHERE " ~
+                _primaryKey ~ "=" ~ to!string(val);
+        try c = Command(_dbCon, query);
+        catch (Exception e) {
+            writeln("Exception caught: ", e.toString());
         }
-    }*/
+        writeln("[QUERY] Query raw: ", c.sql);
+        c.execSQLSequence();
+        return (true);
+    }
 }
