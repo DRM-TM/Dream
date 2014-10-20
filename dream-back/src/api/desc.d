@@ -1,3 +1,20 @@
+/**
+
+    This module is the interface describing the RESTful API functionalities.
+    It Contains every functions sorted by resources and collections.
+    The API contains the following:
+    Resources:
+        - Dream
+        - User
+        - Comment
+        - Hashtag
+    Collections:
+        - Fdream
+
+    Copyright: © 2012 Julien Ganichot
+    Authors: Julien Ganichot
+ */
+
 module api.desc;
 
 import      mysql;
@@ -16,16 +33,26 @@ interface   IDreamAPI
 {
     /**
      * User resource
+     * Every functions related to the User resources.
      */
 
     // GET /api/user
     User[]  getUser();
 
-    // GET /api/user/:uid
+    /***********************************
+     * This function ask the database to get the user corresponding to
+     * the id=uid
+     *
+     * Route: GET /api/user/:uid
+     */
     @path("user/:uid")
     User    getUser(uint _uid);
 
-    // POST /api/user
+    /***********************************
+     * This function add a user to the database
+     *
+     * Route: POST /api/user
+     */
     bool    postUser(string email, string password, string token, string birthdate, string username);
 
     // DELETE /api/user
@@ -36,6 +63,11 @@ interface   IDreamAPI
      * Dream resource
      */
 
+    /***********************************
+     * This function ask the database to get every users from it.
+     *
+     * Route: GET /api/dream
+     */
     // GET /api/dream
     Fdream[]    getDream();
 
@@ -54,7 +86,7 @@ interface   IDreamAPI
     @path("dream/:uid")
     bool    deleteDream(uint _uid);
 
-    /*
+    /**
      * Comment resource
      */
 
@@ -79,7 +111,7 @@ interface   IDreamAPI
      // POST /api/comment
      bool   postComment(uint uid, uint dream_id, string content);
 
-     /*
+     /**
       * Hashtag resource
       */
 
