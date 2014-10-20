@@ -1,12 +1,15 @@
-import      mysql;
-import      vibe.d;
-import      vibe.web.common;
+module api.desc;
 
-import      Dream;
-import      User;
-import      Comment;
-import      Hashtag;
-import      Fdream;
+import      mysql;
+
+import      vibe.d;
+
+import      res.user;
+import      res.comment;
+import      res.hashtag;
+import      res.dream;
+
+import      col.fdream;
 
 @rootPath("api")
 interface   IDreamAPI

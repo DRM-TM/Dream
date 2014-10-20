@@ -1,7 +1,9 @@
-import  Hashtag;
-import  Dream;
-import  Comment;
-import  User;
+module  col.fdream;
+
+import  res.hashtag;
+import  res.dream;
+import  res.comment;
+import  res.user;
 
 class Fdream {
     Dream       content;
@@ -10,6 +12,5 @@ class Fdream {
     Hashtag[]   hashtags;
 
     this() {
-
     }
 }

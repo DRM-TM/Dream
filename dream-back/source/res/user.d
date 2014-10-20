@@ -1,5 +1,8 @@
-import  mysql;
+module  res.user;
+
 import  std.conv;
+
+import  mysql;
 
 class User
 {

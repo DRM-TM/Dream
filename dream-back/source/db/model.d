@@ -1,15 +1,12 @@
-module  database.model;
+module  db.model;
 
 import  mysql;
-import	mysql.connection;
-import  vibe.web.common;
 import  vibe.d;
 
 import  std.stdio;
 import  std.conv : to;
 import  std.string;
 import  std.variant;
-/*import  std.container;*/
 import  std.regex : match;
 
 

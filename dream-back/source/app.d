@@ -1,3 +1,7 @@
+module	app;
+
+import	std.stdio;
+
 import	vibe.core.core;
 import	vibe.core.log;
 import	vibe.http.router;
@@ -5,12 +9,8 @@ import	vibe.http.server;
 import	vibe.web.rest;
 import	vibe.stream.ssl;
 
-import	std.stdio;
-
-import	IDreamAPI;
-import	DreamAPI;
-
-import 	database.model;
+import	api.desc;
+import	api.impl;
 
 void	setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 {
