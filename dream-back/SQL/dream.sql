@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: roemer.im
--- Généré le: Mar 14 Octobre 2014 à 09:45
+-- Généré le: Lun 20 Octobre 2014 à 12:58
 -- Version du serveur: 10.0.12-MariaDB-1~wheezy-log
 -- Version de PHP: 5.3.28
 
@@ -118,7 +118,15 @@ CREATE TABLE IF NOT EXISTS `hashtag` (
   KEY `id` (`id`),
   KEY `user_id_2` (`user_id`),
   KEY `dream_id` (`dream_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `hashtag`
+--
+
+INSERT INTO `hashtag` (`id`, `user_id`, `dream_id`, `content`) VALUES
+(1, 1, 2, '#lol'),
+(2, 1, 3, '#mdr');
 
 -- --------------------------------------------------------
 
@@ -130,20 +138,21 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(1024) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `inscription_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_connection` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_token` varchar(1024) NOT NULL,
   `birthdate` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`, `inscription_date`, `last_connection`, `user_token`, `birthdate`) VALUES
-(1, 'julien.ganichot@gmail.com', 'dbdff46e7e9cb1429e890b326a2a3133', '2014-10-08 11:31:55', '2014-10-08 11:31:55', '', '1993-06-21');
+INSERT INTO `user` (`id`, `email`, `password`, `username`, `inscription_date`, `last_connection`, `user_token`, `birthdate`) VALUES
+(1, 'julien.ganichot@gmail.com', 'dbdff46e7e9cb1429e890b326a2a3133', 'Ganitzsh', '2014-10-08 11:31:55', '2014-10-08 11:31:55', '', '1993-06-21');
 
 --
 -- Contraintes pour les tables exportées
