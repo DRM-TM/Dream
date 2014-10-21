@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="feed">
+	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	</head>
+	<body>
+		<h1>Dream Administrator</h1>
+		<div ng-controller="FeedController as feed">
+			<div ng-repeat="dream in feed.dreams">
+				<strong> {{ dream.user.m_username }} </strong>
+				<p ng-init="showDreamForm=-1" ng-hide="showDreamForm === $index" ng-init="showPanel=-1" ng-click="showPanel = feed.toggle($index, showPanel)">
+			 	{{ dream.content.m_content }}</p>
+			 	<form name="editDream" ng-show="showDreamForm === $index" ng-submit="feed.updateDream(dream.content.m_content, dream.content.m_id)">
+			 		<textarea ng-model="dream.content.m_content"></textarea>
+			 		<input ng-click="showDreamForm = feed.toggle($index, showDreamForm)" type="submit" value="submit" />
+			 	</form>
+				<div ng-show="showPanel === $index">
+					<ul ng-hide="showDreamForm === $index">
+						<li><a ng-click="showDreamForm = feed.toggle($index, showDreamForm)">Edit</a></li>
+						<li><a ng-click="feed.deleteDream(dream.content.m_id)">Delete</a></li>
+					</ul>
+					<div ng-repeat="tag in dream.hashtags">
+						<p>{{ tag.m_content }}</p>
+					</div>
+					<div ng-repeat="comment in dream.comments">
+						<p ng-hide="showCommForm === $index" ng-init="showCommForm=-1" ng-init="showcomm=-1" ng-click="showcomm = feed.toggle($index, showcomm)">
+						{{ comment.m_content }}</p>
+						<form name="editComment" ng-show="showCommForm === $index" ng-submit="feed.updateComment(comment.m_content, comment.m_id)">
+							<textarea ng-model="comment.m_content"></textarea>
+							<input ng-click="showCommForm = feed.toggle($index, showCommForm)" type="submit" value="Submit" />
+						</form>
+						<ul ng-show="showcomm === $index">
+							<li><a ng-click="showCommForm = feed.toggle($index, showCommForm)">Edit</a></li>
+							<li><a ng-click="feed.deleteComment(comment.m_id)">Delete</a></li>
+						</ul>
+					</div>
+					<a>Add</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
