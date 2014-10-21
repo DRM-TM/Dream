@@ -1,6 +1,6 @@
 var dreams = []
 //Controller handling API call and result display
-angular.module('dream.controllers').controller('FeedController', function ($scope, $ionicViewService, $http, FeedService, HardwareBackButtonManager) {
+angular.module('dream.controllers').controller('FeedController', function ($scope, $ionicViewService, $http, $log, FeedService, HardwareBackButtonManager) {
   $scope.navTitle = "Dream feed"
   $scope.list = FeedService.all()
 
@@ -10,6 +10,7 @@ angular.module('dream.controllers').controller('FeedController', function ($scop
   $http.get('http://mimiks.net:15030/api/dream').
   success(function(data, status, headers, config) {
     $scope.list = data
+    $log.log(data)
   }).error(function(data, status, headers, config) {
     $log.log("Error querying dreams for dream feed")
   });
