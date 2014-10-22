@@ -8,4 +8,4 @@ __dummy.html
 *.dt
 dub.selections.json
 *.exe
-db.conf
+db.json
