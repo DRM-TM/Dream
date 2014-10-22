@@ -21,9 +21,9 @@ void	setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 
 shared static	this()
 {
-	ConfigFile	file = new ConfigFile();
 	/*setLogLevel(LogLevel.debug_);*/
 	runTask({
+		ConfigFile	file = new ConfigFile();
 		string		connStr = file.asConnectionString();
 		auto		router = new URLRouter;
 		auto		settings = new HTTPServerSettings;
