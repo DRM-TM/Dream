@@ -45,7 +45,6 @@ class ConfigFile
             _content["host"] = _jsonObj["host"].get!string;
             _content["port"] = _jsonObj["port"].get!string;
             _content["db"] = _jsonObj["db"].get!string;
-            writeln(_content);
         } catch (Exception e) {
             writeln("Exception: ", e.toString());
         }
@@ -54,6 +53,10 @@ class ConfigFile
 
     @property string[string] asAA() {
         return (_content);
+    }
+
+    @property string    fileName() {
+        return (_fileName);
     }
 
     @property string    asConnectionString() {
