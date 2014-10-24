@@ -1,44 +1,74 @@
 <!DOCTYPE html>
 <html ng-app="feed">
 	<head>
-		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/semantic.css" />
+		<link rel="stylesheet" type="text/css" href="css/font.css" />
 		<script type="text/javascript" src="angular.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="javascript/semantic.js"></script>
+		<link rel="stylesheet" type="text/css" src="css/semantic.css" />
 	</head>
 	<body>
-		<h1>Dream Administrator</h1>
-		<div ng-controller="FeedController as feed">
-			<div ng-repeat="dream in feed.dreams">
+		<h1 class="ui dividing center aligned header">Dream Administrator</h1>
+		<div class="tmp" ng-controller="FeedController as feed">
+			<div class="ui segment" ng-repeat="dream in feed.dreams">
 				<strong> {{ dream.user.m_username }} </strong>
 				<p ng-init="showDreamForm=-1" ng-hide="showDreamForm === $index" ng-init="showPanel=-1" ng-click="showPanel = feed.toggle($index, showPanel)">
 			 	{{ dream.content.m_content }}</p>
-			 	<form name="editDream" ng-show="showDreamForm === $index" ng-submit="feed.updateDream(dream.content.m_content, dream.content.m_id)">
-			 		<textarea ng-model="dream.content.m_content"></textarea>
-			 		<input ng-click="showDreamForm = feed.toggle($index, showDreamForm)" type="submit" value="submit" />
+			 	<form class="ui form" name="editDream" ng-show="showDreamForm === $index">
+			 		<div class="field">
+				 		<textarea ng-model="dream.content.m_content"></textarea>
+			 		</div>
 			 	</form>
 				<div ng-show="showPanel === $index">
-					<ul ng-hide="showDreamForm === $index">
-						<li><a ng-click="showDreamForm = feed.toggle($index, showDreamForm)">Edit</a></li>
-						<li><a ng-click="feed.deleteDream(dream.content.m_id)">Delete</a></li>
+					<ul class="tiny icon ui buttons">
+						<li class="ui teal button" ng-show="showDreamForm === $index" 
+							ng-click="feed.updateDream(dream.content.m_content, dream.content.m_id)">
+							<div ng-click="showDreamForm = feed.toggle($index, showDreamForm)">Save</div>
+						</li>
+						<li class="ui teal button" ng-hide="showDreamForm === $index" ng-click="showDreamForm = feed.toggle($index, showDreamForm)"><i class="icon edit"></i> Edit</li>
+						<li class="ui red button" ng-click="feed.deleteDream(dream.content.m_id)"><i class="remove icon"></i> Delete</li>
+						<li class="ui black button" ng-show="showDreamForm === $index" ng-click="showDreamForm = feed.toggle($index, showDreamForm)">Back</li>
 					</ul>
+					<div class="comments">
 					<div ng-repeat="tag in dream.hashtags">
-						<p>{{ tag.m_content }}</p>
+						<p class="ui label">{{ tag.m_content }}</p>
 					</div>
-					<div ng-repeat="comment in dream.comments">
+					<b class="ui tiny icon green circular button"><i class="add icon"></i></b>
+					<div class="ui secondary segment" ng-repeat="comment in dream.comments">
 						<p ng-hide="showCommForm === $index" ng-init="showCommForm=-1" ng-init="showcomm=-1" ng-click="showcomm = feed.toggle($index, showcomm)">
 						{{ comment.m_content }}</p>
-						<form name="editComment" ng-show="showCommForm === $index" ng-submit="feed.updateComment(comment.m_content, comment.m_id)">
-							<textarea ng-model="comment.m_content"></textarea>
-							<input ng-click="showCommForm = feed.toggle($index, showCommForm)" type="submit" value="Submit" />
+						<form class="ui form" name="editComment" ng-show="showCommForm === $index">
+							<div class="field">
+								<textarea ng-model="comment.m_content"></textarea>
+							</div>
 						</form>
-						<ul ng-show="showcomm === $index">
-							<li><a ng-click="showCommForm = feed.toggle($index, showCommForm)">Edit</a></li>
-							<li><a ng-click="feed.deleteComment(comment.m_id)">Delete</a></li>
+						<ul class="tiny icon ui buttons" ng-show="showcomm === $index">
+							<li class="ui teal button" ng-show="showCommForm === $index" ng-click="feed.updateComment(comment.m_content, comment.m_id)">
+								<div ng-click="showCommForm = feed.toggle($index, showCommForm)">Save</div>
+							</li>
+							<li class="ui teal button" ng-click="showCommForm = feed.toggle($index, showCommForm)" ng-hide="showCommForm === $index">
+								<i class="icon edit"></i> Edit
+							</li>
+							<li class="ui red button" ng-click="feed.deleteComment(comment.m_id)"><i class="remove icon"></i> Delete</li>
+							<li class="ui black button" ng-show="showCommForm === $index" ng-click="showCommForm = feed.toggle($index, showCommForm)">Back</li>
 						</ul>
 					</div>
-					<a>Add</a>
+					<a class="tiny ui button green submit labeled icon" ng-hide="showAddComm === $index" ng-click="showAddComm = feed.toggle($index, showAddComm)">
+					<i class="icon add"></i>Add a comment</a>
+					<form name="AddComm" ng-show="showAddComm === $index" ng-submit="feed.addComment()">
+						<textarea placeholder="Enter your comment here"></textarea>
+						<input ng-click="showAddComm = feed.toggle($index, showAddComm)" type="submit" value="Add"/>
+					</form>
+					</div>
 				</div>
 			</div>
+			<a ng-init="showAddDream=-1" ng-hide="showAddDream === $index" ng-click="showAddDream = feed.toggle($index, showAddDream)">Add</a>
+			<form name="AddDream" ng-show="showAddDream === $index" ng-submit="feed.addDream()">
+				<input type="text"/><br/>
+				<textarea placeholder="Enter your Dream here"></textarea>
+				<input ng-click="showAddDream = feed.toggle($index, showAddDream)" type="submit" value="Add"/>
+			</form>
 		</div>
 	</body>
 </html>

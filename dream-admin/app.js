@@ -29,7 +29,7 @@ app.controller('FeedController', ['$http', '$scope', function($http, $scope) {
 	}
 	
 	this.updateDream = function(content, index) {
-
+		alert("LOL");
 	}
 
 	this.alert = function() {
