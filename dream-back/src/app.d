@@ -12,6 +12,8 @@ import	vibe.stream.ssl;
 import	api.desc;
 import	api.impl;
 
+import	db.config;
+
 void	setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 {
 	res.headers["Access-Control-Allow-Origin"] = "*";
@@ -21,7 +23,8 @@ shared static	this()
 {
 	/*setLogLevel(LogLevel.debug_);*/
 	runTask({
-		string		connStr = "host=roemer.im;port=3306;user=dream;pwd=vizzerdrix;db=dream";
+		ConfigFile	file = new ConfigFile();
+		string		connStr = file.asConnectionString();
 		auto		router = new URLRouter;
 		auto		settings = new HTTPServerSettings;
 
