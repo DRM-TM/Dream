@@ -1,42 +1,72 @@
 <style>
+
+input::-webkit-input-placeholder {
+  color: white;
+}
+input::-moz-placeholder {
+  color: white;
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+  color: white;
+}
+input:-ms-input-placeholder {
+  color: white;
+}
+
 .dream-card{
   margin-left: -10px;
   margin-right: -10px;
 }
+
+.icon{
+  color:white;
+}
+
+.colored {
+background-color:rgba(52, 72, 94, 0.2);
+}
+
+.colored1{
+  background-color:rgba(52, 72, 94, 0.5);
+}
+
+.no_border{
+  border-style:none;
+}
+
 </style>
 
 <ion-view title="{{navTitle}}" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
 hide-back-button="true">
 <ion-content has-header="true">
-  <label class="item item-input">
-    <i class="icon ion-search placeholder-icon"></i>
+  <label class="item item-input" style="background-color:#f4d03d;">
+    <i class="icon ion-search"></i>
     <input type="search" placeholder="Search">
   </label>
   <ion-list>
     <ion-item ng-repeat="item in list">
-
-        <div class="item">
-          <h2>{{item.user.username}}</h2>
+        <div class="item colored no_border">
+          <h2>Titre du reve</h2>
         </div>
-        <div class="item item-body">
-          <p>{{item.content.content}}</p>
+        <div class="item item-body colored no_border">
+          <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
           <p>
-            <a href="#" class="subdued">1 Like</a>
-            <a href="#" class="subdued">5 Comments</a>
+            <a href="#" class="subdued">#test</a>
+            <a href="#" class="subdued">#kek</a>
           </p>
         </div>
 
-        <div class="item tabs tabs-secondary tabs-icon-left">
+        <div class="item tabs tabs-secondary tabs-icon-left no_border colored1">
           <a class="tab-item" href="#">
-            <i class="icon ion-thumbsup"></i>
+            <img src="img/like.png" style="width:26%"></img>
             Like
           </a>
           <a class="tab-item" href="#">
-            <i class="icon ion-chatbox"></i>
+          <img src="img/comment.png" style="width:28%"></img>
             Comment
           </a>
           <a class="tab-item" href="#">
-            <i class="icon ion-share"></i>
+            <img src="img/share.png" style="width:30%"></img>
             Share
           </a>
         </div>
