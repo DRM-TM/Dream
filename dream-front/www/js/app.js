@@ -28,10 +28,10 @@ function($stateProvider, $urlRouterProvider) {
     controller: 'FeedController',
     templateUrl: 'templates/feed.html'
   })
-  .state('record', {
-    url: '/record',
-    controller: 'RecordController',
-    templateUrl: 'templates/record.html'
+  .state('about', {
+    url: '/about',
+    controller: 'AboutController',
+    templateUrl: 'templates/about.html'
   })
   .state('settings', {
     url: '/settings',

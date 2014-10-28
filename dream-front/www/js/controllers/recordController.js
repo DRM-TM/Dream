@@ -9,13 +9,12 @@ $scope.showPopup = function(templateUrl, title, errorMessage) {
 
   var myPopup = $ionicPopup.show({
     templateUrl: templateUrl,
-    title: title,
     scope: $scope,
     buttons: [
     { text: 'Cancel' },
     {
       text: '<b>Save</b>',
-      type: 'button-positive',
+      type: 'button-dark',
       onTap: function(e) {
         if (!$scope.data.dream) {
           $scope.errorMessage = errorMessage

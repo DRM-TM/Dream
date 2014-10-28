@@ -1,6 +1,7 @@
 var ctrl = angular.module('dream.controllers', ['ionic']);
 
 ctrl.controller('MenuController', function ($scope, $location, MenuService) {
+  $scope.share_it = "Share it"
   // mock data
   $scope.list = MenuService.all();
   $scope.toggleLeft = function() {

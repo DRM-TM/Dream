@@ -23,16 +23,21 @@ input:-ms-input-placeholder {
 }
 
 .colored {
-background-color:rgba(52, 72, 94, 0.2);
+background-color:rgba(52, 72, 94, 0.07);
 }
 
 .colored1{
-  background-color:rgba(52, 72, 94, 0.5);
+  background-color:rgba(52, 72, 94, 0.2);
 }
 
 .no_border{
   border-style:none;
 }
+
+.item{
+  margin:0px;
+}
+
 
 </style>
 
@@ -49,7 +54,7 @@ hide-back-button="true">
           <h2>Titre du reve</h2>
         </div>
         <div class="item item-body colored no_border">
-          <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+          <p style="margin-top:0px;">lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
           <p>
             <a href="#" class="subdued">#test</a>
             <a href="#" class="subdued">#kek</a>
@@ -57,25 +62,23 @@ hide-back-button="true">
         </div>
 
         <div class="item tabs tabs-secondary tabs-icon-left no_border colored1">
-          <a class="tab-item" href="#">
-            <img src="img/like.png" style="width:26%"></img>
-            Like
+          #dream #test #tag
+        </div>
+
+        <div class="item tabs tabs-secondary tabs-icon-left no_border">
+          <a class="tab-item" href="#" >
+            <p style="font-size:20px" >22&nbsp;<img style="width:26%;vertical-align:middle"src="img/like.png" alt="" /></p>
+
           </a>
           <a class="tab-item" href="#">
-          <img src="img/comment.png" style="width:28%"></img>
-            Comment
+          <p style="font-size:20px">8&nbsp;<img style="width:30%;vertical-align:middle"src="img/comment.png" alt="" /></p>
           </a>
           <a class="tab-item" href="#">
-            <img src="img/share.png" style="width:30%"></img>
-            Share
+            <p style="font-size:20px" ><img style="margin-bottom:5px;width:26%;vertical-align:middle"src="img/share.png" alt="" /></p>
+
           </a>
         </div>
 
-      <!--OLD-->
-      <!--<div class="item-text-wrap">
-      <p>{{item.content.content}}</p>
-      <cite>by {{item.user.username}}</cite>
-    </div>-->
   </ion-item>
 </ion-list>
 </ion-content>

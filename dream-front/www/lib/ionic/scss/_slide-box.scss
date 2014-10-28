@@ -8,7 +8,7 @@
   position: relative;
   visibility: hidden;
   overflow: hidden; }
-  
+
 .slider-slides {
   position: relative;
   height: 100%; }
@@ -45,7 +45,7 @@
   &.no-animate {
     @include transition-duration(0ms !important);
   }
-}
+
 
 .slider-slide-image {
   > img {
