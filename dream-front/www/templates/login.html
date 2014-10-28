@@ -1,36 +1,84 @@
 <style>
+
+input::-webkit-input-placeholder {
+	color: white;
+}
+input::-moz-placeholder {
+	color: white;
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+	color: white;
+}
+input:-ms-input-placeholder {
+	color: white;
+}
+
 .loginButton {
   width:100%;
   margin-bottom:5px;
+  height:40px;
 }
 
 .loginInput {
   margin-bottom:5px;
+  height:40px;
+  background-color:#9aa4af;
 }
+
+.item{
+  border-width:0px;
+}
+
+.loginForm{
+  padding-top:30px;
+  width:80%;
+}
+
+.logo {
+  margin-top:75px;
+  margin-bottom:20px;
+  max-width:45%;
+}
+
+.icon{
+  color:white;
+}
+
+.ion-ios7-email-outline{
+  font-size:20px;
+  margin-top:2px;
+  margin-left:-2px;
+}
+
+.button{
+  border-style:none;
+  min-height:40px
+}
+
 </style>
 
 <ion-modal-view title="{{navTitle}}" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
 hide-back-button="true">
 
-<ion-content has-header="true">
+<ion-content has-header="true" style="background-color:#33475D">
   <div class="list">
-    <center><img style="margin-top:15px;max-width:45%;" src="img/logo.png"></img></center>
-    <center><form name="loginForm" style="padding-top:30px;width:80%">
-      <label class="loginInput item item-input">
-        <i style="font-size: 20px;margin-top: 2px;margin-left: -2px;" class="icon ion-ios7-email-outline placeholder-icon"></i>
-        <input ng-model="user.email" type="text" placeholder="&nbsp;Email">
+    <center><img class="logo" src="img/logo.png"></img></center>
+    <center><form name="loginForm" class="loginForm">
+      <label class="loginInput item item-input" >
+        <i  class="icon ion-ios7-email-outline placeholder-icon"></i>
+        <input ng-model="user.email" type="text" style="color:white;  font-weight:bold;" placeholder="&nbsp;Email">
       </label>
       <label class="loginInput item item-input">
         <i class="icon ion-locked placeholder-icon"></i>
-        <input ng-model="user.password" type="password" placeholder="&nbsp;Password">
+        <input ng-model="user.password" type="password" placeholder="&nbsp;Password" style="color:white;">
       </label>
 
       <button type="submit" ng-click="login(user)" class="loginButton button button-dark">Log me in</button>
-      <button style="background-color:#3B5998" type="submit" class="loginButton button button-positive">Login with <b>Facebook</b></button></center>
+      <button style="background-color:#3B5998;" type="submit" class="loginButton button button-positive">Login with <b>Facebook</b></button></center>
       <center><button class="button button-clear button-stable">
         Password ?
       </button>
-      <button class="button button-clear button-dark">
+      <button class="button button-clear button-energized">
         Create an account
       </button></center>
     </form>

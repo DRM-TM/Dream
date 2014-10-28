@@ -19,36 +19,42 @@
 }
 
 .marged-text{
-  margin-left:15px;
-  margin-right:15px;
+  margin-left:25px;
+  margin-right:25px;
+  color:white;
+}
+
+.logo{
+  width:55%;
+  margin-top:50px;
+  margin-bottom:50px;
 }
 
 </style>
-<ion-modal-view left-buttons="leftButtons" right-buttons="rightButtons">
+<ion-modal-view right-buttons="rightButtons">
   <ion-content>
-    <div class="bar bar-header bar-light">
-      <button class="button button-clear button-positive">{{previousSlide}}</button>
-
-      <button  ng-click="startApp()" class="button button-clear button-positive">{{goToApp}}</button>
+    <div class="bar bar-positive" style="border-color: #33475D;" >
+      <button  class="button button-clear"></button>
+      <button  ng-click="startApp()" class="button button-clear button-energized">{{goToApp}}</button>
     </div>
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
-      <ion-slide>
-        <center><h1 class="marged-text">Thank you for choosing</h1></center>
+      <ion-slide style="background-color:#33475D">
+        <center><h1 class="marged-text">{{intro_text_one}}</h1></center>
         <div id="logo">
-          <img style="width:55%" src="img/logo.svg">
+          <img class="logo" src="img/logo.png">
         </div>
-        <br/><p>
-          We've worked super hard to make you happy.
+        <br/><p class="marged-text">
+          {{intro_text_two}}
         </p>
       </ion-slide>
       <ion-slide class="slide-with-image">
-        <img style="width:100%;" src="img/intro/how_to_record.png">
+        <img style="width:100%;" src="img/intro/intro_00.png">
       </ion-slide>
       <ion-slide class="slide-with-image">
-        <img style="width:100%;" src="img/intro/how_to_menu.png">
+        <img style="width:100%;" src="img/intro/intro_01.png">
       </ion-slide>
       <ion-slide class="slide-with-image">
-        <img style="width:100%;" src="img/intro/how_to_search.png">
+        <img style="width:100%;" src="img/intro/intro_02.png">
       </ion-slide>
     </ion-slide-box>
   </ion-content>

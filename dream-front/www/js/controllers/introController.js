@@ -8,7 +8,8 @@ ctrl.controller('IntroController', function($scope, $location, $ionicSlideBoxDel
   //window.localStorage.clear()
   $scope.goToApp = "Skip"
 
-  $scope.previousSlide = "Previous"
+  $scope.intro_text_one = "Merci d'avoir choisi"
+  $scope.intro_text_two = "Vous venez de télécharger l'appli la plus cool du monde"
 
   /*
   **if user already saw the intro, skip it
