@@ -7670,3 +7670,22 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
 .platform-c:not(.enable-transitions) * {
   -webkit-transition: none !important;
   transition: none !important; }
+
+.icon-white {
+  color: white; }
+
+/*
+** Input
+*/
+input::-webkit-input-placeholder {
+  color: white; }
+
+input::-moz-placeholder {
+  color: white; }
+
+input:-moz-placeholder {
+  /* Older versions of Firefox */
+  color: white; }
+
+input:-ms-input-placeholder {
+  color: white; }

@@ -25,3 +25,24 @@ $popup-background-color:          #33475D !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+.icon-white{
+  color:white;
+}
+
+/*
+** Input
+*/
+
+input::-webkit-input-placeholder {
+  color: white;
+}
+input::-moz-placeholder {
+  color: white;
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+  color: white;
+}
+input:-ms-input-placeholder {
+  color: white;
+}
