@@ -19,16 +19,68 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
-$positive:                        #33475D !default;
+$positive:                        rgba(52, 72, 94, 1) !default;
+$lightblue:                        rgba(52, 72, 94, 0.05);
+$darkblue:                        rgba(52, 72, 94, 0.2);
 $dark:                            #1f2b38 !default;
+$yellow:                          #f4d03d;
 $popup-background-color:          #33475D !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-.icon-white{
-  color:white;
+#feed {
+  label{
+    background-color:$yellow;
+  }
+
+  .icon-white{
+    color:white;
+  }
+
+  .dream-card{
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .lightblue {
+    background-color:$lightblue;
+  }
+
+  .darkblue{
+    background-color:$darkblue;
+  }
+
+  .no_border{
+    border-style:none;
+  }
+
+  .item{
+    margin:0px;
+    p{
+      margin-top:0px;
+    }
+  }
 }
+
+/*
+** record popup
+*/
+#record-popup{
+  img{
+    width:40%;
+    margin-bottom:15px;
+  }
+  #text-title{
+    height:20px;
+    resize:none;
+  }
+  #text-content{
+    height:150px;
+    resize:none;
+  }
+}
+
 
 /*
 ** Input
@@ -36,13 +88,17 @@ $popup-background-color:          #33475D !default;
 
 input::-webkit-input-placeholder {
   color: white;
+  opacity: 1;
 }
 input::-moz-placeholder {
   color: white;
+  opacity: 1;
 }
 input:-moz-placeholder {   /* Older versions of Firefox */
   color: white;
+  opacity: 1;
 }
 input:-ms-input-placeholder {
   color: white;
+  opacity: 1;
 }

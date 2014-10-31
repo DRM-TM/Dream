@@ -1,68 +1,43 @@
-<style>
-
-
-.dream-card{
-  margin-left: -10px;
-  margin-right: -10px;
-}
-
-.colored {
-background-color:rgba(52, 72, 94, 0.07);
-}
-
-.colored1{
-  background-color:rgba(52, 72, 94, 0.2);
-}
-
-.no_border{
-  border-style:none;
-}
-
-.item{
-  margin:0px;
-}
-
-
-</style>
-
-<ion-view title="{{navTitle}}" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
+<ion-view id="feed" title="{{navTitle}}" hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons"
 hide-back-button="true">
 <ion-content has-header="true">
-  <label class="item item-input" style="background-color:#f4d03d;">
+  <label class="item item-input input-yellow">
     <i class="icon ion-search icon-white"></i>
     <input type="search" placeholder="Search">
   </label>
   <ion-list>
     <ion-item ng-repeat="item in list">
-        <div class="item colored no_border">
-          <h2>Titre du reve</h2>
-        </div>
-        <div class="item item-body colored no_border">
-          <p style="margin-top:0px;">lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
-          <p>
-            <a href="#" class="subdued">#test</a>
-            <a href="#" class="subdued">#kek</a>
-          </p>
-        </div>
+      <div class="item no_border lightblue">
+        <h2>Titre du reve</h2>
+      </div>
+      <div class="item item-body lightblue no_border">
+        <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum</p>
+        <p>
+          <a href="#" class="subdued">#test</a>
+          <a href="#" class="subdued">#kek</a>
+        </p>
+      </div>
 
-        <div class="item tabs tabs-secondary tabs-icon-left no_border colored1">
-          #dream #test #tag
-        </div>
+      <div class="item tabs tabs-secondary tabs-icon-left no_border darkblue">
+        #dream #test #tag
+      </div>
 
-        <div class="item tabs tabs-secondary tabs-icon-left no_border">
-          <a class="tab-item" href="#" >
-            <p style="font-size:20px" >22&nbsp;<img style="width:26%;vertical-align:middle"src="img/like.png" alt="" /></p>
-          </a>
-          <a class="tab-item" href="#">
-          <p style="font-size:20px">8&nbsp;<img style="width:30%;vertical-align:middle"src="img/comment.png" alt="" /></p>
-          </a>
-          <a class="tab-item" href="#">
-            <p style="font-size:20px" ><img style="margin-bottom:5px;width:26%;vertical-align:middle"src="img/share.png" alt="" /></p>
-          </a>
-        </div>
+      <div class="item tabs tabs-secondary tabs-icon-left no_border">
+        <a class="tab-item" href="#">
+          <i class="icon ion-thumbsup"></i>
+          Like
+        </a>
+        <a class="tab-item" href="#">
+          <i class="icon ion-chatbox"></i>
+          Comment
+        </a>
+        <a class="tab-item" href="#">
+          <i class="icon ion-share"></i>
+          Share
+        </a>
 
-  </ion-item>
-</ion-list>
-</ion-content>
+      </ion-item>
+    </ion-list>
+  </ion-content>
 
 </ion-view>
