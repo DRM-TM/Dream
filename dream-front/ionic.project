@@ -1,8 +1,12 @@
 {
-  "name": "dream",
+  "name": "myApp",
   "app_id": "",
   "gulpStartupTasks": [
     "sass",
     "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
   ]
 }

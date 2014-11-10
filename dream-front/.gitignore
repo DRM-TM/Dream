@@ -4,6 +4,3 @@
 node_modules/
 platforms/
 plugins/
-
-#images
-.psd
