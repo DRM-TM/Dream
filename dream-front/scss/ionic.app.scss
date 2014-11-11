@@ -20,7 +20,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
 $positive:                        rgba(52, 72, 94, 1) !default;
-$lightblue:                        rgba(52, 72, 94, 0.05);
+$lightblue:                       rgba(52, 72, 94, 0.05);
 $darkblue:                        rgba(52, 72, 94, 0.2);
 $dark:                            #1f2b38 !default;
 $yellow:                          #f4d03d;
@@ -29,9 +29,45 @@ $popup-background-color:          #33475D !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+#intro {
+  .slider {
+    height: 100%;
+  }
+  .slider-slide {
+    padding-top: 50px;
+    color: #000;
+    background-color: #fff;
+    text-align: center;
+
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+  }
+  .scroll{
+    height:100%;
+  }
+  .slide-with-image{
+    margin-top:-6px
+  }
+
+  .marged-text{
+    margin-left:25px;
+    margin-right:25px;
+    color:white;
+  }
+
+  .logo{
+    width:55%;
+    margin-top:50px;
+    margin-bottom:50px;
+  }
+
+}
+
 #feed {
   label{
     background-color:$yellow;
+    height:42px;
+    border-style: none;
   }
 
   .icon-white{
@@ -51,7 +87,7 @@ $popup-background-color:          #33475D !default;
     background-color:$darkblue;
   }
 
-  .no_border{
+  .no-border{
     border-style:none;
   }
 
@@ -63,9 +99,63 @@ $popup-background-color:          #33475D !default;
   }
 }
 
-/*
-** record popup
-*/
+#login{
+
+  .loginButton {
+    width:100%;
+    margin-bottom:5px;
+    height:40px;
+  }
+
+  .loginInput {
+    margin-bottom:5px;
+    height:40px;
+    background-color:#9aa4af;
+  }
+
+  .item{
+    border-width:0px;
+  }
+
+  .loginForm{
+    padding-top:30px;
+    width:80%;
+  }
+
+  .logo {
+    margin-top:75px;
+    margin-bottom:20px;
+    max-width:45%;
+  }
+
+  .icon{
+    color:white;
+  }
+
+  .ion-ios7-email-outline{
+    font-size:20px;
+    margin-top:2px;
+    margin-left:-2px;
+  }
+
+  .button{
+    border-style:none;
+    min-height:40px
+  }
+
+  .button-facebook {
+    background-color:#3B5998;
+    color:white;
+  }
+
+  input{
+    color:white;
+    font-weight:bold;
+  }
+  background-color:$positive;
+
+}
+
 #record-popup{
   img{
     width:40%;
@@ -81,10 +171,6 @@ $popup-background-color:          #33475D !default;
   }
 }
 
-
-/*
-** Input
-*/
 
 input::-webkit-input-placeholder {
   color: white;

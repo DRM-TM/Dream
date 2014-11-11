@@ -7,7 +7,7 @@ angular.module('dream.controllers').controller('FeedController', function ($scop
   //re-enable hardware back button
   HardwareBackButtonManager.enable()
 
-  $http.get('http://mimiks.net:15030/api/dream').
+  $http.get('https://mimiks.net:/15030/api/dream').
   success(function(data, status, headers, config) {
     $scope.list = data
     $log.log(data)

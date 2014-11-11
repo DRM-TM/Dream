@@ -19,8 +19,8 @@ $scope.showPopup = function(templateUrl, title, errorMessage) {
         if (!$scope.data.dream) {
           $scope.errorMessage = errorMessage
           e.preventDefault();
+          console.log($scope.data)
         } else {
-          //process datas
           return $scope.data;
         }
       }
@@ -29,7 +29,7 @@ $scope.showPopup = function(templateUrl, title, errorMessage) {
   });
   myPopup.then(function(res) {
     myPopup.close()
-    console.log('Dream recorded', res);
+    console.log('Record popup closed', res);
   });
 };
 

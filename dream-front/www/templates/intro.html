@@ -1,38 +1,5 @@
-<style>
-.slider {
-  height: 100%;
-}
-.slider-slide {
-  padding-top: 50px;
-  color: #000;
-  background-color: #fff;
-  text-align: center;
-
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-}
-.scroll{
-  height:100%;
-}
-.slide-with-image{
-  margin-top:-6px
-}
-
-.marged-text{
-  margin-left:25px;
-  margin-right:25px;
-  color:white;
-}
-
-.logo{
-  width:55%;
-  margin-top:50px;
-  margin-bottom:50px;
-}
-
-</style>
-<ion-modal-view right-buttons="rightButtons">
-  <ion-content>
+<ion-modal-view id="intro" right-buttons="rightButtons">
+  <ion-content  scroll="false">
     <div class="bar bar-positive" style="border-color: #33475D;" >
       <button  class="button button-clear"></button>
       <button  ng-click="startApp()" class="button button-clear button-energized">{{goToApp}}</button>

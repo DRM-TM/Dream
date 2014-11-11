@@ -2445,31 +2445,31 @@ ion-infinite-scroll {
 
 /* If you change these, change platform.scss as well */
 .has-header {
-  top: 44px; }
+  top: 50px; }
 
 .no-header {
   top: 0; }
 
 .has-subheader {
-  top: 88px; }
+  top: 100px; }
 
 .has-tabs-top {
-  top: 93px; }
+  top: 99px; }
 
 .has-header.has-subheader.has-tabs-top {
-  top: 137px; }
+  top: 149px; }
 
 .has-footer {
-  bottom: 44px; }
+  bottom: 50px; }
 
 .has-subfooter {
-  bottom: 88px; }
+  bottom: 100px; }
 
 .has-tabs, .bar-footer.has-tabs {
   bottom: 49px; }
 
 .has-footer.has-tabs {
-  bottom: 93px; }
+  bottom: 99px; }
 
 .pane {
   -webkit-transform: translate3d(0, 0, 0);
@@ -2725,7 +2725,7 @@ a.subdued {
   box-sizing: border-box;
   padding: 5px;
   width: 100%;
-  height: 44px;
+  height: 50px;
   border-width: 0;
   border-style: solid;
   border-top: 1px solid transparent;
@@ -2846,12 +2846,12 @@ a.subdued {
     overflow: hidden;
     margin: 0 10px;
     min-width: 30px;
-    height: 43px;
+    height: 49px;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 17px;
-    line-height: 44px; }
+    line-height: 50px; }
     .bar .title.title-left {
       text-align: left; }
     .bar .title.title-right {
@@ -3117,11 +3117,11 @@ a.subdued {
   padding: 0; }
 
 .bar-subheader {
-  top: 44px;
+  top: 50px;
   display: block; }
 
 .bar-subfooter {
-  bottom: 44px;
+  bottom: 50px;
   display: block; }
 
 /**
@@ -3589,7 +3589,7 @@ a.subdued {
 /* Allow parent element to have tabs-top */
 /* If you change this, change platform.scss as well */
 .tabs-top > .tabs, .tabs.tabs-top {
-  top: 44px;
+  top: 50px;
   padding-top: 0;
   background-position: bottom; }
   .tabs-top > .tabs .tab-item.tab-item-active .badge, .tabs-top > .tabs .tab-item.active .badge, .tabs-top > .tabs .tab-item.activated .badge, .tabs.tabs-top .tab-item.tab-item-active .badge, .tabs.tabs-top .tab-item.active .badge, .tabs.tabs-top .tab-item.activated .badge {
@@ -3802,19 +3802,19 @@ a.subdued {
   .modal.ng-leave-active {
     bottom: 0; }
   .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) {
-    height: 44px; }
+    height: 50px; }
     .platform-ios.platform-cordova .modal-wrapper .modal .bar-header:not(.bar-subheader) > * {
       margin-top: 0; }
   .platform-ios.platform-cordova .modal-wrapper .modal .tabs-top > .tabs, .platform-ios.platform-cordova .modal-wrapper .modal .tabs.tabs-top {
-    top: 44px; }
+    top: 50px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-header, .platform-ios.platform-cordova .modal-wrapper .modal .bar-subheader {
-    top: 44px; }
+    top: 50px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-subheader {
-    top: 88px; }
+    top: 100px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-tabs-top {
-    top: 93px; }
+    top: 99px; }
   .platform-ios.platform-cordova .modal-wrapper .modal .has-header.has-subheader.has-tabs-top {
-    top: 137px; } }
+    top: 149px; } }
 
 .modal-open {
   pointer-events: none; }
@@ -7645,21 +7645,21 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   }
   */
 .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
-  height: 64px; }
+  height: 70px; }
   .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader).item-input-inset .item-input-wrapper {
     margin-top: 19px !important; }
   .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
     margin-top: 20px; }
 .platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
-  top: 64px; }
+  top: 70px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
-  top: 64px; }
+  top: 70px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-subheader {
-  top: 108px; }
+  top: 120px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-tabs-top {
-  top: 113px; }
+  top: 119px; }
 .platform-ios.platform-cordova:not(.fullscreen) .has-header.has-subheader.has-tabs-top {
-  top: 157px; }
+  top: 169px; }
 .platform-ios.platform-cordova.status-bar-hide {
   margin-bottom: 20px; }
 
@@ -7671,8 +7671,32 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   -webkit-transition: none !important;
   transition: none !important; }
 
+#intro .slider {
+  height: 100%; }
+#intro .slider-slide {
+  padding-top: 50px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300; }
+#intro .scroll {
+  height: 100%; }
+#intro .slide-with-image {
+  margin-top: -6px; }
+#intro .marged-text {
+  margin-left: 25px;
+  margin-right: 25px;
+  color: white; }
+#intro .logo {
+  width: 55%;
+  margin-top: 50px;
+  margin-bottom: 50px; }
+
 #feed label {
-  background-color: #f4d03d; }
+  background-color: #f4d03d;
+  height: 42px;
+  border-style: none; }
 #feed .icon-white {
   color: white; }
 #feed .dream-card {
@@ -7682,16 +7706,48 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   background-color: rgba(52, 72, 94, 0.05); }
 #feed .darkblue {
   background-color: rgba(52, 72, 94, 0.2); }
-#feed .no_border {
+#feed .no-border {
   border-style: none; }
 #feed .item {
   margin: 0px; }
   #feed .item p {
     margin-top: 0px; }
 
-/*
-** record popup
-*/
+#login {
+  background-color: #34485e; }
+  #login .loginButton {
+    width: 100%;
+    margin-bottom: 5px;
+    height: 40px; }
+  #login .loginInput {
+    margin-bottom: 5px;
+    height: 40px;
+    background-color: #9aa4af; }
+  #login .item {
+    border-width: 0px; }
+  #login .loginForm {
+    padding-top: 30px;
+    width: 80%; }
+  #login .logo {
+    margin-top: 75px;
+    margin-bottom: 20px;
+    max-width: 45%; }
+  #login .icon {
+    color: white; }
+  #login .ion-ios7-email-outline {
+    font-size: 20px;
+    margin-top: 2px;
+    margin-left: -2px; }
+  #login .button {
+    border-style: none;
+    min-height: 40px; }
+  #login .button-facebook {
+    background-color: #3B5998;
+    color: white; }
+  #login input {
+    color: white;
+    font-weight: bold; }
+
 #record-popup img {
   width: 40%;
   margin-bottom: 15px; }
@@ -7702,9 +7758,6 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   height: 150px;
   resize: none; }
 
-/*
-** Input
-*/
 input::-webkit-input-placeholder {
   color: white;
   opacity: 1; }

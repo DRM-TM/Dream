@@ -2,10 +2,10 @@
 <widget id="com.ionicframework.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>StarterApp</name>
     <description>
-        A sample Ionic Framework app using Cordova and AngularJS
+        Dream. mobile application
     </description>
-    <author email="max@drifty.com" href="http://ionicframework.com">
-        Apache Cordova Team
+    <author email="mendio_l@epitech.eu">
+        mendio_l
     </author>
     <content src="index.html" />
     <access origin="*" />
