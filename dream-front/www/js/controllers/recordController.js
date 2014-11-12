@@ -21,6 +21,7 @@ $scope.showPopup = function(templateUrl, title, errorMessage) {
           e.preventDefault();
           console.log($scope.data)
         } else {
+          console.log($scope.data)
           return $scope.data;
         }
       }

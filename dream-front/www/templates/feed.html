@@ -6,36 +6,26 @@ hide-back-button="true">
     <input type="search" placeholder="Search">
   </label>
   <ion-list>
-    <ion-item ng-repeat="item in list" class="no-border">
-      <div class="item no-border lightblue">
-        <h2>{{list}}</h2>
-      </div>
+    <ion-item ng-repeat="item in list" class="border-bottom">
       <div class="item item-body lightblue no-border">
-        <p>{{list}}</p>
-        <p>
-          <a href="#" class="subdued">#test</a>
-          <a href="#" class="subdued">#kek</a>
-        </p>
+        <p>{{item.content.m_content}}</p>
       </div>
 
-      <div class="item tabs tabs-secondary tabs-icon-left no-border darkblue">
-        #dream #test #tag
+      <div ng-if="item.hashtags[0]" class="item tabs modified-tabs tabs-secondary no-border darkblue">
+    <div ng-repeat="opt in item.hashtags"  >
+        {{ opt.m_content }} &nbsp;
+    </div>
       </div>
-
       <div class="item tabs tabs-secondary tabs-icon-left no-border">
         <a class="tab-item" href="#">
           <i class="icon ion-thumbsup"></i>
-          Like
         </a>
         <a class="tab-item" href="#">
           <i class="icon ion-chatbox"></i>
-          Comment
         </a>
         <a class="tab-item" href="#">
           <i class="icon ion-share"></i>
-          Share
         </a>
-
       </ion-item>
     </ion-list>
   </ion-content>

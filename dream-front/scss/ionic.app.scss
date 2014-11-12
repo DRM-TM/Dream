@@ -85,6 +85,15 @@ $popup-background-color:          #33475D !default;
 
   .darkblue{
     background-color:$darkblue;
+    height: 27px;
+    line-height: 27px;
+    text-align: left;
+    padding-left:16px;
+  }
+
+  .modified-tabs{
+    justify-content: inherit;
+    color:white;
   }
 
   .no-border{
@@ -96,6 +105,9 @@ $popup-background-color:          #33475D !default;
     p{
       margin-top:0px;
     }
+  }
+  .border-bottom{
+    border-bottom: 1px solid;
   }
 }
 

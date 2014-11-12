@@ -7705,13 +7705,22 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
 #feed .lightblue {
   background-color: rgba(52, 72, 94, 0.05); }
 #feed .darkblue {
-  background-color: rgba(52, 72, 94, 0.2); }
+  background-color: rgba(52, 72, 94, 0.2);
+  height: 27px;
+  line-height: 27px;
+  text-align: left;
+  padding-left: 16px; }
+#feed .modified-tabs {
+  justify-content: inherit;
+  color: white; }
 #feed .no-border {
   border-style: none; }
 #feed .item {
   margin: 0px; }
   #feed .item p {
     margin-top: 0px; }
+#feed .border-bottom {
+  border-bottom: 1px solid; }
 
 #login {
   background-color: #34485e; }
