@@ -7767,6 +7767,18 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   height: 150px;
   resize: none; }
 
+#settings {
+  background-color: white; }
+  #settings .item {
+    height: 46px;
+    line-height: 13px;
+    background-color: rgba(52, 72, 94, 0.9);
+    color: white; }
+  #settings .title {
+    text-align: center;
+    color: white;
+    font-size: 18px; }
+
 input::-webkit-input-placeholder {
   color: white;
   opacity: 1; }

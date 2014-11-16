@@ -183,6 +183,22 @@ $popup-background-color:          #33475D !default;
   }
 }
 
+#settings {
+  background-color:white;
+  .item {
+    height: 46px;
+    line-height: 13px;
+    background-color: rgba(52, 72, 94,0.9);
+    color:white;
+    //border-style:none;
+  }
+
+  .title {
+      text-align:center;
+      color:white;
+      font-size:18px;
+  }
+}
 
 input::-webkit-input-placeholder {
   color: white;
