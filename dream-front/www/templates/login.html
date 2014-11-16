@@ -15,7 +15,7 @@ hide-back-button="true">
 			</label>
 
 			<button type="submit" ng-click="login(user)" class="loginButton button button-dark">Log me in</button>
-			<button type="submit" class="loginButton button button-facebook">Login with <b>Facebook</b></button></center>
+			<button type="submit" ng-click="loginFB()" class="loginButton button button-facebook">Login with <b>Facebook</b></button></center>
 			<center><button class="button button-clear button-stable">
 				Password ?
 			</button>
@@ -24,6 +24,7 @@ hide-back-button="true">
 			</button></center>
 		</form>
 	</div>
+	facebook {{fb}}
 </ion-content>
 
 </ion-modal-view>

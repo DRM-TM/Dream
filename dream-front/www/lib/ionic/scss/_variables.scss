@@ -156,7 +156,7 @@ $button-default-active-border:    $button-stable-active-border !default;
 // Bars
 // -------------------------------
 
-$bar-height:                      50px !default;
+$bar-height:                      44px !default;
 $bar-title-font-size:             17px !default;
 $bar-padding-portrait:            5px !default;
 $bar-padding-landscape:           5px !default;
@@ -625,8 +625,8 @@ $loading-padding:                 20px !default;
 $loading-border-radius:           5px !default;
 $loading-font-size:               15px !default;
 
-$loading-backdrop-fadein-duration:0.1s !default;
-$loading-backdrop-bg-color:       rgba(0,0,0,0.4) !default;
+$loading-backdrop-fadein-duration:0.3s !default;
+$loading-backdrop-bg-color:       rgba(0,0,0,0.7) !default;
 
 
 // Badges

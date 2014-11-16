@@ -4,6 +4,7 @@ angular.module('dream.controllers').controller('FeedController', function ($scop
   $scope.navTitle = "Dream feed"
   $scope.list = FeedService.all()
 
+
   //re-enable hardware back button
   HardwareBackButtonManager.enable()
 

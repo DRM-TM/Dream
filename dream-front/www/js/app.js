@@ -1,6 +1,6 @@
-var dream = angular.module('dream', ['ionic', 'dream.controllers', 'dream.services'])
+var dream = angular.module('dream', ['ionic', 'dream.controllers', 'dream.services', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaOauth) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -45,6 +45,6 @@ function($stateProvider, $urlRouterProvider) {
   });
 
   // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/');
 }
 ]);

@@ -1,5 +1,5 @@
 //Controller handling user connection
-ctrl.controller('LoginController', function ($scope, $location, $ionicSideMenuDelegate, HardwareBackButtonManager) {
+ctrl.controller('LoginController', function ($scope, $location, $ionicSideMenuDelegate, HardwareBackButtonManager, $cordovaOauth) {
   $scope.navTitle = "Login";
 
   //remove menu drag to open
@@ -16,6 +16,17 @@ ctrl.controller('LoginController', function ($scope, $location, $ionicSideMenuDe
     }
     $scope.log = "ERROR : You tried to log in with the following credentials" + user.email + " " + user.password
   }
+
+
+  $scope.loginFB = function(user) {
+    $cordovaOauth.facebook("1485303221747100", []).then(function(result) {
+      $scope.fb = JSON.stringify(result);
+    }, function(error) {
+      $scope.fb = error;
+    });
+
+  }
+
 
   $scope.leftButtons = [{
     type: 'button-icon icon ion-navicon',
