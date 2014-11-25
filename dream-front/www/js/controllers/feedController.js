@@ -19,12 +19,4 @@ angular.module('dream.controllers').controller('FeedController', function ($scop
 
   //reset nav history to prevent back button error
   $ionicViewService.clearHistory()
-
-  $scope.leftButtons = [{
-    type: 'button-icon icon ion-navicon',
-    tap: function(e) {
-      $scope.sideMenuController.toggleLeft();
-    }
-  }];
-  $scope.rightButtons = [];
 })

@@ -1,8 +1,8 @@
-ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, StorageService, HardwareBackButtonManager) {
+ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, StorageService, HardwareBackButtonManager, $ionicSideMenuDelegate) {
   $scope.navTitle = "Settings"
 
-  $scope.edit_user_infos = "Edit your informations"
-  $scope.feed_options = "Feed"
+  $scope.dream_options = "Dream options"
+  $scope.feed_options = "Feed options"
 
   StorageService.set("autoSharing", "false")
   StorageService.set("private", "false")
@@ -24,18 +24,32 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, S
     // console.log("------------------------")
   }
 
+  /*
+  **ugly fix to send a request to the api only when the user re-open the
+  **menu from the settings page.
+  */
+
+  $scope.$watch(function () {
+    return $ionicSideMenuDelegate.getOpenRatio();
+  },
+  function (ratio) {
+    if (ratio == 1){
+      console.log("if there is a modification, send it to the server");
+    }
+  });
+
   //store banned tags in local storage as bannedTags
   $scope.addTags = function(tags) {
-    var bannedTags = tags.replace(/\s/g, "").split(',')
-    StorageService.set('bannedTags', JSON.stringify(bannedTags))
-    StorageService.dump('bannedTags')
+    var bannedTags = tags.replace(/\s/g, "").split(',');
+    StorageService.set('bannedTags', JSON.stringify(bannedTags));
+    StorageService.dump('bannedTags');
   }
 
   $scope.clearLocalStorage = function() {
-    StorageService.clean()
-    console.log("local storage cleared by user")
-    $scope.data = {}
-    $scope.errorMessage = ""
+    StorageService.clean();
+    console.log("local storage cleared by user");
+    $scope.data = {};
+    $scope.errorMessage = "";
 
     var myPopup = $ionicPopup.show({
       title:"Local storage clear",
@@ -47,8 +61,8 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, S
       console.log('Profile settings saved', res);
     });
     $timeout(function() {
-     myPopup.close();
-  }, 1000);
+      myPopup.close();
+    }, 1000);
   }
 
   //popup function for email and password modification
@@ -86,14 +100,4 @@ ctrl.controller('SettingsController', function ($scope, $ionicPopup, $timeout, S
       console.log('Profile settings saved', res);
     });
   };
-
-
-  $scope.leftButtons = [{
-    type: 'button-icon icon ion-navicon',
-    tap: function(e) {
-      $scope.sideMenuController.toggleLeft();
-    }
-  }];
-
-  $scope.rightButtons = [];
 });

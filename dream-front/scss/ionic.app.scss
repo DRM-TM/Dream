@@ -29,6 +29,24 @@ $popup-background-color:          #33475D !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+input::-webkit-input-placeholder {
+  color: white;
+  opacity: 1;
+}
+input::-moz-placeholder {
+  color: white;
+  opacity: 1;
+}
+input:-moz-placeholder {   /* Older versions of Firefox */
+  color: white;
+  opacity: 1;
+}
+input:-ms-input-placeholder {
+  color: white;
+  opacity: 1;
+}
+
+
 #intro {
   .slider {
     height: 100%;
@@ -60,7 +78,6 @@ $popup-background-color:          #33475D !default;
     margin-top:50px;
     margin-bottom:50px;
   }
-
 }
 
 #feed {
@@ -168,6 +185,11 @@ $popup-background-color:          #33475D !default;
 
 }
 
+.popup-head {
+  padding : 0px;
+  border-style:none;
+}
+
 #record-popup{
   img{
     width:40%;
@@ -184,35 +206,35 @@ $popup-background-color:          #33475D !default;
 }
 
 #settings {
-  background-color:white;
-  .item {
-    height: 46px;
-    line-height: 13px;
-    background-color: rgba(52, 72, 94,0.9);
-    color:white;
-    //border-style:none;
+  // background-color:white;
+  // .item {
+  //   height: 46px;
+  //   line-height: 13px;
+  //   background-color: rgba(52, 72, 94,0.9);
+  //   color:white;
+  //   //border-style:none;
+  // }
+  //
+  // .title {
+  //     text-align:center;
+  //     color:white;
+  //     font-size:18px;
+  // }
+  input::-webkit-input-placeholder {
+    color: black;
+    opacity: 0.8;
+  }
+  input::-moz-placeholder {
+    color: black;
+    opacity: 0.8;
+  }
+  input:-moz-placeholder {   /* Older versions of Firefox */
+    color: black;
+    opacity: 0.8;
+  }
+  input:-ms-input-placeholder {
+    color: black;
+    opacity: 0.8;
   }
 
-  .title {
-      text-align:center;
-      color:white;
-      font-size:18px;
-  }
-}
-
-input::-webkit-input-placeholder {
-  color: white;
-  opacity: 1;
-}
-input::-moz-placeholder {
-  color: white;
-  opacity: 1;
-}
-input:-moz-placeholder {   /* Older versions of Firefox */
-  color: white;
-  opacity: 1;
-}
-input:-ms-input-placeholder {
-  color: white;
-  opacity: 1;
 }

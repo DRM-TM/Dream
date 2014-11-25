@@ -7815,6 +7815,23 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   -webkit-transition: none !important;
   transition: none !important; }
 
+input::-webkit-input-placeholder {
+  color: white;
+  opacity: 1; }
+
+input::-moz-placeholder {
+  color: white;
+  opacity: 1; }
+
+input:-moz-placeholder {
+  /* Older versions of Firefox */
+  color: white;
+  opacity: 1; }
+
+input:-ms-input-placeholder {
+  color: white;
+  opacity: 1; }
+
 #intro .slider {
   height: 100%; }
 #intro .slider-slide {
@@ -7901,6 +7918,10 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
     color: white;
     font-weight: bold; }
 
+.popup-head {
+  padding: 0px;
+  border-style: none; }
+
 #record-popup img {
   width: 40%;
   margin-bottom: 15px; }
@@ -7911,31 +7932,16 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
   height: 150px;
   resize: none; }
 
-#settings {
-  background-color: white; }
-  #settings .item {
-    height: 46px;
-    line-height: 13px;
-    background-color: rgba(52, 72, 94, 0.9);
-    color: white; }
-  #settings .title {
-    text-align: center;
-    color: white;
-    font-size: 18px; }
-
-input::-webkit-input-placeholder {
-  color: white;
-  opacity: 1; }
-
-input::-moz-placeholder {
-  color: white;
-  opacity: 1; }
-
-input:-moz-placeholder {
+#settings input::-webkit-input-placeholder {
+  color: black;
+  opacity: 0.8; }
+#settings input::-moz-placeholder {
+  color: black;
+  opacity: 0.8; }
+#settings input:-moz-placeholder {
   /* Older versions of Firefox */
-  color: white;
-  opacity: 1; }
-
-input:-ms-input-placeholder {
-  color: white;
-  opacity: 1; }
+  color: black;
+  opacity: 0.8; }
+#settings input:-ms-input-placeholder {
+  color: black;
+  opacity: 0.8; }
