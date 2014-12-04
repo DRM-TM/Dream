@@ -98,6 +98,7 @@ class Model(T, U) {
         if (result.empty())
             return (new T());
         aa = result.asAA();
+        result.close();
         return (new T(aa));
     }
 
@@ -129,7 +130,7 @@ class Model(T, U) {
         ResultSequence  result;
         Command         c;
 
-        query = "INSERT INTO " ~ _modelName.toLower() ~ " "~ _attributes ~ " VALUES " ~ toAdd.asValues;
+        query = "INSERT INTO " ~ _modelName.toLower() ~ " " ~ _attributes ~ " VALUES " ~ toAdd.asValues;
         try c = Command(_dbCon, query);
         catch (Exception e) {
             writeln("Exception caught: ", e.toString());
@@ -137,8 +138,10 @@ class Model(T, U) {
         writeln("[QUERY] Query raw: ", c.sql);
         try result = c.execSQLSequence();
         catch (Exception e) {
-            return (false);
+          result.close();
+          return (false);
         }
+        result.close();
         return (true);
     }
 
@@ -157,6 +160,7 @@ class Model(T, U) {
         }
         writeln("[QUERY] Query raw: ", c.sql);
         c.execSQLSequence();
+        result.close();
         return (true);
     }
 }

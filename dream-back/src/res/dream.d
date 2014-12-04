@@ -40,10 +40,10 @@ class Dream
     @property string asValues()
     {
         return ("(" ~
-                m_user_id ~ " " ~
-                m_category_id ~ " "  ~
-                m_content ~ " " ~
-                m_date ~ " " ~
+                m_user_id ~ ", " ~
+                m_category_id ~ ", "
+                ~ "\"" ~ m_content ~ "\", " ~
+                m_date ~
                 ")");
     }
 }

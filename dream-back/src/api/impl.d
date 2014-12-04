@@ -17,7 +17,7 @@ import  col.fdream;
 import  api.desc;
 import 	db.model;
 
-class DreamAPI : IDreamAPI
+class   DreamAPI : IDreamAPI
 {
     private {
         string                  _connStr;

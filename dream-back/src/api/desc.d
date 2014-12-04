@@ -11,11 +11,11 @@
     Collections:
         - Fdream
 
-    Copyright: © 2012 Julien Ganichot
+    Copyright: © 2014 Julien Ganichot
     Authors: Julien Ganichot
  */
 
-module api.desc;
+module      api.desc;
 
 import      mysql;
 
@@ -36,7 +36,11 @@ interface   IDreamAPI
      * Every functions related to the User resources.
      */
 
-    // GET /api/user
+    /***********************************
+     * This function ask the database to get every users
+     *
+     * Route: GET /api/user/:uid
+     */
     User[]  getUser();
 
     /***********************************
@@ -55,7 +59,11 @@ interface   IDreamAPI
      */
     bool    postUser(string email, string password, string token, string birthdate, string username);
 
-    // DELETE /api/user
+    /***********************************
+     * This function add a user to the database
+     *
+     * Route: DELETE /api/user
+     */
     @path("user/:uid")
     bool    deleteUser(uint _uid);
 
@@ -68,7 +76,6 @@ interface   IDreamAPI
      *
      * Route: GET /api/dream
      */
-    // GET /api/dream
     Fdream[]    getDream();
 
     // GET /api/dream/:uid
@@ -105,7 +112,7 @@ interface   IDreamAPI
      Comment[]  getCommentByUserId(uint _uid);
 
      // DELETE /api/comment
-     @path("comment/:uid")
+     @path("comment")
      bool   deleteComment(uint _uid);
 
      // POST /api/comment
