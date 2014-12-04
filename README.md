@@ -44,15 +44,42 @@ Request's body:
 }
 ```
 
+### How research works
+
+The research engine will search for any occurence of the words in the `research`
+string.
+
+##### Example:
+
+Request's body:
+```json
+{
+  "research": "lorem ips ipsum lor"
+}
+```
+The request below will find:
+* H**ips**te
+* **ips**um
+* l**ips**um
+* **lor**eal
+* **lorem**
+* etc...
+
+***General routes***
+* POST /api/search - Parameters `string research`
+
 ***User resource***
 * GET /api/user - Get every users
 * GET /api/user/:uid - Get user with id *uid*
 * POST /api/user - Parameters: `string email, string password, string token, string birthdate, string username`
+* POST /user/login - Parameters `string email, string hash`
+* POST /user/login/token - Parameters `string email, string password, string token`
 
 ***Dream resource***
 * GET /api/dream - Get every dream
 * GET /api/dream/:uid - Get dream with id *uid*
-* GET /api/dream/incategory/:category_id - Get every dream in the category *
+* GET /api/dream/incategory/:category_id - Get every dream in the category *category_id*
+* GET /api/dream/limit/:limit - Get the *limit* first dreams
 * POST /api/dream - Parameters: `uint uid, uint category_id, string content`
 
 ***Comment resource***

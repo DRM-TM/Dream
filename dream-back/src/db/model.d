@@ -18,6 +18,8 @@ class Model(T, U) {
 
         bool            _autoInc = true;
 
+        uint            _limit = 0;
+
         Connection      _dbCon;
         /*SList!string    _foreignKey;*/
     }
@@ -59,6 +61,10 @@ class Model(T, U) {
         return (_modelName);
     }
 
+    @property ref       uint    limit() {
+      return (_limit);
+    }
+
     T[] all() {
         ResultSet       result;
         Command         c;
@@ -66,6 +72,9 @@ class Model(T, U) {
         string          query;
 
         query = "SELECT * FROM " ~ _modelName.toLower();
+        if (_limit > 0) {
+          query = query ~ " LIMIT " ~ to!string(_limit);
+        }
         c = Command(_dbCon, query);
         writeln("[QUERY] Query raw: ", query);
         try result = c.execSQLResult();
@@ -89,6 +98,9 @@ class Model(T, U) {
         string          query;
 
         query = "SELECT * FROM " ~ _modelName.toLower() ~ " WHERE " ~ _primaryKey ~ "=" ~ to!string(value);
+        if (_limit > 0) {
+          query = query ~ " LIMIT " ~ to!string(_limit);
+        }
         c = Command(_dbCon, query);
         writeln("[QUERY] Query raw: ", query);
         try result = c.execSQLSequence();
@@ -109,6 +121,9 @@ class Model(T, U) {
         string          query;
 
         query = "SELECT * FROM " ~ _modelName.toLower() ~ " WHERE " ~ key ~ "=" ~ to!string(value);
+        if (_limit > 0) {
+          query = query ~ " LIMIT " ~ to!string(_limit);
+        }
         c = Command(_dbCon, query);
         writeln("[QUERY] Query raw: ", query);
         try result = c.execSQLResult();

@@ -17,6 +17,8 @@
 
 module      api.desc;
 
+import      std.container;
+
 import      mysql;
 
 import      vibe.d;
@@ -31,6 +33,10 @@ import      col.fdream;
 @rootPath("api")
 interface   IDreamAPI
 {
+    // POST /api/search
+    @path("search")
+    Fdream[] postSearch(string research);
+
     /**
      * User resource
      * Every functions related to the User resources.
@@ -59,6 +65,12 @@ interface   IDreamAPI
      */
     bool    postUser(string email, string password, string token, string birthdate, string username);
 
+    @path("user/login")
+    bool    postUserAuth(string email, string hash);
+
+    @path("user/login/token")
+    bool    postUserAuth(string email, string hash, string token);
+
     /***********************************
      * This function add a user to the database
      *
@@ -85,6 +97,10 @@ interface   IDreamAPI
     // GET /api/dream/incategory/:category_id
     @path("dream/incategory/:cat_id")
     Dream[]  getDreamIncategory(uint _cat_id);
+
+    // GET /api/dream/limit/:limit
+    @path("dream/limit/:limit")
+    Fdream[] getDreamLimit(uint _limit);
 
     // POST /api/dream
     bool    postDream(uint uid, uint category_id, string content);

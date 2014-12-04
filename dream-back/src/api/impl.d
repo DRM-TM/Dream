@@ -2,6 +2,9 @@ module  api.impl;
 
 import	std.stdio;
 import  std.conv;
+import  std.regex;
+import  std.container;
+import  std.range;
 
 import	mysql.connection;
 
@@ -46,6 +49,37 @@ class   DreamAPI : IDreamAPI
         _hashtagRes = new Model!(Hashtag, uint)(_dbCon);
     }
 
+    // POST /search
+    Fdream[]  postSearch(string research) {
+      auto ret = matchAll(research, regex(`\w+`));
+      Fdream[] dreams = getDream();
+      auto list = make!(SList!Fdream);
+      Fdream[] result;
+      ulong len = 0;
+
+      foreach (dream ; dreams) {
+        foreach (word ; ret) {
+          auto re = regex(r"(" ~ word.hit ~ ")", "gi");
+          auto check = matchAll(dream.content.content, re);
+          if (!check.empty) {
+            list.insert(dream);
+          }
+        }
+      }
+      if ((len = walkLength(list[])) == 0) {
+        return (null);
+      } else {
+        result = new Fdream[len];
+        int i = 0;
+        foreach (fdr ; list) {
+          result[i] = fdr;
+          ++i;
+        }
+      }
+      list.clear();
+      return (result);
+    }
+
     /**
      * User resource methods
      */
@@ -71,6 +105,32 @@ class   DreamAPI : IDreamAPI
         toAdd.m_birthdate = birthdate;
         toAdd.m_username = username;
         return (_userRes.add(toAdd));
+    }
+
+    // POST /user/login
+    bool    postUserAuth(string email, string hash) {
+      User[]  match = _userRes.findCustomKey!(string)("email", "\"" ~ email ~ "\"");
+
+      if (match.length > 1 || match.length == 0) {
+        return (false);
+      }
+      if (match[0].m_email == email && match[0].m_password == hash) {
+        return (true);
+      }
+      return (false);
+    }
+
+    // POST /user/login/token
+    bool    postUserAuth(string email, string hash, string token) {
+      User[]  match = _userRes.findCustomKey!(string)("email", "\"" ~ email ~ "\"");
+
+      if (match.length > 1 || match.length == 0) {
+        return (false);
+      }
+      if (match[0].m_email == email && match[0].m_user_token == token) {
+        return (true);
+      }
+      return (false);
     }
 
     // DELETE /user/:uid
@@ -115,6 +175,20 @@ class   DreamAPI : IDreamAPI
     // GET /api/dream/:uid
     Dream   getDream(uint _uid) {
         return (_dreamRes.find(_uid));
+    }
+
+    // GET /api/dream/limit/:limit
+    Fdream[] getDreamLimit(uint _limit) {
+      Dream[] result;
+      _dreamRes.limit = _limit;
+      result = _dreamRes.all();
+      Fdream[]    dreams = new Fdream[to!uint(result.length)];
+
+      for (auto i = 0 ; i < result.length ; ++i) {
+          dreams[i] = solveDream(result[i]);
+      }
+      _dreamRes.limit = 0;
+      return (dreams);
     }
 
     // POST /dream

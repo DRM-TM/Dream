@@ -37,6 +37,10 @@ class Dream
         m_user_id = to!string(aa["user_id"].value);
     }
 
+    @property string content() {
+        return (m_content);
+    }
+
     @property string asValues()
     {
         return ("(" ~

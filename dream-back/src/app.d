@@ -43,7 +43,7 @@ shared static	this()
 				writeln("Failed to register interface: ", e.toString());
       }
       settings.port = 15030;
-      settings.sslContext = createSSLContext(SSLContextKind.server, SSLVersion.any);
+      /*settings.sslContext = createSSLContext(SSLContextKind.server, SSLVersion.any);
       try {
 				writeln("Key: [", privateKeyPath, "]");
 				writeln("Certificate: [", certificatePath, "]");
@@ -52,7 +52,7 @@ shared static	this()
 				settings.sslContext.peerValidationMode = SSLPeerValidationMode.none;
       } catch (Exception e) {
 				writeln("Failed to load SSL stuff:\n", e.toString());
-      }
+      }*/
       listenHTTP(settings, router);
     });
 }
