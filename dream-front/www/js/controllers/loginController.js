@@ -5,7 +5,9 @@ ctrl.controller('LoginController', function ($scope,
   $cordovaOauth,
   StorageService,
   $ionicSideMenuDelegate,
-  HardwareBackButtonManager) {
+  HardwareBackButtonManager,
+  $ionicPopup,
+  sha1) {
 
     $scope.navTitle = "Login";
 
@@ -18,39 +20,29 @@ ctrl.controller('LoginController', function ($scope,
     ** save the user id in the local storage
     */
     $scope.login = function(user) {
-      if (user.email == "root" && user.password == "root") {
-        $location.path("/feed");
-        StorageService.set("isLogged", "true");
-        StorageService.set("userID", user.email);
-        console.log(window.localStorage['userEmail'])
-      }
-      $scope.log = "ERROR : You tried to log in with the following credentials"
-      + user.email +
-      " " + user.password
+      $http.post('https://mimiks.net:15030/api/user/login', {email:user.email, hash:sha1.encode(user.password)}).
+      success(function(data, status, headers, config) {
+        if (data == "true") {
+          $scope.error = "string";
+          $location.path("/feed");
+          StorageService.set("isLogged", "true");
+          StorageService.set("userEmail", user.email);
+          StoragePassword.set("userPassword", sha1.encode(user.password));
+        }
+      }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+        console.log("Failder to log user")
+        $scope.error = "failed to log";
+      });
     }
-
-    // if there there is no data
-    if(window.Connection) {
-      if(navigator.connection.type == Connection.NONE) {
-        $ionicPopup.confirm({
-          title: "Internet Disconnected",
-          content: "The internet is disconnected on your device."
-        })
-        .then(function(result) {
-          if(!result) {
-            ionic.Platform.exitApp();
-          }
-        });
-      }
-    }
-
 
     //login the user using the facebook API
     $scope.loginFB = function(user) {
       $cordovaOauth.facebook("1485303221747100", []).then(function(result) {
         auth("https://graph.facebook.com/me?fields=id&access_token=" + result.access_token)
       }, function(error) {
-        $scope.fb = error;
+        $scope.error = error;
       });
 
       //get the facebook user id coresponding to the access_token
@@ -60,8 +52,43 @@ ctrl.controller('LoginController', function ($scope,
           StorageService.set("userID", data.id);
           $location.path("/feed");
         }).error(function(data, status, headers, config) {
-          $scope.fb = "Authentification failed : unknown error.";
+          $scope.error = "Authentification failed : unknown error.";
         });
       }
     }
+
+    $scope.showPopup = function(templateUrl, title, errorMessage) {
+      $scope.data = {}
+
+      var myPopup = $ionicPopup.show({
+        templateUrl: templateUrl,
+        scope: $scope,
+        id: "recovery-popup",
+        buttons: [
+        {
+          text: 'Cancel',
+          type: 'button-recovery'
+        },
+        {
+          text: '<b>Send</b>',
+          type: 'button-dark button-recovery',
+          onTap: function(e) {
+            if (!$scope.data.email) {
+              $scope.errorMessage = errorMessage
+              e.preventDefault();
+              console.log(errorMessage)
+            } else {
+              console.log($scope.data)
+              return $scope.data;
+            }
+          }
+        },
+        ]
+      });
+      myPopup.then(function(res) {
+        myPopup.close()
+        console.log('Record popup closed', res);
+      });
+    };
+
   });
