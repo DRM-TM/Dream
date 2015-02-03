@@ -55,7 +55,7 @@ class   DreamAPI : IDreamAPI
       Fdream[] dreams = getDream();
       auto list = make!(SList!Fdream);
       Fdream[] result;
-      ulong len = 0;
+      uint len = 0;
 
       foreach (dream ; dreams) {
         foreach (word ; ret) {
