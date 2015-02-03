@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="feed">
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/semantic.css" />
-		<link rel="stylesheet" type="text/css" href="css/font.css" />
 		<script type="text/javascript" src="angular.min.js"></script>
 		<script type="text/javascript" src="app.js"></script>
-		<script type="text/javascript" src="javascript/semantic.js"></script>
+		<script type="text/javascript" src="javascript/semantic.min.js"></script>
 		<link rel="stylesheet" type="text/css" src="css/semantic.css" />
+		<link rel="stylesheet" type="text/css" href="css/semantic.css" />
+		<link rel="stylesheet" type="text/css" href="css/font.css" />
 	</head>
 	<body>
 		<h1 class="ui dividing center aligned header">Dream Administrator</h1>
@@ -62,7 +62,7 @@
 
 							<!-- Contenu du commentaire -->
 							<p ng-hide="showCommForm === $index" ng-init="showCommForm=-1" ng-init="showcomm=-1" ng-click="showcomm = feed.toggle($index, showcomm)">{{ comment.m_content }}</p>
-
+							
 							<!-- Form d'édition du commentaire -->
 							<form class="ui form" name="editComment" ng-show="showCommForm === $index">
 								<div class="field">
@@ -94,7 +94,6 @@
 					</div>
 				</div>
 			</div>
-
 			<!-- Bouton d'ajout de post -->
 			<a ng-init="showAddDream=-1" ng-hide="showAddDream === $index" ng-click="showAddDream = feed.toggle($index, showAddDream)">Add</a>
 

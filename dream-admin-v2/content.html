@@ -1,0 +1,31 @@
+<section ng-controller="FeedController as feed">
+	<article ng-repeat="dream in feed.dreams" ng-hide="dream.length">
+		<strong> {{ dream.user.m_username }} </strong>
+		<p>{{ dream.content.m_content }}</p>
+			<div class="tags" ng-hide="!dream.hashtags.length">
+				<span 	ng-repeat="tag in dream.hashtags"
+						ng-mouseenter="showDeleteTag = true" 
+						ng-mouseleave="showDeleteTag = false">
+					{{ tag.m_content }}
+					<span 	ng-show="showDeleteTag" 
+							ng-click="feed.deleteTag($index)" 
+							class="deleteTag">
+							x
+					</span>
+				</span>
+				<div class="addTag" ng-click="showForm = feed.toggle($index, showForm)" ng-hide="showForm === $index">+</div>
+				<form 	class="AddTagForm" name="AddComm" ng-show="showForm === $index" 
+						ng-submit="feed.addTag($index)">
+					<input ng-model="feed.tag.text" type="text" placeholder="Enter tag here" autofocus/>
+					<input ng-click="showForm = feed.toggle($index, showForm)" type="submit" ng-hide="true"/>
+				</form>
+			</div>
+
+			<div class="comments" ng-hide="!dream.comments.length">
+				<!-- <strong>Comments</strong> -->
+				<div class="comment" ng-repeat="comment in dream.comments">
+					{{ comment.m_content }}
+				</div>
+			</div>
+	</article>
+</section>

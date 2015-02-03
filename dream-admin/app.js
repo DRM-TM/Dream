@@ -17,7 +17,7 @@ app.controller('FeedController', ['$http', '$scope', function($http, $scope) {
 	}
 
 	this.deleteDream = function(index) {
-		var path = 'http://mimiks.net:15030/api/dream' + index;
+		var path = 'https://mimiks.net:15030/api/dream' + index;
 		$http.delete(path).
 		success(function() {
 			alert("Delete success")
@@ -36,7 +36,7 @@ app.controller('FeedController', ['$http', '$scope', function($http, $scope) {
 		alert("Alerte")
 	}
 
-	$http.get('http://mimiks.net:15030/api/dream').
+	$http.get('https://mimiks.net:15030/api/dream').
   	success(function(data) {
     // this callback will be called asynchronously
     // when the response is available
