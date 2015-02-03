@@ -16,7 +16,7 @@ hide-back-button="true">
 
 			<button type="submit" ng-click="login(user)" class="loginButton button button-dark">Log me in</button>
 			<button type="submit" ng-click="loginFB()" class="loginButton button button-facebook">Login with <b>Facebook</b></button></center>
-			<center><button class="button button-clear button-stable">
+			<center><button class="button button-clear button-stable" ng-click="showPopup('templates/popups/retrievePassword.html', '{{share_it}}', 'email is empty')">
 				Password ?
 			</button>
 			<button class="button button-clear button-energized">
@@ -24,7 +24,7 @@ hide-back-button="true">
 			</button></center>
 		</form>
 	</div>
-	facebook {{fb}}
+	{{error}}
 </ion-content>
 
 </ion-modal-view>
