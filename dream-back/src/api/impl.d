@@ -14,6 +14,10 @@ import  res.user;
 import  res.comment;
 import  res.hashtag;
 import  res.dream;
+import  res.word;
+import  res.definition;
+
+import  utils.token;
 
 import  col.fdream;
 
@@ -23,18 +27,23 @@ import 	db.model;
 class   DreamAPI : IDreamAPI
 {
     private {
-        string                  _connStr;
-        Connection              _dbCon;
+        SList!Token               _tokens;
 
-        Model!(User, uint)      _userRes;
-        Model!(Dream, uint)     _dreamRes;
-        Model!(Comment, uint)   _commentRes;
-        Model!(Hashtag, uint)   _hashtagRes;
+        string                    _connStr;
+        Connection                _dbCon;
+
+        Model!(User, uint)        _userRes;
+        Model!(Dream, uint)       _dreamRes;
+        Model!(Comment, uint)     _commentRes;
+        Model!(Hashtag, uint)     _hashtagRes;
+        Model!(Word, uint)        _wordRes;
+        Model!(Definition, uint)  _definitionRes;
     }
 
     this(string connStr)
     {
         _connStr = connStr;
+        _tokens = make!(SList!Token);
         _dbCon = new Connection(_connStr);
         scope(failure) _dbCon.close();
         writefln("You have connected to server version %s", _dbCon.serverVersion);
@@ -47,6 +56,30 @@ class   DreamAPI : IDreamAPI
         _dreamRes = new Model!(Dream, uint)(_dbCon);
         _commentRes = new Model!(Comment, uint)(_dbCon);
         _hashtagRes = new Model!(Hashtag, uint)(_dbCon);
+        _wordRes = new Model!(Word, uint)(_dbCon);
+        _definitionRes = new Model!(Definition, uint)(_dbCon);
+    }
+
+    Token findTokenForUser(uint userId) {
+      foreach (token ; _tokens) {
+        if (token.getUid() == userId) {
+          return (token);
+        }
+      }
+      return (null);
+    }
+
+    Token findTokenForToken(string userToken) {
+      foreach (token ; _tokens) {
+        if (token.getToken() == userToken) {
+          return (token);
+        }
+      }
+      return (null);
+    }
+
+    bool  isAllowed(string token) {
+      return ((findTokenForToken(token) is null) ? false : true);
     }
 
     // POST /search
@@ -93,7 +126,6 @@ class   DreamAPI : IDreamAPI
     User                getUser(uint _uid) {
         return (_userRes.find(_uid));
     }
-
 
     // POST /user
     bool    postUser(string email, string password, string token, string birthdate, string username) {
@@ -282,5 +314,88 @@ class   DreamAPI : IDreamAPI
           toAdd.m_dream_id = to!string(dream_id);
           toAdd.m_content = content;
           return (_hashtagRes.add(toAdd));
+      }
+
+      /**
+      * Word resource
+      */
+
+      // GET /api/word
+      Word[]  getWord() {
+        return (_wordRes.all());
+      }
+
+      // GET /api/word/:uid
+      Word    getWord(uint _uid) {
+        return (_wordRes.find(_uid));
+      }
+
+      // GET /api/word/bystring/:actual_word
+      Word[]  getWordsByString(string _actual_word) {
+        return (_wordRes.findCustomKey!string("word", _actual_word));
+      }
+
+      // GET /api/word/bylevel/:level
+      Word[]  getWordsByLevel(uint _level) {
+        return (_wordRes.findCustomKey!uint("level", _level));
+      }
+
+      // DELETE /api/word
+      bool   deleteWord(uint _uid) {
+        return (_wordRes.del(_uid));
+      }
+
+      // POST /api/word
+      bool   postWord(uint uid, string word, uint level) {
+        Word  toAdd = new Word();
+
+        toAdd.m_id = to!string(uid);
+        toAdd.m_word = word;
+        toAdd.m_level = to!string(level);
+        return (_wordRes.add(toAdd));
+      }
+
+      /**
+      * Definition resource
+      */
+
+      // GET /api/definition
+      Definition[]  getDefinition() {
+        return (_definitionRes.all());
+      }
+
+      // GET /api/definition/:uid
+      Definition    getDefinition(uint _uid) {
+        return (_definitionRes.find(_uid));
+      }
+
+      // GET /api/definition/byword/:actual_word
+      Definition[]  getDefinitionsByWord(string _actual_word) {
+        return (_definitionRes.findCustomKey!string("word", _actual_word));
+      }
+
+      // DELETE /api/definition
+      bool   deleteDefinition(uint _uid) {
+        return (_definitionRes.del(_uid));
+      }
+
+      // POST /api/definition
+      bool   postDefinition(uint uid, string word, string definition) {
+        Definition toAdd = new Definition();
+
+        toAdd.m_id = to!string(uid);
+        toAdd.m_word = word;
+        toAdd.m_definition = definition;
+        return (_definitionRes.add(toAdd));
+      }
+
+      /*
+      * Reporter
+      */
+
+      // POST /api/dream/report/:_uid
+      Fdream postReportDream(uint _uid) {
+        Dream tmp = _dreamRes.find(_uid);
+        return ((tmp is null) ? null : solveDream(tmp));
       }
 }

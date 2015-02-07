@@ -27,6 +27,8 @@ import      res.user;
 import      res.comment;
 import      res.hashtag;
 import      res.dream;
+import      res.word;
+import      res.definition;
 
 import      col.fdream;
 
@@ -158,4 +160,58 @@ interface   IDreamAPI
 
       // POST /api/hashtag
       bool   postHashtag(uint uid, uint hashtag_id, string content);
+
+      /**
+      * Word resource
+      */
+
+      // GET /api/word
+      Word[]  getWord();
+
+      // GET /api/word/:uid
+      Word    getWord(uint _uid);
+
+      // GET /api/word/bystring/:actual_word
+      @path("word/bystring/:actual_word")
+      Word[]  getWordsByString(string _actual_word);
+
+      // GET /api/word/bylevel/:level
+      @path("word/bystring/:actual_word")
+      Word[]  getWordsByLevel(uint _level);
+
+      // DELETE /api/word
+      @path("word/:uid")
+      bool   deleteWord(uint _uid);
+
+      // POST /api/word
+      bool   postWord(uint uid, string word, uint level);
+
+      /**
+      * Definition resource
+      */
+
+      // GET /api/definition
+      Definition[]  getDefinition();
+
+      // GET /api/definition/:uid
+      Definition    getDefinition(uint _uid);
+
+      // GET /api/definition/:actual_word
+      @path("definition/byword/:actual_word")
+      Definition[]  getDefinitionsByWord(string _actual_word);
+
+      // DELETE /api/definition
+      @path("definition/:uid")
+      bool   deleteDefinition(uint _uid);
+
+      // POST /api/definition
+      bool   postDefinition(uint uid, string word, string definition);
+
+      /*
+      * Reporter
+      */
+
+      // POST /api/dream/report
+      @path("dream/report/:uid")
+      Fdream postReportDream(uint _uid);
 }
