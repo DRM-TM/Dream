@@ -35,4 +35,14 @@ class Definition
             ")"
         );
     }
+
+    bool opEquals(in Definition rhs) const
+    {
+        return m_word == rhs.m_word;
+    }
+
+    bool opEquals(in string rhs) const
+    {
+        return m_word == rhs;
+    }
 }

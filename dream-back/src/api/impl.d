@@ -82,13 +82,53 @@ class   DreamAPI : IDreamAPI
       return ((findTokenForToken(token) is null) ? false : true);
     }
 
+    //POST /dream/check/forbiden
+    SList!Word  postCheckForbiden(string text) {
+      Word[]      dbContent = getWord();
+      string[]    wordtab = text.split();
+      SList!Word  forbidenWords = make!(SList!Word);
+
+      if (wordtab is null) {
+        throw new HTTPStatusException(418); // Means "I'm a teapot"
+      }
+      foreach (word ; wordtab) {
+        foreach (dbWord ; dbContent) {
+          if (word == dbWord) {
+            forbidenWords.insert(dbContent);
+          }
+        }
+      }
+      if (walkLength(forbidenWords[]) <= 0)
+        throw new HTTPStatusException(204);
+      return (forbidenWords);
+    }
+
+    //POST /dream/check/meaning
+    SList!Definition postCheckMeaning(string text) {
+      Definition[]      dbContent = getDefinition();
+      string[]          wordtab = text.split();
+      SList!Definition  definitions = make!(SList!Definition);
+
+      if (wordtab is null) {
+        throw new HTTPStatusException(418); // Means "I'm a teapot"
+      }
+      foreach (word ; wordtab) {
+        foreach (dbDefinition ; dbContent) {
+          if (word == dbDefinition) {
+            definitions.insert(dbContent);
+          }
+        }
+      }
+      if (walkLength(definitions[]) <= 0)
+        throw new HTTPStatusException(204);
+      return (definitions);
+    }
+
     // POST /search
-    Fdream[]  postSearch(string research) {
+    SList!Fdream  postSearch(string research) {
       auto ret = matchAll(research, regex(`\w+`));
       Fdream[] dreams = getDream();
       auto list = make!(SList!Fdream);
-      Fdream[] result;
-      uint len = 0;
 
       foreach (dream ; dreams) {
         foreach (word ; ret) {
@@ -99,18 +139,10 @@ class   DreamAPI : IDreamAPI
           }
         }
       }
-      if ((len = walkLength(list[])) == 0) {
-        return (null);
-      } else {
-        result = new Fdream[len];
-        int i = 0;
-        foreach (fdr ; list) {
-          result[i] = fdr;
-          ++i;
-        }
+      if (walkLength(list[]) <= 0) {
+        throw new HTTPStatusException(204);
       }
-      list.clear();
-      return (result);
+      return (list);
     }
 
     /**
@@ -123,7 +155,7 @@ class   DreamAPI : IDreamAPI
     }
 
     // GET /user/:uid
-    User                getUser(uint _uid) {
+    User    getUser(uint _uid) {
         return (_userRes.find(_uid));
     }
 
@@ -144,6 +176,7 @@ class   DreamAPI : IDreamAPI
       User[]  match = _userRes.findCustomKey!(string)("email", "\"" ~ email ~ "\"");
 
       if (match.length > 1 || match.length == 0) {
+        //throw new HTTPStatusException(401);
         return (false);
       }
       if (match[0].m_email == email && match[0].m_password == hash) {
@@ -157,6 +190,7 @@ class   DreamAPI : IDreamAPI
       User[]  match = _userRes.findCustomKey!(string)("email", "\"" ~ email ~ "\"");
 
       if (match.length > 1 || match.length == 0) {
+        //throw new HTTPStatusException(401);
         return (false);
       }
       if (match[0].m_email == email && match[0].m_user_token == token) {

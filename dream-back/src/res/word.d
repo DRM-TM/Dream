@@ -34,4 +34,14 @@ class Word
             ")"
         );
     }
+
+    bool opEquals(in Word rhs) const
+    {
+        return m_word == rhs.m_word;
+    }
+
+    bool opEquals(in string rhs) const
+    {
+        return m_word == rhs;
+    }
 }

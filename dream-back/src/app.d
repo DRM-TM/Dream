@@ -44,7 +44,7 @@ void			setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 		**
 		*/
 	} catch (JSONException e) {
-		throw new HTTPStatusException(403);
+		throw new HTTPStatusException(401);
 	}
 	res.headers["Access-Control-Allow-Origin"] = "*";
 }
@@ -72,7 +72,7 @@ shared static	this()
       catch(Exception e) {
 				writeln("Failed to register interface: ", e.toString());
       }
-			settings.options = HTTPServerOption.parseJsonBody | HTTPServerOption.defaults;
+			settings.options = HTTPServerOption.parseJsonBody|HTTPServerOption.defaults;
       settings.port = 15030;
       listenHTTP(settings, router);
     });

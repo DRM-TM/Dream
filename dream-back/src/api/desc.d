@@ -37,7 +37,7 @@ interface   IDreamAPI
 {
     // POST /api/search
     @path("search")
-    Fdream[] postSearch(string research);
+    SList!Fdream postSearch(string research);
 
     /**
      * User resource
@@ -214,4 +214,12 @@ interface   IDreamAPI
       // POST /api/dream/report
       @path("dream/report/:uid")
       Fdream postReportDream(uint _uid);
+
+      // POST /api/dream/check/forbiden
+      @path("dream/check/forbiden")
+      SList!Word  postCheckForbiden(string text);
+
+      //POST /api/dream/check/meaning
+      @path("dream/check/meaning")
+      SList!Definition postCheckMeaning(string text);
 }

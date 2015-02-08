@@ -88,6 +88,8 @@ class Model(T, U) {
             arr[i] = new T(result.asAA());
             result.popFront();
         }
+        if (arr.length <= 0)
+          throw new HTTPStatusException(204);
         return (arr);
     }
 
@@ -111,6 +113,8 @@ class Model(T, U) {
             return (new T());
         aa = result.asAA();
         result.close();
+        if (aa.length <= 0 )
+          throw new HTTPStatusException(204);
         return (new T(aa));
     }
 
@@ -137,6 +141,8 @@ class Model(T, U) {
             arr[i] = new T(result.asAA());
             result.popFront();
         }
+        if (arr.length <= 0)
+          throw new HTTPStatusException(204);
         return (arr);
     }
 
