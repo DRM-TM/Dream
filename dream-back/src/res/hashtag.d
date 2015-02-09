@@ -34,10 +34,10 @@ class Hashtag
 
     @property string asValues()
     {
-        return ("("
-                ~ "\"" ~ m_content ~ "\", " ~
-                m_dream_id ~ " "  ~
-                m_user_id ~ " " ~
+        return ("(" ~
+                m_user_id ~ ", " ~
+                m_dream_id ~ ", "  ~
+                "\"" ~ m_content ~ "\"" ~
                 ")");
     }
 
