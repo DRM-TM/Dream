@@ -50,6 +50,12 @@ void			setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 	res.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE";
 }
 
+void sendOptions(HTTPServerRequest req, HTTPServerResponse res)
+{
+	setAccessControlOrigin(req, res);
+	res.writeBody("");
+}
+
 /*****************/
 
 shared static	this()
@@ -69,7 +75,7 @@ shared static	this()
       }
 			myApi = new DreamAPI(connStr);
       router.any("*", &setAccessControlOrigin);
-			router.match(HTTPMethod.OPTIONS, "*", &setAccessControlOrigin);
+			router.match(HTTPMethod.OPTIONS, "*", &sendOptions);
       try registerRestInterface(router, myApi);
       catch(Exception e) {
 				writeln("Failed to register interface: ", e.toString());
