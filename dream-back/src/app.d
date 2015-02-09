@@ -46,7 +46,7 @@ void			setAccessControlOrigin(HTTPServerRequest req, HTTPServerResponse res)
 	} catch (JSONException e) {
 		throw new HTTPStatusException(401);
 	}
-	res.headers["Access-Control-Allow-Origin"] = "http://localhost:15030";
+	res.headers["Access-Control-Allow-Origin"] = "http://localhost";
 	res.headers["Access-Control-Allow-Headers"] = "X-Custom-Header";
 	res.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE";
 
