@@ -69,6 +69,7 @@ shared static	this()
       }
 			myApi = new DreamAPI(connStr);
       router.any("*", &setAccessControlOrigin);
+			router.match(HTTPMethod.OPTIONS, "*", &setAccessControlOrigin);
       try registerRestInterface(router, myApi);
       catch(Exception e) {
 				writeln("Failed to register interface: ", e.toString());
