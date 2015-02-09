@@ -193,10 +193,10 @@ interface   IDreamAPI
       bool   deleteWord(uint _uid);
 
       // POST /api/word
-      bool   postWord(uint uid, string word, uint level);
+      bool   postWord(string word, uint level);
 
       // PUT /api/word
-      bool  putWord(uint uid, string word, uint level);
+      bool  putWord(string word, uint level);
 
 
       /**
@@ -218,10 +218,10 @@ interface   IDreamAPI
       bool   deleteDefinition(uint _uid);
 
       // POST /api/definition
-      bool   postDefinition(uint uid, string word, string definition);
+      bool   postDefinition(string word, string definition);
 
       // PUT /api/definition
-      bool  putDefinition(uint uid, string word, string definition);
+      bool  putDefinition(string word, string definition);
 
       /*
       * Reporter

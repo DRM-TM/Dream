@@ -410,20 +410,20 @@ class   DreamAPI : IDreamAPI
       }
 
       // POST /api/word
-      bool   postWord(uint uid, string word, uint level) {
+      bool   postWord(string word, uint level) {
         Word  toAdd = new Word();
 
-        toAdd.m_id = to!string(uid);
+        toAdd.m_id = "-1";
         toAdd.m_word = word;
         toAdd.m_level = to!string(level);
         return (_wordRes.add(toAdd));
       }
 
       // PUT /api/word
-      bool  putWord(uint uid, string word, uint level) {
+      bool  putWord(string word, uint level) {
         Word toUpdate = new Word();
 
-        toUpdate.m_id = to!string(uid);
+        toUpdate.m_id = "-1";
         toUpdate.m_word = word;
         toUpdate.m_level = to!string(level);
         return (_wordRes.update(toUpdate));
@@ -454,20 +454,20 @@ class   DreamAPI : IDreamAPI
       }
 
       // POST /api/definition
-      bool   postDefinition(uint uid, string word, string definition) {
+      bool   postDefinition(string word, string definition) {
         Definition toAdd = new Definition();
 
-        toAdd.m_id = to!string(uid);
+        toAdd.m_id = "-1";
         toAdd.m_word = word;
         toAdd.m_definition = definition;
         return (_definitionRes.add(toAdd));
       }
 
       // PUT /api/definition
-      bool  putDefinition(uint uid, string word, string definition) {
+      bool  putDefinition(string word, string definition) {
         Definition toUpdate = new Definition();
 
-        toUpdate.m_id = to!string(uid);
+        toUpdate.m_id = "-1";
         toUpdate.m_word = word;
         toUpdate.m_definition = definition;
         return (_definitionRes.add(toUpdate));
