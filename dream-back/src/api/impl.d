@@ -272,6 +272,16 @@ class   DreamAPI : IDreamAPI
         return (_dreamRes.del(_uid));
     }
 
+    // PUT /api/dream
+    bool  putDream(uint uid, uint category_id, string content) {
+      Dream   toUpdate = new Dream();
+
+      toUpdate.m_user_id = to!string(uid);
+      toUpdate.m_category_id = to!string(category_id);
+      toUpdate.m_content = content;
+      return (_dreamRes.update(toUpdate));
+    }
+
     /**
      * Comment resource
      */
@@ -309,6 +319,16 @@ class   DreamAPI : IDreamAPI
          toAdd.m_dream_id = to!string(dream_id);
          toAdd.m_content = content;
          return (_commentRes.add(toAdd));
+     }
+
+     // PUT /api/comment
+     bool  putComment(uint uid, uint dream_id, string content) {
+       Comment   toUpdate = new Comment();
+
+       toUpdate.m_user_id = to!string(uid);
+       toUpdate.m_dream_id = to!string(dream_id);
+       toUpdate.m_content = content;
+       return (_commentRes.update(toUpdate));
      }
 
      /**
@@ -350,6 +370,16 @@ class   DreamAPI : IDreamAPI
           return (_hashtagRes.add(toAdd));
       }
 
+      // PUT /api/hashtag
+      bool  putHashtag(uint uid, uint dream_id, string content) {
+        Hashtag   toUpdate = new Hashtag();
+
+        toUpdate.m_user_id = to!string(uid);
+        toUpdate.m_dream_id = to!string(dream_id);
+        toUpdate.m_content = content;
+        return (_hashtagRes.update(toUpdate));
+      }
+
       /**
       * Word resource
       */
@@ -389,6 +419,16 @@ class   DreamAPI : IDreamAPI
         return (_wordRes.add(toAdd));
       }
 
+      // PUT /api/word
+      bool  putWord(uint uid, string word, uint level) {
+        Word toUpdate = new Word();
+
+        toUpdate.m_id = to!string(uid);
+        toUpdate.m_word = word;
+        toUpdate.m_level = to!string(level);
+        return (_wordRes.update(toUpdate));
+      }
+
       /**
       * Definition resource
       */
@@ -421,6 +461,16 @@ class   DreamAPI : IDreamAPI
         toAdd.m_word = word;
         toAdd.m_definition = definition;
         return (_definitionRes.add(toAdd));
+      }
+
+      // PUT /api/definition
+      bool  putDefinition(uint uid, string word, string definition) {
+        Definition toUpdate = new Definition();
+
+        toUpdate.m_id = to!string(uid);
+        toUpdate.m_word = word;
+        toUpdate.m_definition = definition;
+        return (_definitionRes.add(toUpdate));
       }
 
       /*

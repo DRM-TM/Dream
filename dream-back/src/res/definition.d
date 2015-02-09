@@ -36,6 +36,14 @@ class Definition
         );
     }
 
+    @property string asDefinition()
+    {
+      return (
+        "word=\"" ~ m_word ~ "\","
+        "defintion=\"" ~ m_definition ~ "\""
+      );
+    }
+
     bool opEquals(in Definition rhs) const
     {
         return m_word == rhs.m_word;

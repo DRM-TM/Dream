@@ -5,7 +5,8 @@
     "authors": ["Ganitzsh"],
     "dependencies": {
         "vibe-d": ">=0.7.21-rc.2",
-        "mysql-native": ">=0.1.0"
+        "mysql-native": ">=0.1.0",
+        "dunit": ">=1.0.10"
     },
     "versions": ["VibeDefaultMain"]
 }

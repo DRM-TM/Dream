@@ -40,4 +40,13 @@ class Hashtag
                 m_user_id ~ " " ~
                 ")");
     }
+
+    @property string asDefinition()
+    {
+      return (
+        "user_id=" ~ m_user_id ~ ","
+        "dream_id=" ~ m_dream_id ~ ","
+        "content=\"" ~ m_content ~ "\""
+      );
+    }
 }

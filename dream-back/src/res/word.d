@@ -35,6 +35,14 @@ class Word
         );
     }
 
+    @property string asDefinition()
+    {
+      return (
+        "word=\"" ~ m_word ~ "\","
+        "level=" ~ m_level
+      );
+    }
+
     bool opEquals(in Word rhs) const
     {
         return m_word == rhs.m_word;

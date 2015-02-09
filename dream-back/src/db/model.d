@@ -146,6 +146,26 @@ class Model(T, U) {
         return (arr);
     }
 
+    bool  update(T toUpdate) {
+      string          query;
+      ResultSequence  result;
+      Command         c;
+
+      query = "UPDATE " ~ _modelName.toLower() ~ " SET " ~ toUpdate.asDefinition ~ " WHERE " ~ _primaryKey ~ "=" ~ toUpdate.m_id;
+      try c = Command(_dbCon, query);
+      catch (Exception e) {
+          writeln("Exception caught: ", e.toString());
+      }
+      writeln("[QUERY] Query raw: ", c.sql);
+      try result = c.execSQLSequence();
+      catch (Exception e) {
+        result.close();
+        return (false);
+      }
+      result.close();
+      return (true);
+    }
+
     bool   add(T toAdd) {
         string          query;
         ResultSequence  result;

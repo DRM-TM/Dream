@@ -55,4 +55,17 @@ class User
             ")"
         );
     }
+
+    @property string asDefinition()
+    {
+      return (
+        "email=\"" ~ m_email ~ "\","
+        "password=\"" ~ m_password ~ "\","
+        "username=\"" ~ m_username ~ "\","
+        "inscription_date=" ~ m_inscription_date ~ ","
+        "last_connection=" ~ m_last_connection ~ ","
+        "user_token=\"" ~ m_user_token ~ "\","
+        "birthdate=\"" ~ m_birthdate ~ "\""
+      );
+    }
 }

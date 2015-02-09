@@ -50,4 +50,14 @@ class Dream
                 m_date ~
                 ")");
     }
+
+    @property string asDefinition()
+    {
+      return (
+        "user_id=" ~ m_user_id ~ ","
+        "category_id=" ~ m_category_id ~ ","
+        "content=\"" ~ m_content ~ "\","
+        "date=" ~ m_date
+      );
+    }
 }
