@@ -165,10 +165,10 @@ interface   IDreamAPI
       bool   deleteHashtag(uint _uid);
 
       // POST /api/hashtag
-      bool   postHashtag(uint uid, uint hashtag_id, string content);
+      bool   postHashtag(uint uid, uint dream_id, string content);
 
       // PUT /api/hashtag
-      bool  putHashtag(uint uid, uint hashtag_id, string content);
+      bool  putHashtag(uint uid, uint dream_id, string content);
 
       /**
       * Word resource
