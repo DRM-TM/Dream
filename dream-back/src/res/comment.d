@@ -50,8 +50,8 @@ class Comment
     @property string asDefinition()
     {
       return (
-        "user_id=" ~ m_user_id ~ "\","
-        "dream_id=" ~ m_dream_id ~ "\","
+        "user_id=" ~ m_user_id ~ ","
+        "dream_id=" ~ m_dream_id ~ ","
         "content=\"" ~ m_content ~ "\","
         "post_date=" ~ m_post_date
       );
