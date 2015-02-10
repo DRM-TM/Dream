@@ -112,7 +112,7 @@ interface   IDreamAPI
     bool    deleteDream(uint _uid);
 
     // PUT /api/dream
-    bool  putDream(uint uid, uint category_id, string content);
+    bool  putDream(uint actual_id, uint uid, uint category_id, string content);
 
     /**
      * Comment resource
@@ -140,7 +140,7 @@ interface   IDreamAPI
      bool   postComment(uint uid, uint dream_id, string content);
 
      // PUT /api/comment
-     bool  putComment(uint uid, uint dream_id, string content);
+     bool  putComment(uint actual_id, uint uid, uint dream_id, string content);
 
      /**
       * Hashtag resource
@@ -168,7 +168,7 @@ interface   IDreamAPI
       bool   postHashtag(uint uid, uint dream_id, string content);
 
       // PUT /api/hashtag
-      bool  putHashtag(uint uid, uint dream_id, string content);
+      bool  putHashtag(uint actual_id, uint uid, uint dream_id, string content);
 
       /**
       * Word resource
@@ -196,7 +196,7 @@ interface   IDreamAPI
       bool   postWord(string word, uint level);
 
       // PUT /api/word
-      bool  putWord(string word, uint level);
+      bool  putWord(uint actual_id, string word, uint level);
 
 
       /**
@@ -221,7 +221,7 @@ interface   IDreamAPI
       bool   postDefinition(string word, string definition);
 
       // PUT /api/definition
-      bool  putDefinition(string word, string definition);
+      bool  putDefinition(uint actual_id, string word, string definition);
 
       /*
       * Reporter
