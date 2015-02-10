@@ -133,7 +133,7 @@ interface   IDreamAPI
      Comment[]  getCommentByUserId(uint _uid);
 
      // DELETE /api/comment
-     @path("comment")
+     @path("comment/:uid")
      bool   deleteComment(uint _uid);
 
      // POST /api/comment
