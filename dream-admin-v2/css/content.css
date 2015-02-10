@@ -68,10 +68,78 @@ article {
 	/*color: #FEFEFE;*/
 	/*margin-left: 5px;*/
 	/*background-color: #adbccc;*/
-	background-color: #DCDCDC;
+	background-color: #FFFFFF;
 	/*border-top: solid 1px;*/
 }
 
-article:hover {
-	background-color: #DCDCDC;
+.deleteSomething {
+	display: inline-block;
+	width: 16px;
+    height:16px;
+    border-radius:9px;
+    font-size:17px;
+	color: #754747;
+    line-height:13px;
+	text-align: center;
+    background: #FFBBBB;
+	float: right;
+    margin-right: 10px;
+    padding: 1px;
 }
+
+.deleteSomething:hover {
+	box-shadow: 0px 0px 5px;
+	cursor: pointer;
+}
+
+.addComment {
+	margin-top: 10px;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+    color:#3eb78d;
+	background-color: #EEF5EE;
+	text-align: center;
+}
+
+.addComment:hover {
+	cursor: pointer;
+}
+
+.addDream {
+    color:#3eb78d;
+   	background-color: #EEF5EE;
+    text-align: center;
+}
+
+.addDream:hover {
+	cursor: pointer;
+}
+
+.editSomething {
+	display: inline-block;
+	width: 16px;
+    height:16px;
+    border-radius:9px;
+    font-size:17px;
+	color: #103b89;
+    line-height:13px;
+	text-align: center;
+    background: #6495ed;
+	float: right;
+    margin-right: 10px;
+    padding: 1px;
+}
+
+.editSomething:hover {
+	cursor: pointer;
+	box-shadow: 0px 0px 5px;
+}
+
+.dreamTextarea {
+	width: 100%;
+}
+
+/*article:hover {
+	background-color: #DCDCDC;
+}*/
