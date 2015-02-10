@@ -40,9 +40,9 @@ class Comment
     @property string asValues()
     {
         return ("(" ~
-                m_user_id ~ ", " ~
-                m_dream_id ~ ", "  ~
-                m_content ~ ", " ~
+                m_user_id ~ "," ~
+                m_dream_id ~ ","  ~
+                "\"" ~ m_content ~ "\"," ~
                 m_post_date ~
                 ")");
     }
