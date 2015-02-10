@@ -160,7 +160,7 @@ class Model(T, U) {
       try result = c.execSQLSequence();
       catch (Exception e) {
         result.close();
-        return (false);
+        throw new HTTPStatusException(204);
       }
       result.close();
       return (true);
@@ -180,7 +180,7 @@ class Model(T, U) {
         try result = c.execSQLSequence();
         catch (Exception e) {
           result.close();
-          return (false);
+          throw new HTTPStatusException(204);
         }
         result.close();
         return (true);
@@ -200,7 +200,11 @@ class Model(T, U) {
             writeln("Exception caught: ", e.toString());
         }
         writeln("[QUERY] Query raw: ", c.sql);
-        c.execSQLSequence();
+        try c.execSQLSequence();
+        catch (Exception e) {
+          result.close();
+          throw new HTTPStatusException(204);
+        }
         result.close();
         return (true);
     }

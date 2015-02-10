@@ -112,7 +112,7 @@ interface   IDreamAPI
     bool    deleteDream(uint _uid);
 
     // PUT /api/dream
-    bool  putDream(uint uid, uint category_id, string content);
+    bool  putDream(uint actual_id, uint uid, uint category_id, string content);
 
     /**
      * Comment resource
@@ -133,14 +133,14 @@ interface   IDreamAPI
      Comment[]  getCommentByUserId(uint _uid);
 
      // DELETE /api/comment
-     @path("comment")
+     @path("comment/:uid")
      bool   deleteComment(uint _uid);
 
      // POST /api/comment
      bool   postComment(uint uid, uint dream_id, string content);
 
      // PUT /api/comment
-     bool  putComment(uint uid, uint dream_id, string content);
+     bool  putComment(uint actual_id, uint uid, uint dream_id, string content);
 
      /**
       * Hashtag resource
@@ -165,10 +165,10 @@ interface   IDreamAPI
       bool   deleteHashtag(uint _uid);
 
       // POST /api/hashtag
-      bool   postHashtag(uint uid, uint hashtag_id, string content);
+      bool   postHashtag(uint uid, uint dream_id, string content);
 
       // PUT /api/hashtag
-      bool  putHashtag(uint uid, uint hashtag_id, string content);
+      bool  putHashtag(uint actual_id, uint uid, uint dream_id, string content);
 
       /**
       * Word resource
@@ -193,10 +193,10 @@ interface   IDreamAPI
       bool   deleteWord(uint _uid);
 
       // POST /api/word
-      bool   postWord(uint uid, string word, uint level);
+      bool   postWord(string word, uint level);
 
       // PUT /api/word
-      bool  putWord(uint uid, string word, uint level);
+      bool  putWord(uint actual_id, string word, uint level);
 
 
       /**
@@ -218,10 +218,10 @@ interface   IDreamAPI
       bool   deleteDefinition(uint _uid);
 
       // POST /api/definition
-      bool   postDefinition(uint uid, string word, string definition);
+      bool   postDefinition(string word, string definition);
 
       // PUT /api/definition
-      bool  putDefinition(uint uid, string word, string definition);
+      bool  putDefinition(uint actual_id, string word, string definition);
 
       /*
       * Reporter

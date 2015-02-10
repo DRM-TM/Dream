@@ -40,18 +40,18 @@ class Comment
     @property string asValues()
     {
         return ("(" ~
-                m_user_id ~ " " ~
-                m_dream_id ~ " "  ~
-                m_content ~ " " ~
-                m_post_date ~ " " ~
+                m_user_id ~ "," ~
+                m_dream_id ~ ","  ~
+                "\"" ~ m_content ~ "\"," ~
+                m_post_date ~
                 ")");
     }
 
     @property string asDefinition()
     {
       return (
-        "user_id=" ~ m_user_id ~ "\","
-        "dream_id=" ~ m_dream_id ~ "\","
+        "user_id=" ~ m_user_id ~ ","
+        "dream_id=" ~ m_dream_id ~ ","
         "content=\"" ~ m_content ~ "\","
         "post_date=" ~ m_post_date
       );
