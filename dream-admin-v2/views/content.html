@@ -33,15 +33,25 @@
 		<div class="tags" ng-hide="!dream.hashtags.length">
 			<!-- repeat tags of the dream -->
 			<span 	ng-repeat="tag in dream.hashtags"
-					ng-mouseenter="showDeleteTag = true" 
-					ng-mouseleave="showDeleteTag = false">
-					{{ tag.m_content }}
+					ng-mouseenter="showActionTag = true" 
+					ng-mouseleave="showActionTag = false">
+				<span ng-hide="showEditTagForm === $index">{{ tag.m_content }}</span>
+				<span 	ng-hide="!showActionTag || showEditTagForm === $index"
+						ng-click="showEditTagForm = feed.toggle($index, showEditTagForm)"
+						class="editTag">
+						i					
+				</span>
 					<!-- delete tag input -->
-				<span 	ng-show="showDeleteTag" 
+				<span 	ng-hide="!showActionTag || showEditTagForm === $index" 
 						ng-click="feed.deleteTag(tag.m_id)" 
 						class="deleteTag">
 						x
-				</span>
+				</span>		
+				<!-- edit tag form -->
+				<form 	name="editTag" ng-show="showEditTagForm === $index" 
+						ng-submit="showEditTagForm = feed.updateTag(tag.m_id, dream.content.m_id, $index, $parent.$index)">
+					<input ng-model="tag.m_content" type="text" autofocus/>
+				</form>
 			</span>
 			<!-- add tag button -->
 			<div class="addTag" ng-click="showTagForm = feed.toggle($index, showTagForm)" ng-hide="showTagForm === $index">+</div>

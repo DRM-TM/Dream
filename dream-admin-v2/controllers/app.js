@@ -115,6 +115,24 @@ app.controller('FeedController', ['$http', '$scope', function($http, $scope) {
 		return false;
 	}
 
+	this.updateTag = function(id, dream_id, index, dream_index) {
+		var path = apiPath + '/hashtag';
+
+		$http({ method:'PUT',
+				url:path,
+				data:{	"actual_id":parseInt(id),
+						"uid":1, 
+						"dream_id":parseInt(dream_id), 
+						"content":this.dreams[dream_index].hashtags[index].m_content }
+			}).
+		success(function() {
+			$scope.getFeed()
+		}).
+		error(function() {
+			alert("post fail : " + id)
+		});
+	}
+
 	this.addComm = function(id) {
 		var path = apiPath + '/comment';
 		if (this.comment.text) {

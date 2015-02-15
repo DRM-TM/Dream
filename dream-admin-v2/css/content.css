@@ -27,6 +27,14 @@ article {
 	cursor: pointer;
 }
 
+.editTag {
+	color: #103b89;
+}
+
+.editTag:hover {
+	cursor: pointer;
+}
+
 .addTag {
 	display: inline-block;
 	width: 16px;
