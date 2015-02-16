@@ -29,12 +29,18 @@ import      res.hashtag;
 import      res.dream;
 import      res.word;
 import      res.definition;
+import      res.reported;
 
+import      col.freported;
 import      col.fdream;
 
 @rootPath("api")
 interface   IDreamAPI
 {
+    // GET /api/dream/reported
+    @path("dream/reported")
+    Freported[]  getReported();
+
     // POST /api/search
     @path("search")
     SList!Fdream postSearch(string research);
@@ -68,7 +74,7 @@ interface   IDreamAPI
     bool    postUser(string email, string password, string token, string birthdate, string username);
 
     @path("user/login")
-    string  postUserAuth(string email, string hash);
+    User  postUserAuth(string email, string hash);
 
     @path("user/login/token")
     bool    postUserAuth(string email, string hash, string token);

@@ -16,10 +16,12 @@ import  res.hashtag;
 import  res.dream;
 import  res.word;
 import  res.definition;
+import  res.reported;
 
 import  utils.token;
 
 import  col.fdream;
+import  col.freported;
 
 import  api.desc;
 import 	db.model;
@@ -38,6 +40,7 @@ class   DreamAPI : IDreamAPI
         Model!(Hashtag, uint)     _hashtagRes;
         Model!(Word, uint)        _wordRes;
         Model!(Definition, uint)  _definitionRes;
+        Model!(Reported, uint)    _reportedRes;
     }
 
     this(string connStr)
@@ -58,6 +61,7 @@ class   DreamAPI : IDreamAPI
         _hashtagRes = new Model!(Hashtag, uint)(_dbCon);
         _wordRes = new Model!(Word, uint)(_dbCon);
         _definitionRes = new Model!(Definition, uint)(_dbCon);
+        _reportedRes = new Model!(Reported, uint)(_dbCon);
     }
 
     Token findTokenForUser(uint userId) {
@@ -172,14 +176,14 @@ class   DreamAPI : IDreamAPI
     }
 
     // POST /user/login
-    string    postUserAuth(string email, string hash) {
+    User    postUserAuth(string email, string hash) {
       User[]  match = _userRes.findCustomKey!(string)("email", "\"" ~ email ~ "\"");
 
       if (match.length > 1 || match.length == 0) {
         throw new HTTPStatusException(401);
       }
       if (match[0].m_email == email && match[0].m_password == hash) {
-        return (match[0].m_id);
+        return (match[0]);
       }
       throw new HTTPStatusException(401);
     }
@@ -219,6 +223,26 @@ class   DreamAPI : IDreamAPI
         ret.comments = comments;
         ret.hashtags = hashtags;
         return (ret);
+    }
+
+    Freported solveReported(Reported base) {
+      Freported  ret = new Freported();
+
+      ret.m_content = getDream(to!uint(base.m_dream_id));
+      ret.m_user = getUser(to!uint(base.m_user_id));
+      ret.m_base = base;
+      return (ret);
+    }
+
+    // GET /api/dream/reported
+    Freported[]  getReported() {
+      Reported[]  result = _reportedRes.all();
+      Freported[] reportedDreams = new Freported[to!uint(result.length)];
+
+      for (auto i = 0 ; i < result.length ; ++i) {
+        reportedDreams[i] = solveReported(result[i]);
+      }
+      return (reportedDreams);
     }
 
     // GET /api/dream/incategory/:cat_id

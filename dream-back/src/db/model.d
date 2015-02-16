@@ -81,8 +81,9 @@ class Model(T, U) {
         catch (Exception e) {
             writeln("Exception caught", e.toString());
         }
+        writeln("Bool: ", result.empty());
         if (result.empty())
-            return (null);
+          throw new HTTPStatusException(204);
         T[]   arr = new T[to!uint(result.length())];
         for (auto i = 0 ; !result.empty() ; ++i) {
             arr[i] = new T(result.asAA());
