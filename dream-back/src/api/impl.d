@@ -172,17 +172,16 @@ class   DreamAPI : IDreamAPI
     }
 
     // POST /user/login
-    bool    postUserAuth(string email, string hash) {
+    string    postUserAuth(string email, string hash) {
       User[]  match = _userRes.findCustomKey!(string)("email", "\"" ~ email ~ "\"");
 
       if (match.length > 1 || match.length == 0) {
-        //throw new HTTPStatusException(401);
-        return (false);
+        throw new HTTPStatusException(401);
       }
       if (match[0].m_email == email && match[0].m_password == hash) {
-        return (true);
+        return (match[0].m_id);
       }
-      return (false);
+      throw new HTTPStatusException(401);
     }
 
     // POST /user/login/token

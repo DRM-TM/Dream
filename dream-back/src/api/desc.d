@@ -68,7 +68,7 @@ interface   IDreamAPI
     bool    postUser(string email, string password, string token, string birthdate, string username);
 
     @path("user/login")
-    bool    postUserAuth(string email, string hash);
+    string  postUserAuth(string email, string hash);
 
     @path("user/login/token")
     bool    postUserAuth(string email, string hash, string token);
