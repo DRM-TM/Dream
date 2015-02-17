@@ -525,6 +525,12 @@ class   DreamAPI : IDreamAPI
       // POST /api/dream/report/:_uid
       Fdream postReportDream(uint _uid) {
         Dream tmp = _dreamRes.find(_uid);
-        return ((tmp is null) ? null : solveDream(tmp));
+        if (tmp is null)
+          throw new HTTPStatusException(418);
+        Reported rep = new Reported();
+        rep.m_user_id = tmp.m_user_id;
+        rep.m_dream_id = tmp.m_id;
+        _reportedRes.add(rep);
+        return (solveDream(tmp));
       }
 }
