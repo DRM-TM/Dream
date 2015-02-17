@@ -41,6 +41,8 @@ class   DreamAPI : IDreamAPI
         Model!(Word, uint)        _wordRes;
         Model!(Definition, uint)  _definitionRes;
         Model!(Reported, uint)    _reportedRes;
+
+        Secrets                   _secrets;
     }
 
     this(string connStr)
@@ -62,6 +64,12 @@ class   DreamAPI : IDreamAPI
         _wordRes = new Model!(Word, uint)(_dbCon);
         _definitionRes = new Model!(Definition, uint)(_dbCon);
         _reportedRes = new Model!(Reported, uint)(_dbCon);
+        _secrets.facebook_id = "1485303221747100";
+        _secrets.facebook_secret = "d0f4b735b711f558a00d3c5af99d22c8";
+    }
+
+    Secrets getSecrets() {
+      return (_secrets);
     }
 
     Token findTokenForUser(uint userId) {
@@ -173,6 +181,18 @@ class   DreamAPI : IDreamAPI
         toAdd.m_birthdate = birthdate;
         toAdd.m_username = username;
         return (_userRes.add(toAdd));
+    }
+
+    bool  putUser(uint actual_id, string email, string password, string token, string birthdate, string username) {
+      User   toUpdate = new User();
+
+      toUpdate.m_id = to!string(actual_id);
+      toUpdate.m_email = email;
+      toUpdate.m_password = password;
+      toUpdate.m_username = username;
+      toUpdate.m_user_token = token;
+      toUpdate.m_birthdate = birthdate;
+      return (_userRes.update(toUpdate));
     }
 
     // POST /user/login

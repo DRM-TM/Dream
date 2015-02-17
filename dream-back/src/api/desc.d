@@ -34,9 +34,18 @@ import      res.reported;
 import      col.freported;
 import      col.fdream;
 
+struct  Secrets {
+  string facebook_secret;
+  string facebook_id;
+}
+
 @rootPath("api")
 interface   IDreamAPI
 {
+    // GET /api/secrets
+    @path("secrets")
+    Secrets getSecrets();
+
     // GET /api/dream/reported
     @path("dream/reported")
     Freported[]  getReported();
@@ -86,6 +95,10 @@ interface   IDreamAPI
      */
     @path("user/:uid")
     bool    deleteUser(uint _uid);
+
+    // PUT /api/user
+    @path("user")
+    bool  putUser(uint actual_id, string email, string password, string token, string birthdate, string username);
 
     /**
      * Dream resource
