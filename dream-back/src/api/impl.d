@@ -278,6 +278,7 @@ class   DreamAPI : IDreamAPI
         for (auto i = 0 ; i < result.length ; ++i) {
             dreams[i] = solveDream(result[i]);
         }
+        dreams.reverse;
         return (dreams);
     }
 
