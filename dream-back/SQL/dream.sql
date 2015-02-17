@@ -230,7 +230,7 @@ CREATE TABLE `user` (
   `password` varchar(1024) NOT NULL,
   `username` varchar(255) NOT NULL,
   `inscription_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_connection` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_connection` timestamp NOT NULL DEFAULT "0000-00-00",
   `user_token` varchar(1024) NOT NULL,
   `birthdate` date NOT NULL,
   PRIMARY KEY (`id`),
