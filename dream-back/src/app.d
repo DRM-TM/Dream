@@ -71,7 +71,7 @@ shared static	this()
       string			slash;
 
       version (Windows) {
-				slash = `\`;
+				slash = "\\";
       } version (linux) {
 				slash = `/`;
       }

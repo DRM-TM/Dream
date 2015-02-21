@@ -111,6 +111,10 @@ interface   IDreamAPI
      */
     Fdream[]    getDream();
 
+    // POST /api/dream/like/:uid
+    @path("dream/like/:uid")
+    bool   postLike(uint _uid);
+
     // GET /api/dream/:uid
     @path("dream/:uid")
     Dream   getDream(uint _uid);

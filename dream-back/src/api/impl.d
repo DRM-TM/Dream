@@ -282,6 +282,17 @@ class   DreamAPI : IDreamAPI
         return (dreams);
     }
 
+    // POST /api/dream/like/:uid
+    bool   postLike(uint _uid) {
+      Dream liked = getDream(_uid);
+      uint  tmp = 0;
+
+      if (liked is null)
+        throw new HTTPStatusException(204);
+      liked.m_likes = to!string(to!uint(liked.m_likes) + 1);
+      return (_dreamRes.update(liked));
+    }
+
     // GET /api/dream/:uid
     Dream   getDream(uint _uid) {
         return (_dreamRes.find(_uid));
