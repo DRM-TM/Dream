@@ -142,7 +142,7 @@ class   DreamAPI : IDreamAPI
       Fdream[] dreams = getDream();
       Fdream[] result;
       auto list = make!(SList!Fdream);
-      uint length;
+      ulong length;
 
       foreach (dream ; dreams) {
         foreach (word ; ret) {
@@ -157,7 +157,7 @@ class   DreamAPI : IDreamAPI
       if ((length = walkLength(list[])) <= 0) {
         throw new HTTPStatusException(204);
       }
-      result = new Fdream[length];
+      result = new Fdream[to!uint(length)];
       int i = 0;
       foreach (fdr ; list) {
         result[i] = fdr;
