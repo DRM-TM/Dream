@@ -1,9 +1,0 @@
-<!-- add comment button -->
-<div class="addComment" ng-click="showCommForm = feed.toggle($index, showCommForm)" ng-hide="showCommForm === $index">
-	Add a comment
-</div>
-<!-- add comment form -->
-<form 	class="AddCommForm" name="AddComm" ng-show="showCommForm === $index"
-		ng-submit="showCommForm = feed.addComm(dream.content.m_id)">
-	<input ng-model="feed.comment.text" type="text" placeholder="Enter comment here" autofocus/>
-</form>
