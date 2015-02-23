@@ -16,10 +16,12 @@ import  res.hashtag;
 import  res.dream;
 import  res.word;
 import  res.definition;
+import  res.reported;
 
 import  utils.token;
 
 import  col.fdream;
+import  col.freported;
 
 import  api.desc;
 import 	db.model;
@@ -38,6 +40,9 @@ class   DreamAPI : IDreamAPI
         Model!(Hashtag, uint)     _hashtagRes;
         Model!(Word, uint)        _wordRes;
         Model!(Definition, uint)  _definitionRes;
+        Model!(Reported, uint)    _reportedRes;
+
+        Secrets                   _secrets;
     }
 
     this(string connStr)
@@ -58,6 +63,13 @@ class   DreamAPI : IDreamAPI
         _hashtagRes = new Model!(Hashtag, uint)(_dbCon);
         _wordRes = new Model!(Word, uint)(_dbCon);
         _definitionRes = new Model!(Definition, uint)(_dbCon);
+        _reportedRes = new Model!(Reported, uint)(_dbCon);
+        _secrets.facebook_id = "1485303221747100";
+        _secrets.facebook_secret = "d0f4b735b711f558a00d3c5af99d22c8";
+    }
+
+    Secrets getSecrets() {
+      return (_secrets);
     }
 
     Token findTokenForUser(uint userId) {
@@ -125,24 +137,33 @@ class   DreamAPI : IDreamAPI
     }
 
     // POST /search
-    SList!Fdream  postSearch(string research) {
+    Fdream[]  postSearch(string research) {
       auto ret = matchAll(research, regex(`\w+`));
       Fdream[] dreams = getDream();
+      Fdream[] result;
       auto list = make!(SList!Fdream);
+      ulong length;
 
       foreach (dream ; dreams) {
         foreach (word ; ret) {
           auto re = regex(r"(" ~ word.hit ~ ")", "gi");
           auto check = matchAll(dream.content.content, re);
           if (!check.empty) {
+            writeln("Adding a dream");
             list.insert(dream);
           }
         }
       }
-      if (walkLength(list[]) <= 0) {
+      if ((length = walkLength(list[])) <= 0) {
         throw new HTTPStatusException(204);
       }
-      return (list);
+      result = new Fdream[to!uint(length)];
+      int i = 0;
+      foreach (fdr ; list) {
+        result[i] = fdr;
+        ++i;
+      }
+      return (result);
     }
 
     /**
@@ -171,18 +192,29 @@ class   DreamAPI : IDreamAPI
         return (_userRes.add(toAdd));
     }
 
+    bool  putUser(uint actual_id, string email, string password, string token, string birthdate, string username) {
+      User   toUpdate = new User();
+
+      toUpdate.m_id = to!string(actual_id);
+      toUpdate.m_email = email;
+      toUpdate.m_password = password;
+      toUpdate.m_username = username;
+      toUpdate.m_user_token = token;
+      toUpdate.m_birthdate = birthdate;
+      return (_userRes.update(toUpdate));
+    }
+
     // POST /user/login
-    bool    postUserAuth(string email, string hash) {
+    User    postUserAuth(string email, string hash) {
       User[]  match = _userRes.findCustomKey!(string)("email", "\"" ~ email ~ "\"");
 
       if (match.length > 1 || match.length == 0) {
-        //throw new HTTPStatusException(401);
-        return (false);
+        throw new HTTPStatusException(401);
       }
       if (match[0].m_email == email && match[0].m_password == hash) {
-        return (true);
+        return (match[0]);
       }
-      return (false);
+      throw new HTTPStatusException(401);
     }
 
     // POST /user/login/token
@@ -222,6 +254,26 @@ class   DreamAPI : IDreamAPI
         return (ret);
     }
 
+    Freported solveReported(Reported base) {
+      Freported  ret = new Freported();
+
+      ret.m_content = getDream(to!uint(base.m_dream_id));
+      ret.m_user = getUser(to!uint(base.m_user_id));
+      ret.m_base = base;
+      return (ret);
+    }
+
+    // GET /api/dream/reported
+    Freported[]  getReported() {
+      Reported[]  result = _reportedRes.all();
+      Freported[] reportedDreams = new Freported[to!uint(result.length)];
+
+      for (auto i = 0 ; i < result.length ; ++i) {
+        reportedDreams[i] = solveReported(result[i]);
+      }
+      return (reportedDreams);
+    }
+
     // GET /api/dream/incategory/:cat_id
     Dream[]  getDreamIncategory(uint _cat_id) {
         return (_dreamRes.findCustomKey!uint("category_id", _cat_id));
@@ -235,7 +287,19 @@ class   DreamAPI : IDreamAPI
         for (auto i = 0 ; i < result.length ; ++i) {
             dreams[i] = solveDream(result[i]);
         }
+        dreams.reverse;
         return (dreams);
+    }
+
+    // POST /api/dream/like/:uid
+    bool   postLike(uint _uid) {
+      Dream liked = getDream(_uid);
+      uint  tmp = 0;
+
+      if (liked is null)
+        throw new HTTPStatusException(204);
+      liked.m_likes = to!string(to!uint(liked.m_likes) + 1);
+      return (_dreamRes.update(liked));
     }
 
     // GET /api/dream/:uid
@@ -482,6 +546,12 @@ class   DreamAPI : IDreamAPI
       // POST /api/dream/report/:_uid
       Fdream postReportDream(uint _uid) {
         Dream tmp = _dreamRes.find(_uid);
-        return ((tmp is null) ? null : solveDream(tmp));
+        if (tmp is null)
+          throw new HTTPStatusException(418);
+        Reported rep = new Reported();
+        rep.m_user_id = tmp.m_user_id;
+        rep.m_dream_id = tmp.m_id;
+        _reportedRes.add(rep);
+        return (solveDream(tmp));
       }
 }

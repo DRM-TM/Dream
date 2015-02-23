@@ -29,15 +29,30 @@ import      res.hashtag;
 import      res.dream;
 import      res.word;
 import      res.definition;
+import      res.reported;
 
+import      col.freported;
 import      col.fdream;
+
+struct  Secrets {
+  string facebook_secret;
+  string facebook_id;
+}
 
 @rootPath("api")
 interface   IDreamAPI
 {
+    // GET /api/secrets
+    @path("secrets")
+    Secrets getSecrets();
+
+    // GET /api/dream/reported
+    @path("dream/reported")
+    Freported[]  getReported();
+
     // POST /api/search
     @path("search")
-    SList!Fdream postSearch(string research);
+    Fdream[] postSearch(string research);
 
     /**
      * User resource
@@ -68,7 +83,7 @@ interface   IDreamAPI
     bool    postUser(string email, string password, string token, string birthdate, string username);
 
     @path("user/login")
-    bool    postUserAuth(string email, string hash);
+    User  postUserAuth(string email, string hash);
 
     @path("user/login/token")
     bool    postUserAuth(string email, string hash, string token);
@@ -81,6 +96,10 @@ interface   IDreamAPI
     @path("user/:uid")
     bool    deleteUser(uint _uid);
 
+    // PUT /api/user
+    @path("user")
+    bool  putUser(uint actual_id, string email, string password, string token, string birthdate, string username);
+
     /**
      * Dream resource
      */
@@ -91,6 +110,10 @@ interface   IDreamAPI
      * Route: GET /api/dream
      */
     Fdream[]    getDream();
+
+    // POST /api/dream/like/:uid
+    @path("dream/like/:uid")
+    bool   postLike(uint _uid);
 
     // GET /api/dream/:uid
     @path("dream/:uid")
