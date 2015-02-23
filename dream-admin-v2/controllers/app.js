@@ -1,10 +1,4 @@
-var app = angular.module('dream', []);
-
-app.factory('login', function() {
-  return {
-      logged: false
-  };
-});
+var app = angular.module('dream', ['ngCookies']);
 
 app.factory('sha1', function() {
   return {

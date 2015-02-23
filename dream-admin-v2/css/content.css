@@ -10,12 +10,21 @@ article {
 	color: #34485e;
 }
 
-nav {
 
+.menu {
+	background-color: #354A5F;
+	color: #FFFFFF;
+	text-align: center;
 }
 
-nav:hover {
+#menu {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#menu:hover {
 	cursor: pointer;
+	text-decoration: underline;
 }
 
 .tags {
