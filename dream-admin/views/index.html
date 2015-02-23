@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="dream">
+	<head>
+		<meta charset="utf-8">
+		<title>Dream Administrator</title>
+		<script type="text/javascript" src="../assets/angular.min.js"></script>
+		<script type="text/javascript" src="../controllers/app.js"></script>
+		<script type="text/javascript" src="../controllers/feed.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular-cookies.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/header.css" />
+		<link rel="stylesheet" type="text/css" href="../css/content.css" />
+		<link rel="stylesheet" type="text/css" href="../css/global.css" />
+	</head>
+	<body ng-controller="FeedController as feed" ng-init="display = feed.getDisplay()">
+		<ng-include src="'header.html'"></ng-include>
+		<article class="menu" ng-show="feed.display != 'login'">
+  			<span id="menu" ng-click="feed.display= feed.getFeed()">dreams</span>
+  			<span id="menu" ng-click="feed.display= feed.getUsers()">users</span>
+  		</article>
+  		<ng-include ng-show="feed.display === 'login'" src="'login.html'"></ng-include>
+	 	<ng-include ng-show="feed.display === 'dreams'" src="'content.html'"></ng-include>
+	 	<ng-include ng-show="feed.display === 'users'" src="'users.html'"></ng-include>
+	</body>
+</html>

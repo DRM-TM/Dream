@@ -1,0 +1,170 @@
+article {
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	background-color: #FEFEFE;
+	font-family: verdana;
+	padding: 20px;
+	box-shadow: 2px 2px 2px #1c3044;
+	color: #34485e;
+}
+
+
+.menu {
+	background-color: #354A5F;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+#menu {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#menu:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.tags {
+	background-color: #adbccc;
+	padding: 5px;
+	padding-left: 15px;
+	color: #FEFEFE;
+	/*border-bottom: solid 1px #9CABBB; */
+	border-bottom: solid 1px #DCDCDC;
+}
+
+.deleteTag {
+	color: #754747;
+ }
+
+.deleteTag:hover {
+	cursor: pointer;
+}
+
+.editTag {
+	color: #103b89;
+}
+
+.editTag:hover {
+	cursor: pointer;
+}
+
+.addTag {
+	display: inline-block;
+	width: 16px;
+    height:16px;
+    border-radius:8px;
+    font-size:16px;
+    color:#3eb78d;
+    line-height:13px;
+	text-align: center;
+    background: #FEFEFE;
+	float: right;
+    margin-right: 10px;
+}
+.addTag:hover {
+	box-shadow: 0px 0px 5px;
+	cursor: pointer;
+}
+
+.addTagForm {
+	display: inline-block;
+}
+
+.comments {
+	background-color: #adbccc;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 1px;
+	padding-bottom: 11px;
+	/*margin-top: 20px;*/
+}
+
+.comment {
+	/*box-shadow: 0px 0px 1px #1c3044;*/
+	margin-top: 10px;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #354A5F;
+	/*color: #FEFEFE;*/
+	/*margin-left: 5px;*/
+	/*background-color: #adbccc;*/
+	background-color: #FFFFFF;
+	/*border-top: solid 1px;*/
+}
+
+.deleteSomething {
+	display: inline-block;
+	width: 16px;
+    height:16px;
+    border-radius:9px;
+    font-size:17px;
+	color: #754747;
+    line-height:13px;
+	text-align: center;
+    background: #FFBBBB;
+	float: right;
+    margin-right: 10px;
+    padding: 1px;
+}
+
+.deleteSomething:hover {
+	box-shadow: 0px 0px 5px;
+	cursor: pointer;
+}
+
+.addComment {
+	margin-top: 10px;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+    color:#3eb78d;
+	background-color: #EEF5EE;
+	text-align: center;
+}
+
+.addComment:hover {
+	cursor: pointer;
+}
+
+.addDream {
+    color:#3eb78d;
+   	background-color: #EEF5EE;
+    text-align: center;
+}
+
+.addDream:hover {
+	cursor: pointer;
+}
+
+.editSomething {
+	display: inline-block;
+	width: 16px;
+    height:16px;
+    border-radius:9px;
+    font-size:17px;
+	color: #103b89;
+    line-height:13px;
+	text-align: center;
+    background: #6495ed;
+	float: right;
+    margin-right: 10px;
+    padding: 1px;
+}
+
+.editSomething:hover {
+	cursor: pointer;
+	box-shadow: 0px 0px 5px;
+}
+
+.dreamTextarea {
+	width: 100%;
+}
+
+/*article:hover {
+	background-color: #DCDCDC;
+}*/

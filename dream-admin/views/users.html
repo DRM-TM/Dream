@@ -1,0 +1,37 @@
+<section>
+	
+	<!-- add dream button and form-->
+	<article class="addDream" ng-init="showUserForm = false">
+		<div ng-click="showUserForm = true" ng-hide="showUserForm">
+			Add an user
+		</div>
+		<form class="addUserForm" name="AddUser" ng-show="showUserForm" ng-submit="showUserForm = false">
+			Username : <input type="text" ng-model="feed.newUser.username" required autofocus/> <br />
+			Email : <input type="email" ng-model="feed.newUser.email" required/> <br />
+			Birthdate :	<input type="date" ng-model="feed.newUser.birthdate" required/> <br />
+			Password : <input type="password" ng-model="feed.newUser.password" required/> <br />
+			<input ng-click="feed.addUser()" type="submit"/>
+			<input ng-click="showUserForm = false" type="submit" value="cancel" />
+		</form>
+	</article>
+
+	<!-- repeat dreams from feed -->
+	<article ng-repeat="user in feed.users" ng-hide="user.length" ng-init="editUser = false">
+		<span class="deleteSomething" ng-show="!editUser" ng-click="feed.deleteUser(user.m_id)">x</span>
+		<span class="editSomething" ng-show="!editUser" ng-click="editUser = true">i</span>
+		Username : <strong ng-show="!editUser"> {{ user.m_username }} </strong>
+					<input ng-show="editUser" type="text" ng-model="user.m_username" autofocus>
+		<div>
+			Email : 			<span ng-show="!editUser">{{ user.m_email }}</span> 
+								<input ng-show="editUser" type="text" ng-model="user.m_email"><br/>
+			Birthdate : 		<span ng-show="!editUser">{{ user.m_birthdate }}</span> 
+								<input ng-show="editUser" type="date" value="user.m_birthdate" ng-model="user.m_birthdate"/><br/>
+			<span ng-show="!editUser">Inscription date : {{ user.m_inscription_date }}<br/></span> 
+			<span ng-show="!editUser">Last connection : {{ user.m_last_connection }}<br/></span> 
+			<input ng-show="editUser" type="submit" value="save" ng-click="editUser = feed.updateUser(user.m_id, $index)"/>
+			<input ng-show="editUser" type="submit" value="cancel" ng-click="editUser = feed.cancelUpdate()"/>
+		</div>
+		
+
+	</article>
+</section>
