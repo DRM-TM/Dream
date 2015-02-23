@@ -10,6 +10,14 @@ article {
 	color: #34485e;
 }
 
+nav {
+
+}
+
+nav:hover {
+	cursor: pointer;
+}
+
 .tags {
 	background-color: #adbccc;
 	padding: 5px;

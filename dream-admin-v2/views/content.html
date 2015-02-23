@@ -1,7 +1,6 @@
-<section ng-controller="FeedController as feed">
-	
+<section>
 	<!-- add dream button and form-->
-	<article class="addDream" >
+	<article class="addDream" ng-init="showDreamForm = false">
 		<div ng-click="showDreamForm = true" ng-hide="showDreamForm">
 			Add a dream
 		</div>
@@ -56,7 +55,7 @@
 			<!-- add tag button -->
 			<div class="addTag" ng-click="showTagForm = feed.toggle($index, showTagForm)" ng-hide="showTagForm === $index">+</div>
 			<!-- render partial view add_tag_form.hmtl -->
-			<ng-include src="'./views/add_tag_form.html'"></ng-include>
+			<ng-include src="'add_tag_form.html'"></ng-include>
 		</div>
 
 		<!-- add tag button that shows when there is no tags -->
@@ -65,7 +64,7 @@
 				Add a tag
 			</div>
 			<!-- render partial view add_tag_form.hmtl -->
-			<ng-include src="'./views/add_tag_form.html'"></ng-include>
+			<ng-include src="'add_tag_form.html'"></ng-include>
 		</div>
 
 		<!-- comments div -->
@@ -88,13 +87,13 @@
 				</form>
 			</div>
 			<!-- render partial view add_comm.html -->
-			<ng-include src="'./views/add_comm.html'"></ng-include>
+			<ng-include src="'add_comm.html'"></ng-include>
 		</div>
 
 		<!-- add comment div that shows when there is no tags -->
 		<div ng-hide="dream.comments.length">	
 			<!-- render partial view add_comm.html -->
-			<ng-include src="'./views/add_comm.html'"></ng-include>
+			<ng-include src="'add_comm.html'"></ng-include>
 		</div>
 
 	</article>

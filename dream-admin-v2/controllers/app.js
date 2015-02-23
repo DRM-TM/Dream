@@ -1,192 +1,173 @@
-(function(){
+var app = angular.module('dream', []);
 
-var app = angular.module('feed', []);
+app.factory('login', function() {
+  return {
+      logged: false
+  };
+});
 
-app.controller('FeedController', ['$http', '$scope', function($http, $scope) {
+app.factory('sha1', function() {
+  return {
+    name: 'SHA1',
+    readonly: true,
+    encode: function(input) {
+      function rotate_left(n,s) {
+        var t4 = ( n<<s ) | (n>>>(32-s));
+        return t4;
+      };
+      function lsb_hex(val) {
+        var str="";
+        var i;
+        var vh;
+        var vl;
+        for( i=0; i<=6; i+=2 ) {
+          vh = (val>>>(i*4+4))&0x0f;
+          vl = (val>>>(i*4))&0x0f;
+          str += vh.toString(16) + vl.toString(16);
+        }
+        return str;
+      };
+      function cvt_hex(val) {
+        var str="";
+        var i;
+        var v;
+        for( i=7; i>=0; i-- ) {
+          v = (val>>>(i*4))&0x0f;
+          str += v.toString(16);
+        }
+        return str;
+      };
+      function Utf8Encode(input) {
+        input = input.replace(/\r\n/g,"\n");
+        var utftext = "";
+        for (var n = 0; n < input.length; n++) {
+          var c = input.charCodeAt(n);
+          if (c < 128) {
+            utftext += String.fromCharCode(c);
+          }
+          else if((c > 127) && (c < 2048)) {
+            utftext += String.fromCharCode((c >> 6) | 192);
+            utftext += String.fromCharCode((c & 63) | 128);
+          }
+          else {
+            utftext += String.fromCharCode((c >> 12) | 224);
+            utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+            utftext += String.fromCharCode((c & 63) | 128);
+          }
+        }
+        return utftext;
+      };
+      var blockstart;
+      var i, j;
+      var W = new Array(80);
+      var H0 = 0x67452301;
+      var H1 = 0xEFCDAB89;
+      var H2 = 0x98BADCFE;
+      var H3 = 0x10325476;
+      var H4 = 0xC3D2E1F0;
+      var A, B, C, D, E;
+      var temp;
+      input = Utf8Encode(input);
+      var input_len = input.length;
+      var word_array = new Array();
+      for( i=0; i<input_len-3; i+=4 ) {
+        j = input.charCodeAt(i)<<24 | input.charCodeAt(i+1)<<16 |
+        input.charCodeAt(i+2)<<8 | input.charCodeAt(i+3);
+        word_array.push( j );
+      }
+      switch( input_len % 4 ) {
+        case 0:
+          i = 0x080000000;
+          break;
+          case 1:
+            i = input.charCodeAt(input_len-1)<<24 | 0x0800000;
+            break;
+            case 2:
+              i = input.charCodeAt(input_len-2)<<24 | input.charCodeAt(input_len-1)<<16 | 0x08000;
+              break;
+              case 3:
+                i = input.charCodeAt(input_len-3)<<24 | input.charCodeAt(input_len-2)<<16 | input.charCodeAt(input_len-1)<<8	| 0x80;
+                break;
+              }
+              word_array.push( i );
+              while( (word_array.length % 16) != 14 ) word_array.push( 0 );
+              word_array.push( input_len>>>29 );
+              word_array.push( (input_len<<3)&0x0ffffffff );
+              for ( blockstart=0; blockstart<word_array.length; blockstart+=16 ) {
+                for( i=0; i<16; i++ ) W[i] = word_array[blockstart+i];
+                for( i=16; i<=79; i++ ) W[i] = rotate_left(W[i-3] ^ W[i-8] ^ W[i-14] ^ W[i-16], 1);
+                A = H0;
+                B = H1;
+                C = H2;
+                D = H3;
+                E = H4;
+                for( i= 0; i<=19; i++ ) {
+                  temp = (rotate_left(A,5) + ((B&C) | (~B&D)) + E + W[i] + 0x5A827999) & 0x0ffffffff;
+                  E = D;
+                  D = C;
+                  C = rotate_left(B,30);
+                  B = A;
+                  A = temp;
+                }
+                for( i=20; i<=39; i++ ) {
+                  temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0x6ED9EBA1) & 0x0ffffffff;
+                  E = D;
+                  D = C;
+                  C = rotate_left(B,30);
+                  B = A;
+                  A = temp;
+                }
+                for( i=40; i<=59; i++ ) {
+                  temp = (rotate_left(A,5) + ((B&C) | (B&D) | (C&D)) + E + W[i] + 0x8F1BBCDC) & 0x0ffffffff;
+                  E = D;
+                  D = C;
+                  C = rotate_left(B,30);
+                  B = A;
+                  A = temp;
+                }
+                for( i=60; i<=79; i++ ) {
+                  temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0xCA62C1D6) & 0x0ffffffff;
+                  E = D;
+                  D = C;
+                  C = rotate_left(B,30);
+                  B = A;
+                  A = temp;
+                }
+                H0 = (H0 + A) & 0x0ffffffff;
+                H1 = (H1 + B) & 0x0ffffffff;
+                H2 = (H2 + C) & 0x0ffffffff;
+                H3 = (H3 + D) & 0x0ffffffff;
+                H4 = (H4 + E) & 0x0ffffffff;
+              }
+              var temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
+              return temp.toLowerCase();
+            }
+          };
+        })
 
-	var feed = this;
-	var apiPath = 'http://localhost:15030/api';
-	this.dreams = [];
-	this.showDream = -1;
-	this.showComment = -1;
-	this.tag = {text:''};
-	this.comment = {text:''};
-	this.dreamContent = {text:''};
+        /*
+        ** simpler local storage access
+        */
 
-	this.toggle = function(index, show) {
-		if (show == index)
-			return -1;
-		else
-			return index;
-	}
-
-	$scope.getFeed = function() {
-		$http.get(apiPath + '/dream').
-  		success(function(data) {
-    	// this callback will be called asynchronously
-    	// when the response is available
-    		feed.dreams = data;
-    		feed.dreams = feed.dreams.reverse();
-//    		feed.dreams.push(moderate="true");
-    	}).
-  		error(function(data) {
-    	// called asynchronously if an error occurs
-    	// or server returns response with an error status.
-    		feed.dreams = ["lol"];
-
-		});
-	}
-
-	this.addDream = function() {
-		var path = apiPath + '/dream';
-		if (this.dreamContent.text) {	
-			$http({ method:'POST',
-					url:path,
-					data:{"uid":1, "category_id":1, "content":this.dreamContent.text}
-					}).
-			success(function() {
-				$scope.getFeed()
-			}).
-			error(function() {
-				alert("Add dream fail")
-			});
-			this.dreamContent.text = '';
-		}
-	}
-
-	this.deleteDream = function(index) {
-		var path = apiPath + '/dream/' + index;
-		$http.delete(path).
-		success(function() {
-			$scope.getFeed()
-		}).
-		error(function() {
-			alert("Delete fail")
-			// body...
-		});
-	}
-	
-	this.updateDream = function(id, index) {
-		var path = apiPath + '/dream';
-		$http({ method:'PUT',
-				url:path,
-				data:{	"actual_id":parseInt(id), 
-						"uid":1,
-						"category_id":parseInt(this.dreams[index].content.m_category_id),
-						"content":this.dreams[index].content.m_content}
-			}).
-		success(function() {
-			$scope.getFeed();
-		}).
-		error(function() {
-			$scope.getFeed();
-			alert("update dream fail")
-		});
-		return false;
-	}
-
-	this.deleteTag = function(index) {
-		var path = apiPath + '/hashtag/' + index;
-		$http.delete(path).
-		success(function() {
-			$scope.getFeed()
-		}).
-		error(function() {
-			alert("Delete fail")
-		}); 
-	}
-
-	this.addTag = function(id) {
-		var path = apiPath + '/hashtag';
-		this.tag.text = this.tag.text.replace(' ', '');
-		if (this.tag.text) {
-			$http({	method:'POST',
-					url:path,
-					data:{"uid":1, "dream_id":parseInt(id), "content":"#" + this.tag.text},
-					}).
-			success(function() {
-				$scope.getFeed()
-			}).
-			error(function() {
-				alert("post fail : " + id)
-			});
-			this.tag.text = '';
-		}
-		return false;
-	}
-
-	this.updateTag = function(id, dream_id, index, dream_index) {
-		var path = apiPath + '/hashtag';
-
-		$http({ method:'PUT',
-				url:path,
-				data:{	"actual_id":parseInt(id),
-						"uid":1, 
-						"dream_id":parseInt(dream_id), 
-						"content":this.dreams[dream_index].hashtags[index].m_content }
-			}).
-		success(function() {
-			$scope.getFeed()
-		}).
-		error(function() {
-			alert("post fail : " + id)
-		});
-	}
-
-	this.addComm = function(id) {
-		var path = apiPath + '/comment';
-		if (this.comment.text) {
-			$http({	method:'POST',
-					url:path,
-					data:{"uid":1, "dream_id":parseInt(id), "content":this.comment.text},
-					}).
-			success(function() {
-				$scope.getFeed()
-			}).
-			error(function() {
-				alert("post fail : " + id)
-			});
-			this.comment.text = '';
-		}
-		return false;
-	}
-
-	this.deleteComm = function(id) {
-		var path = apiPath + '/comment/' + id;
-		$http.delete(path).
-		success(function() {
-			$scope.getFeed()
-		}).
-		error(function() {
-			alert("Delete fail : " + id)
-		});
-	}
-
-	this.updateComm = function(id, dream_id, index, dream_index) {
-		var path = apiPath + '/comment';
-		$http({ method:'PUT',
-				url:path,
-				data:{	"actual_id":parseInt(id),
-						"uid":1, 
-						"dream_id":parseInt(dream_id), 
-						"content":this.dreams[dream_index].comments[index].m_content }
-			}).
-		success(function() {
-			$scope.getFeed()
-		}).
-		error(function() {
-			alert("post fail : " + id)
-		});
-		return false;
-	}
-
-	this.alert = function() {
-		alert("Alerte")
-	}
-
-	$scope.getFeed();
-}]);
-
-
-
-})();
+        .factory('StorageService', ['$window', function($window) {
+          return {
+            dump : function(key){
+              console.log($window.localStorage[key])
+            },
+            set: function(key, value) {
+              $window.localStorage[key] = value;
+            },
+            get: function(key, defaultValue) {
+              return $window.localStorage[key] || defaultValue;
+            },
+            setObject: function(key, value) {
+              $window.localStorage[key] = JSON.stringify(value);
+            },
+            getObject: function(key) {
+              return JSON.parse($window.localStorage[key] || '{}');
+            },
+            clean: function() {
+              $window.localStorage.clear()
+            }
+          }
+        }]);
