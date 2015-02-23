@@ -52,7 +52,7 @@ interface   IDreamAPI
 
     // POST /api/search
     @path("search")
-    SList!Fdream postSearch(string research);
+    Fdream[] postSearch(string research);
 
     /**
      * User resource

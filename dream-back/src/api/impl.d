@@ -137,24 +137,33 @@ class   DreamAPI : IDreamAPI
     }
 
     // POST /search
-    SList!Fdream  postSearch(string research) {
+    Fdream[]  postSearch(string research) {
       auto ret = matchAll(research, regex(`\w+`));
       Fdream[] dreams = getDream();
+      Fdream[] result;
       auto list = make!(SList!Fdream);
+      uint length;
 
       foreach (dream ; dreams) {
         foreach (word ; ret) {
           auto re = regex(r"(" ~ word.hit ~ ")", "gi");
           auto check = matchAll(dream.content.content, re);
           if (!check.empty) {
+            writeln("Adding a dream");
             list.insert(dream);
           }
         }
       }
-      if (walkLength(list[]) <= 0) {
+      if ((length = walkLength(list[])) <= 0) {
         throw new HTTPStatusException(204);
       }
-      return (list);
+      result = new Fdream[length];
+      int i = 0;
+      foreach (fdr ; list) {
+        result[i] = fdr;
+        ++i;
+      }
+      return (result);
     }
 
     /**

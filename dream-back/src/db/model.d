@@ -113,7 +113,6 @@ class Model(T, U) {
         if (result.empty())
             return (new T());
         aa = result.asAA();
-        writeln(aa);
         result.close();
         if (aa.length <= 0 )
           throw new HTTPStatusException(204);
