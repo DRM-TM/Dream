@@ -54,6 +54,10 @@ interface   IDreamAPI
     @path("search")
     Fdream[] postSearch(string research);
 
+    // POST /api/search/banned
+    @path("search/banned")
+    Fdream[] postSearchBanned(string research, string[] banned);
+
     /**
      * User resource
      * Every functions related to the User resources.
@@ -109,7 +113,11 @@ interface   IDreamAPI
      *
      * Route: GET /api/dream
      */
+    @path("dream")
     Fdream[]    getDream();
+
+    @path("dream/banned/tags")
+    Fdream[]    postDreamBannedTags(string[] banned);
 
     // POST /api/dream/like/:uid
     @path("dream/like/:uid")

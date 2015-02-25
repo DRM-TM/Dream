@@ -166,6 +166,35 @@ class   DreamAPI : IDreamAPI
       return (result);
     }
 
+    Fdream[] postSearchBanned(string research, string[] banned) {
+      auto ret = matchAll(research, regex(`\w+`));
+      Fdream[] dreams = postDreamBannedTags(banned);
+      Fdream[] result;
+      auto list = make!(SList!Fdream);
+      ulong length;
+
+      foreach (dream ; dreams) {
+        foreach (word ; ret) {
+          auto re = regex(r"(" ~ word.hit ~ ")", "gi");
+          auto check = matchAll(dream.content.content, re);
+          if (!check.empty) {
+            writeln("Adding a dream");
+            list.insert(dream);
+          }
+        }
+      }
+      if ((length = walkLength(list[])) <= 0) {
+        throw new HTTPStatusException(204);
+      }
+      result = new Fdream[to!uint(length)];
+      int i = 0;
+      foreach (fdr ; list) {
+        result[i] = fdr;
+        ++i;
+      }
+      return (result);
+    }
+
     /**
      * User resource methods
      */
@@ -289,6 +318,38 @@ class   DreamAPI : IDreamAPI
         }
         dreams.reverse;
         return (dreams);
+    }
+
+    // POST /dream/banned
+    Fdream[]    postDreamBannedTags(string[] banned) {
+      writeln(banned);
+      Dream[]     result = _dreamRes.all();
+      Fdream[]    dreams;
+      SList!Fdream  tmpList = make!(SList!Fdream);
+      uint        j = 0;
+      bool        found = false;
+
+      for (auto i = 0 ; i < result.length ; ++i) {
+          Fdream tmp = solveDream(result[i]);
+          found = false;
+          foreach (tag ; banned) {
+            foreach (dreamTag ; tmp.hashtags) {
+              if (dreamTag.m_content == tag) {
+                found = true;
+                break;
+              }
+            }
+          }
+          if (!found) {
+            tmpList.insert(tmp);
+          }
+      }
+      dreams = new Fdream[to!uint(walkLength(tmpList[]))];
+      foreach (dream ; tmpList) {
+        dreams[j++] = dream;
+      }
+      dreams.reverse;
+      return (dreams);
     }
 
     // POST /api/dream/like/:uid
